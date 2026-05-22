@@ -86,49 +86,10 @@ const CATEGORIES = [
   },
 ]
 
-/* ── Featured games ── */
-const FEATURED = [
-  { name:'Aviator', path:'/games/aviator', icon:'✈️', color:'#ff4444', video:'https://res.cloudinary.com/dnzfce2wa/video/upload/v1778066670/aviator_nw6vp5.mp4', badge:'HOT' },
-  { name:'Crash Rocket', path:'/games/crash-rocket', icon:'🚀', color:'#9944ff', video:'https://res.cloudinary.com/dnzfce2wa/video/upload/v1778066670/Mobile_run_o48kbe.mp4', badge:'HOT' },
-  { name:'Color Prediction', path:'/games/color-prediction', icon:'🎨', color:'#ff4488', video:'https://res.cloudinary.com/dnzfce2wa/video/upload/v1778066669/colour_prediction_nfxrqp.mp4', badge:'NEW' },
-  { name:'Chicken Road', path:'/games/chicken-road', icon:'🐔', color:'#ff9900', video:'https://res.cloudinary.com/dnzfce2wa/video/upload/v1778066669/chicken_road_i61thh.mp4', badge:'NEW' },
-  { name:'Mines', path:'/games/mines', icon:'💎', color:'#00d084', video:'https://res.cloudinary.com/dnzfce2wa/video/upload/v1778066670/mines_xsbshb.mp4' },
-  { name:'Dragon Tiger', path:'/games/dragon-tiger', icon:'🐉', color:'#ff4444' },
-]
-
-/* ── Static live casino games (no auto-loop) ── */
-const TRENDING_ROWS = [
-  {
-    label:'🔥 Trending',
-    games: [
-      { name:'Kickoff Roulette', icon:'🎡', color:'#1a3a1a', uid:'7004' },
-      { name:'Vortex Aero', icon:'✈️', color:'#1a1a3a', uid:'7004' },
-      { name:'Fortune Garuda 500', icon:'🦅', color:'#3a2a00', uid:'7004' },
-      { name:'Teen Patti Gold', icon:'♠️', color:'#3a0000', uid:'7004' },
-      { name:'Aviator', icon:'✈️', color:'#2a0020', uid:'7004' },
-      { name:'Dragon Tiger', icon:'🐉', color:'#2a0000', uid:'7004' },
-      { name:'Lightning Roulette', icon:'⚡', color:'#1a1a00', uid:'7004' },
-    ]
-  },
-  {
-    label:'🎰 Roulette',
-    games: [
-      { name:'Roulette A', icon:'🎡', color:'#1a003a', uid:'7004' },
-      { name:'Speed Roulette', icon:'🎡', color:'#002a3a', uid:'7004' },
-      { name:'Kickoff Roulette', icon:'⚽', color:'#003a1a', uid:'7004' },
-      { name:'Lightning Roulette', icon:'⚡', color:'#1a1a00', uid:'7004' },
-      { name:'Immersive Roulette', icon:'🎮', color:'#2a002a', uid:'7004' },
-    ]
-  },
-  {
-    label:'♠️ Teen Patti',
-    games: [
-      { name:'Teen Patti Gold', icon:'♠️', color:'#3a0000', uid:'7004' },
-      { name:'AK47 Teen Patti', icon:'🔫', color:'#1a1a00', uid:'7004' },
-      { name:'Teen Patti Joker', icon:'🃏', color:'#001a3a', uid:'7004' },
-      { name:'3 Patti Bonus', icon:'🎁', color:'#003a00', uid:'7004' },
-    ]
-  },
+const ROW_TAGS = [
+  '🔥 Trending', '🎰 Casino Games', '⭐ Recommended',
+  '🏆 Top Rated', '♠️ Card Games', '🎯 Popular Picks',
+  '💥 Crash Games', '🎲 Table Games',
 ]
 
 /* ── Banner slider ── */
@@ -171,19 +132,26 @@ function BannerSlider({ onLaunch, launching }) {
 }
 
 /* ── Static horizontal scroll (no auto-loop) ── */
-function StaticRow({ games, onPlay }) {
+function StaticRow({ games, onPlay, launchingGame }) {
   const ref = useRef(null)
   const scroll = (dir) => { if (ref.current) ref.current.scrollBy({ left: dir * 280, behavior:'smooth' }) }
   return (
     <div style={{ position:'relative' }}>
       <button onClick={() => scroll(-1)} style={{ position:'absolute', left:0, top:'50%', transform:'translateY(-50%)', zIndex:10, width:'28px', height:'28px', borderRadius:'50%', background:'rgba(30,30,40,0.9)', border:'1px solid rgba(255,255,255,0.15)', color:'white', fontSize:'16px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>‹</button>
       <div ref={ref} className="hscroll" style={{ paddingLeft:'34px', paddingRight:'34px' }}>
-        {games.map((g, i) => (
-          <div key={i} className="game-card" onClick={() => onPlay(g)}>
-            <div className="game-card-thumb-placeholder" style={{ background:g.color, fontSize:'28px' }}>{g.icon}</div>
-            <div className="game-card-name">{g.name}</div>
-          </div>
-        ))}
+        {games.map((g, i) => {
+          const busy = launchingGame === g.game_uid
+          return (
+            <div key={i} className="game-card" onClick={() => !busy && onPlay(g)} style={{ opacity: busy ? 0.6 : 1, cursor: busy ? 'wait' : 'pointer' }}>
+              {g.img
+                ? <img src={g.img} alt={g.name} className="game-card-thumb" onError={e => { e.target.style.display='none'; e.target.nextSibling && (e.target.nextSibling.style.display='flex') }} />
+                : null
+              }
+              <div className="game-card-thumb-placeholder" style={{ background:'#1a1a2a', fontSize:'28px', display: g.img ? 'none' : 'flex' }}>🎰</div>
+              <div className="game-card-name">{busy ? '⏳' : g.name}</div>
+            </div>
+          )
+        })}
       </div>
       <button onClick={() => scroll(1)} style={{ position:'absolute', right:0, top:'50%', transform:'translateY(-50%)', zIndex:10, width:'28px', height:'28px', borderRadius:'50%', background:'rgba(30,30,40,0.9)', border:'1px solid rgba(255,255,255,0.15)', color:'white', fontSize:'16px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>›</button>
     </div>
@@ -194,7 +162,16 @@ export default function Home() {
   const { user, balance } = useStore()
   const navigate = useNavigate()
   const [launching, setLaunching] = useState(false)
+  const [launchingGame, setLaunchingGame] = useState(null)
   const [modal, setModal] = useState(null)
+  const [liveGames, setLiveGames] = useState([])
+
+  useEffect(() => {
+    api.get('/live-casino/games').then(r => setLiveGames(r.data.games || [])).catch(() => {})
+  }, [])
+
+  const rows = []
+  for (let i = 0; i < liveGames.length; i += 15) rows.push(liveGames.slice(i, i+15))
 
   async function launchCricket() {
     if (!user) { toast.error('Login karein pehle!'); navigate('/login'); return }
@@ -209,11 +186,13 @@ export default function Home() {
 
   async function launchGame(g) {
     if (!user) { toast.error('Login karein pehle!'); navigate('/login'); return }
+    setLaunchingGame(g.game_uid)
     try {
-      const res = await api.post('/live-casino/launch', { game_uid: g.uid || '7004', language:'hi', currency_code:'INR' })
+      const res = await api.post('/live-casino/launch', { game_uid: g.game_uid || '7004', language:'hi', currency_code:'INR' })
       if (res.data.success && res.data.gameUrl) setModal(res.data.gameUrl)
       else toast.error(res.data.message || 'Launch failed')
     } catch { toast.error('Launch failed') }
+    setLaunchingGame(null)
   }
 
   const handleCat = (cat) => {
@@ -272,47 +251,19 @@ export default function Home() {
         ))}
       </div>
 
-      {/* FEATURED — 3 col video */}
-      <section style={{ marginBottom:'18px' }}>
-        <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'10px' }}>
-          <span style={{ fontSize:'14px', fontWeight:'800', color:'#fff', letterSpacing:'0.3px' }}>
-            TRENDING
-            <span style={{ marginLeft:'8px', fontSize:'9px', fontWeight:'800', padding:'2px 7px', borderRadius:'3px', background:'rgba(224,48,48,0.18)', color:'#e03030', border:'1px solid rgba(224,48,48,0.3)', textTransform:'uppercase' }}>HOT</span>
-          </span>
-          <div style={{ display:'flex', gap:'6px' }}>
-            <button id="feat-prev" style={{ width:'26px', height:'26px', borderRadius:'5px', background:'#252535', border:'1px solid rgba(255,255,255,0.1)', color:'white', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'14px' }}>‹</button>
-            <button id="feat-next" style={{ width:'26px', height:'26px', borderRadius:'5px', background:'#252535', border:'1px solid rgba(255,255,255,0.1)', color:'white', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'14px' }}>›</button>
-          </div>
-        </div>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'8px' }}>
-          {FEATURED.map((g,i) => (
-            <Link key={i} to={g.path} style={{ textDecoration:'none' }}>
-              <div style={{ aspectRatio:'4/3', background:`linear-gradient(135deg,${g.color}33,#12121a)`, borderRadius:'10px', overflow:'hidden', cursor:'pointer', transition:'transform 0.2s', position:'relative', border:'1px solid rgba(255,255,255,0.05)' }}
-                onMouseEnter={e=>e.currentTarget.style.transform='translateY(-2px)'}
-                onMouseLeave={e=>e.currentTarget.style.transform='none'}
-              >
-                {g.video
-                  ? <video src={g.video} autoPlay loop muted playsInline style={{ width:'100%', height:'100%', objectFit:'cover' }} />
-                  : <div style={{ width:'100%', height:'100%', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'clamp(22px,5vw,38px)' }}>{g.icon}</div>
-                }
-                <div style={{ position:'absolute', bottom:0, left:0, right:0, padding:'4px 8px', background:'linear-gradient(transparent,rgba(0,0,0,0.88))', fontSize:'clamp(9px,2vw,11px)', fontWeight:'700', color:'white', textTransform:'uppercase', letterSpacing:'0.3px' }}>{g.name}</div>
-                {g.badge && <div style={{ position:'absolute', top:'4px', left:'4px', fontSize:'8px', fontWeight:'800', padding:'1px 5px', borderRadius:'3px', background:'rgba(224,48,48,0.9)', color:'#fff' }}>{g.badge}</div>}
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+      {/* LIVE CASINO GAME ROWS — from API */}
+      {liveGames.length === 0 && (
+        <div style={{ height:'120px', display:'flex', alignItems:'center', justifyContent:'center', color:'var(--text-muted)', fontSize:'13px' }}>⏳ Loading games...</div>
+      )}
 
-      {/* STATIC LIVE CASINO ROWS */}
-      {TRENDING_ROWS.map((row, idx) => (
+      {rows.map((row, idx) => (
         <section key={idx} style={{ marginBottom:'18px' }}>
-          <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'10px' }}>
-            <span style={{ fontSize:'14px', fontWeight:'800', color:'#fff' }}>{row.label}</span>
-            <div style={{ display:'flex', gap:'6px' }}>
-              <span style={{ fontSize:'11px', color:'var(--text-muted)', cursor:'pointer' }}>View All →</span>
-            </div>
+          <div style={{ display:'flex', alignItems:'center', gap:'8px', marginBottom:'10px' }}>
+            <span style={{ fontSize:'14px', fontWeight:'800', color:'#fff' }}>{ROW_TAGS[idx] || '🎮 Games'}</span>
+            {idx === 0 && <span style={{ fontSize:'9px', fontWeight:'800', padding:'2px 7px', borderRadius:'3px', background:'rgba(224,48,48,0.18)', color:'#e03030', border:'1px solid rgba(224,48,48,0.3)' }}>HOT</span>}
+            {idx === 1 && <span style={{ fontSize:'9px', fontWeight:'800', padding:'2px 7px', borderRadius:'3px', background:'rgba(68,136,255,0.18)', color:'#4488ff', border:'1px solid rgba(68,136,255,0.3)' }}>LIVE</span>}
           </div>
-          <StaticRow games={row.games} onPlay={launchGame} />
+          <StaticRow games={row} onPlay={launchGame} launchingGame={launchingGame} />
         </section>
       ))}
 
