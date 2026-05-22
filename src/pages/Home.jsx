@@ -174,6 +174,29 @@ function ArrowBtns({ rowRef }) {
   )
 }
 
+function GameRow({ row, idx, onPlay, launchingGame }) {
+  const rowRef = useRef(null)
+  const tag = ROW_TAGS[idx] || '🎮 Games'
+  return (
+    <section style={{ marginBottom:'20px' }}>
+      <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'8px' }}>
+        <div style={{ display:'flex', alignItems:'center', gap:'7px' }}>
+          <span style={{ fontSize:'13px', fontWeight:'800', color:'#fff', textTransform:'uppercase', letterSpacing:'0.5px' }}>{tag}</span>
+          {idx === 0 && <span style={{ fontSize:'9px', fontWeight:'800', padding:'2px 6px', borderRadius:'3px', background:'rgba(224,48,48,0.18)', color:'#e03030', border:'1px solid rgba(224,48,48,0.3)' }}>HOT</span>}
+          {idx === 1 && <span style={{ fontSize:'9px', fontWeight:'800', padding:'2px 6px', borderRadius:'3px', background:'rgba(68,136,255,0.18)', color:'#4488ff', border:'1px solid rgba(68,136,255,0.3)' }}>LIVE</span>}
+        </div>
+        <div style={{ display:'flex', gap:'5px' }}>
+          <button onClick={() => rowRef.current?.scrollBy({ left:-300, behavior:'smooth' })}
+            style={{ width:'28px', height:'28px', borderRadius:'6px', background:'#222', border:'1px solid #333', color:'#ccc', fontSize:'16px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:'700' }}>‹</button>
+          <button onClick={() => rowRef.current?.scrollBy({ left:300, behavior:'smooth' })}
+            style={{ width:'28px', height:'28px', borderRadius:'6px', background:'#222', border:'1px solid #333', color:'#ccc', fontSize:'16px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:'700' }}>›</button>
+        </div>
+      </div>
+      <StaticRow games={row} onPlay={onPlay} launchingGame={launchingGame} rowRef={rowRef} />
+    </section>
+  )
+}
+
 export default function Home() {
   const { user, balance } = useStore()
   const navigate = useNavigate()
@@ -295,22 +318,9 @@ export default function Home() {
         <div style={{ height:'120px', display:'flex', alignItems:'center', justifyContent:'center', color:'var(--text-muted)', fontSize:'13px' }}>⏳ Loading games...</div>
       )}
 
-      {rows.map((row, idx) => {
-        const rowRef = React.createRef()
-        return (
-          <section key={idx} style={{ marginBottom:'20px' }}>
-            <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'10px' }}>
-              <div style={{ display:'flex', alignItems:'center', gap:'8px' }}>
-                <span style={{ fontSize:'14px', fontWeight:'800', color:'#fff', textTransform:'uppercase', letterSpacing:'0.5px' }}>{ROW_TAGS[idx] || '🎮 Games'}</span>
-                {idx === 0 && <span style={{ fontSize:'9px', fontWeight:'800', padding:'2px 7px', borderRadius:'3px', background:'rgba(224,48,48,0.18)', color:'#e03030', border:'1px solid rgba(224,48,48,0.3)' }}>HOT</span>}
-                {idx === 1 && <span style={{ fontSize:'9px', fontWeight:'800', padding:'2px 7px', borderRadius:'3px', background:'rgba(68,136,255,0.18)', color:'#4488ff', border:'1px solid rgba(68,136,255,0.3)' }}>LIVE</span>}
-              </div>
-              <ArrowBtns rowRef={rowRef} />
-            </div>
-            <StaticRow games={row} onPlay={launchGame} launchingGame={launchingGame} rowRef={rowRef} />
-          </section>
-        )
-      })}
+      {rows.map((row, idx) => (
+        <GameRow key={idx} row={row} idx={idx} onPlay={launchGame} launchingGame={launchingGame} />
+      ))}
 
       {/* LIVE SPORTS EMBED */}
       {user && <LiveSportsEmbed />}
