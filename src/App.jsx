@@ -53,8 +53,6 @@ import AndarBahar from './games/AndarBahar'
 import GameWrapper from './components/GameWrapper'
 import ESports from './pages/ESports'
 import PlayerBattle from './pages/PlayerBattle'
-import EsportsPage from './pages/EsportsPage'
-import PlayerBattle from './pages/PlayerBattle'
 import DragonTiger from './games/DragonTiger'
 import PokerGame from './games/PokerGame'
 import TowerGame from './games/TowerGame'
@@ -131,7 +129,6 @@ export default function App() {
         <Route path="games/three-card-poker" element={<ProtectedRoute><GameWrapper><ThreeCardPoker /></GameWrapper></ProtectedRoute>} />
         <Route path="games/mini-baccarat" element={<ProtectedRoute><GameWrapper><MiniBaccarat /></GameWrapper></ProtectedRoute>} />
         <Route path="games/penalty" element={<ProtectedRoute><GameWrapper><PenaltyShootout /></GameWrapper></ProtectedRoute>} />
-        <Route path="esports" element={<EsportsPage />} />
       </Route>
     </Routes>
     <Footer />
