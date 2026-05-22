@@ -59,14 +59,12 @@ export default function Header({ onMobileMenuClick, isMobile }) {
 
         {user ? (
           <>
-            <div onClick={() => navigate('/dashboard')} style={{ display:'flex', alignItems:'center', gap:'4px', background:'rgba(0,0,0,0.3)', border:'1px solid rgba(255,255,255,0.15)', borderRadius:'20px', padding:'2px 8px', cursor:'pointer', flexShrink:0 }}>
-              <span style={{ fontSize:'10px' }}>🪙</span>
-              <span style={{ color:'#ffe066', fontWeight:'800', fontSize:'11px' }}>{Number(balance||0).toLocaleString()}</span>
+            {/* Balance chip — Mahaling777 style */}
+            <div onClick={() => navigate('/dashboard')} style={{ display:'flex', alignItems:'center', gap:'5px', background:'rgba(0,0,0,0.35)', border:'1px solid rgba(255,255,255,0.2)', borderRadius:'6px', padding:'3px 10px', cursor:'pointer', flexShrink:0 }}>
+              <span style={{ fontSize:'12px' }}>🪙</span>
+              <span style={{ color:'#ffe066', fontWeight:'800', fontSize:'12px' }}>CI {Number(balance||0).toLocaleString()}</span>
             </div>
-            <div onClick={() => navigate('/dashboard')} style={{ width:'22px', height:'22px', background:'rgba(255,255,255,0.15)', border:'1.5px solid rgba(255,255,255,0.3)', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'10px', fontWeight:'800', cursor:'pointer', color:'#fff', flexShrink:0 }}>
-              {user.username?.[0]?.toUpperCase()}
-            </div>
-            <button onClick={logout} style={{ background:'rgba(0,0,0,0.3)', border:'1px solid rgba(255,255,255,0.18)', color:'rgba(255,255,255,0.85)', padding:'3px 7px', borderRadius:'4px', fontSize:'10px', fontWeight:'600', cursor:'pointer', whiteSpace:'nowrap' }}>
+            <button onClick={logout} style={{ background:'rgba(0,0,0,0.3)', border:'1px solid rgba(255,255,255,0.18)', color:'rgba(255,255,255,0.8)', padding:'3px 7px', borderRadius:'4px', fontSize:'10px', fontWeight:'600', cursor:'pointer', whiteSpace:'nowrap' }}>
               {isMobile ? '⬅' : 'Logout'}
             </button>
           </>
