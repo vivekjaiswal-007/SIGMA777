@@ -319,13 +319,13 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .app-sidebar { width:var(--sidebar-w) !important; transform:translateX(-100%); box-shadow:none; }
   .app-sidebar.open { transform:translateX(0); box-shadow:4px 0 24px rgba(0,0,0,0.6); }
   .sidebar-overlay.visible { display:block; }
-  .app-main { margin-left:0 !important; padding:8px 8px calc(var(--bottom-nav-h) + 8px); width:100%; }
+  .app-main { margin-left:0 !important; padding:8px 12px calc(var(--bottom-nav-h) + 8px); width:100%; }
   .bottom-nav { display:flex !important; }
   .hide-mobile { display:none !important; }
 }
 
 @media (max-width:479px) {
-  .app-main { padding:8px 8px calc(var(--bottom-nav-h) + 8px); }
+  .app-main { padding:8px 12px calc(var(--bottom-nav-h) + 8px); }
   .game-card { width:110px; }
   .game-card-thumb, .game-card-thumb-placeholder { height:138px; }
 }

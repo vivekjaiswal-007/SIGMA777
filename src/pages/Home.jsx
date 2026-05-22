@@ -230,6 +230,29 @@ export default function Home() {
         </div>
       )}
 
+      {/* QUICK TABS — Mahaling777 style horizontal scroll below header */}
+      <div style={{ display:'flex', gap:'6px', overflowX:'auto', paddingBottom:'10px', marginBottom:'2px', scrollbarWidth:'none', marginLeft:'-12px', marginRight:'-12px', paddingLeft:'12px', paddingRight:'12px' }}>
+        {[
+          { icon:'✈️', label:'Aviator', path:'/games/aviator' },
+          { icon:'🎮', label:'Grey Gaming', action:'cricket' },
+          { icon:'🏏', label:'Live Cricket', action:'cricket' },
+          { icon:'⚽', label:'E-Soccer', path:'/e-sports' },
+          { icon:'🎰', label:'Live Casino', path:'/live-casino' },
+          { icon:'♠️', label:'Teen Patti', path:'/games/teen-patti' },
+          { icon:'🚀', label:'Crash Games', path:'/games/crash-rocket' },
+          { icon:'💎', label:'Mines', path:'/games/mines' },
+        ].map((tab, i) => (
+          <button key={i} onClick={() => tab.action === 'cricket' ? launchCricket() : navigate(tab.path)}
+            style={{ flexShrink:0, display:'flex', alignItems:'center', gap:'5px', padding:'5px 12px', background:'#1a1a1a', border:'1px solid #2a2a2a', borderRadius:'20px', color:'#ccc', fontSize:'11px', fontWeight:'600', cursor:'pointer', whiteSpace:'nowrap' }}
+            onMouseEnter={e => { e.currentTarget.style.background='#222'; e.currentTarget.style.borderColor='#3a3a3a' }}
+            onMouseLeave={e => { e.currentTarget.style.background='#1a1a1a'; e.currentTarget.style.borderColor='#2a2a2a' }}
+          >
+            <span style={{ fontSize:'13px' }}>{tab.icon}</span>
+            <span>{tab.label}</span>
+          </button>
+        ))}
+      </div>
+
       {/* WELCOME */}
       {user && (
         <div style={{ padding:'9px 13px', background:'rgba(34,139,34,0.1)', border:'1px solid rgba(34,139,34,0.2)', borderRadius:'10px', marginBottom:'12px', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
