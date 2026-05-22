@@ -98,9 +98,11 @@ export default function Layout() {
   useEffect(() => {
     const onResize = () => {
       const w = window.innerWidth
-      setIsMobile(w < 768); setIsTablet(w >= 768 && w < 1024)
+      setIsMobile(w < 768)
+      setIsTablet(w >= 768 && w < 1024)
       if (w >= 768) setMobileSidebarOpen(false)
     }
+    onResize()
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
   }, [])
