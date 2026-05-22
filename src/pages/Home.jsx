@@ -250,9 +250,9 @@ export default function Home() {
       {/* 6 CATEGORY GRID */}
       <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'8px', marginBottom:'18px' }}>
         {CATEGORIES.map((cat, i) => (
-          <button key={i} onClick={() => handleCat(cat)} style={{ position:'relative', background:'#1c1c28', border:'1px solid rgba(255,255,255,0.08)', borderRadius:'12px', padding:'18px 8px 14px', display:'flex', flexDirection:'column', alignItems:'center', gap:'10px', cursor:'pointer', transition:'all 0.2s', overflow:'hidden' }}
-            onMouseEnter={e => { e.currentTarget.style.background='#252535'; e.currentTarget.style.borderColor='rgba(255,255,255,0.18)' }}
-            onMouseLeave={e => { e.currentTarget.style.background='#1c1c28'; e.currentTarget.style.borderColor='rgba(255,255,255,0.08)' }}
+          <button key={i} onClick={() => handleCat(cat)} style={{ position:'relative', background:'#181818', border:'1px solid #2a2a2a', borderRadius:'12px', padding:'18px 8px 14px', display:'flex', flexDirection:'column', alignItems:'center', gap:'10px', cursor:'pointer', transition:'all 0.2s', overflow:'hidden' }}
+            onMouseEnter={e => { e.currentTarget.style.background='#222'; e.currentTarget.style.borderColor='#3a3a3a' }}
+            onMouseLeave={e => { e.currentTarget.style.background='#181818'; e.currentTarget.style.borderColor='#2a2a2a' }}
           >
             {cat.badge && (
               <div style={{ position:'absolute', top:0, right:0, background:'#e03030', color:'#fff', fontSize:'8px', fontWeight:'900', padding:'3px 8px 3px 12px', borderBottomLeftRadius:'10px', letterSpacing:'0.5px' }}>NEW</div>
