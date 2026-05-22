@@ -18,111 +18,122 @@ const CATEGORIES = [
   {
     label:'IN-PLAY', badge:null, action:'cricket',
     icon: (
-      <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-        {/* Basketball/ball with LIVE text — like Mahaling777 */}
-        <circle cx="22" cy="22" r="18" stroke="white" strokeWidth="2.2"/>
-        <circle cx="22" cy="22" r="12" stroke="white" strokeWidth="1.8"/>
-        {/* LIVE text in center */}
-        <rect x="10" y="17" width="24" height="10" rx="2" fill="white" opacity="0.15"/>
-        <text x="22" y="24.5" textAnchor="middle" fontSize="7" fontWeight="900" fill="white" fontFamily="Arial,sans-serif" letterSpacing="0.5">LIVE</text>
-        {/* Arc lines like basketball */}
-        <path d="M8 22 Q22 14 36 22" stroke="white" strokeWidth="1.5" fill="none" opacity="0.6"/>
-        <path d="M8 22 Q22 30 36 22" stroke="white" strokeWidth="1.5" fill="none" opacity="0.6"/>
+      <svg width="42" height="42" viewBox="0 0 42 42" fill="none">
+        {/* Basketball hoop ring */}
+        <ellipse cx="21" cy="14" rx="11" ry="3" stroke="white" strokeWidth="2.2"/>
+        {/* Net lines going down */}
+        <line x1="10" y1="14" x2="12" y2="26" stroke="white" strokeWidth="1.8"/>
+        <line x1="32" y1="14" x2="30" y2="26" stroke="white" strokeWidth="1.8"/>
+        <line x1="14" y1="14" x2="15" y2="26" stroke="white" strokeWidth="1.5"/>
+        <line x1="21" y1="14" x2="21" y2="27" stroke="white" strokeWidth="1.5"/>
+        <line x1="28" y1="14" x2="27" y2="26" stroke="white" strokeWidth="1.5"/>
+        {/* Net bottom curve */}
+        <path d="M12 26 Q21 30 30 26" stroke="white" strokeWidth="1.8" fill="none"/>
+        {/* Horizontal net lines */}
+        <path d="M11 18 Q21 21 31 18" stroke="white" strokeWidth="1.2" fill="none"/>
+        <path d="M11.5 22 Q21 25 30.5 22" stroke="white" strokeWidth="1.2" fill="none"/>
+        {/* LIVE badge */}
+        <rect x="13" y="32" width="16" height="7" rx="2" fill="white"/>
+        <text x="21" y="38" textAnchor="middle" fontSize="5.5" fontWeight="900" fill="#111" fontFamily="Arial,sans-serif">LIVE</text>
       </svg>
     )
   },
   {
     label:'SPORTSBOOK', badge:null, action:'cricket',
     icon: (
-      <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-        {/* Ticket/coupon shape */}
-        <rect x="5" y="10" width="34" height="24" rx="3" stroke="white" strokeWidth="2.2"/>
-        {/* Notch left */}
-        <path d="M5 19 Q11 19 11 22 Q11 25 5 25" stroke="white" strokeWidth="2" fill="none"/>
-        {/* Notch right */}
-        <path d="M39 19 Q33 19 33 22 Q33 25 39 25" stroke="white" strokeWidth="2" fill="none"/>
-        {/* Cricket ball in center */}
-        <circle cx="22" cy="22" r="7" stroke="white" strokeWidth="1.8"/>
-        <path d="M17 19 Q22 16 27 19" stroke="white" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
-        <path d="M17 25 Q22 28 27 25" stroke="white" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
-        <line x1="22" y1="15" x2="22" y2="29" stroke="white" strokeWidth="1.2"/>
+      <svg width="42" height="42" viewBox="0 0 42 42" fill="none">
+        {/* Ticket shape */}
+        <path d="M4 13 L38 13 L38 19 Q34 19 34 21 Q34 23 38 23 L38 29 L4 29 L4 23 Q8 23 8 21 Q8 19 4 19 Z" stroke="white" strokeWidth="2" fill="none"/>
+        {/* Cricket ball inside ticket */}
+        <circle cx="21" cy="21" r="6" stroke="white" strokeWidth="1.8"/>
+        {/* Ball seam */}
+        <path d="M16 19 Q21 16 26 19" stroke="white" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
+        <path d="M16 23 Q21 26 26 23" stroke="white" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
+        <line x1="21" y1="15" x2="21" y2="27" stroke="white" strokeWidth="1.2"/>
+        {/* Dashed perforation line */}
+        <line x1="34" y1="14" x2="34" y2="28" stroke="white" strokeWidth="1.2" strokeDasharray="2 2"/>
       </svg>
     )
   },
   {
     label:'VIRTUAL', badge:null, path:'/live-casino',
     icon: (
-      <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-        {/* Hand with pointer finger — like Mahaling777 virtual icon */}
-        <path d="M22 8 L22 18" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
-        {/* Horizontal bars at top */}
-        <path d="M16 11 L22 8 L28 11" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-        {/* Hand/pointer */}
-        <path d="M22 18 L22 30" stroke="white" strokeWidth="3" strokeLinecap="round"/>
-        <path d="M16 22 L22 18 L28 22" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-        {/* Finger tip */}
-        <circle cx="22" cy="30" r="2.5" fill="white"/>
-        {/* Touch ripples */}
-        <path d="M16 34 Q22 31 28 34" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.7"/>
-        <path d="M13 37 Q22 33 31 37" stroke="white" strokeWidth="1.2" fill="none" strokeLinecap="round" opacity="0.4"/>
+      <svg width="42" height="42" viewBox="0 0 42 42" fill="none">
+        {/* Index finger pointing up */}
+        <rect x="18" y="6" width="6" height="18" rx="3" stroke="white" strokeWidth="2"/>
+        {/* Middle finger */}
+        <rect x="25" y="12" width="5" height="14" rx="2.5" stroke="white" strokeWidth="1.8"/>
+        {/* Ring finger */}
+        <rect x="31" y="14" width="5" height="12" rx="2.5" stroke="white" strokeWidth="1.8"/>
+        {/* Palm */}
+        <path d="M18 22 L18 30 Q18 34 22 34 Q26 34 26 30 L26 24" stroke="white" strokeWidth="2" fill="none"/>
+        <path d="M26 26 L26 30 Q26 34 30 34 Q34 34 34 30 L34 24" stroke="white" strokeWidth="1.8" fill="none"/>
+        {/* Touch ripple at bottom */}
+        <path d="M9 36 Q15 33 21 36" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.7"/>
       </svg>
     )
   },
   {
     label:'E-SPORTS', badge:'NEW', path:'/e-sports',
     icon: (
-      <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-        {/* Gamepad body */}
-        <rect x="4" y="14" width="36" height="20" rx="6" stroke="white" strokeWidth="2.2"/>
-        {/* D-pad left side */}
-        <line x1="13" y1="24" x2="19" y2="24" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
-        <line x1="16" y1="21" x2="16" y2="27" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
-        {/* Buttons right side */}
-        <circle cx="28" cy="21" r="2" fill="white"/>
-        <circle cx="33" cy="24" r="2" fill="white"/>
-        <circle cx="28" cy="27" r="2" fill="white"/>
-        <circle cx="23" cy="24" r="2" fill="white"/>
-        {/* Cable top */}
-        <path d="M16 14 L16 9 L28 9 L28 14" stroke="white" strokeWidth="2" fill="none" strokeLinejoin="round"/>
+      <svg width="42" height="42" viewBox="0 0 42 42" fill="none">
+        {/* Monitor screen */}
+        <rect x="5" y="7" width="32" height="22" rx="3" stroke="white" strokeWidth="2.2"/>
+        {/* Screen content - simple game display */}
+        <rect x="9" y="11" width="24" height="14" rx="1.5" stroke="white" strokeWidth="1.5"/>
+        {/* Stand */}
+        <line x1="21" y1="29" x2="21" y2="34" stroke="white" strokeWidth="2.2"/>
+        <line x1="14" y1="34" x2="28" y2="34" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
+        {/* Game cursor/crosshair on screen */}
+        <circle cx="21" cy="18" r="3" stroke="white" strokeWidth="1.5"/>
+        <line x1="21" y1="13" x2="21" y2="15" stroke="white" strokeWidth="1.5"/>
+        <line x1="21" y1="21" x2="21" y2="23" stroke="white" strokeWidth="1.5"/>
+        <line x1="16" y1="18" x2="18" y2="18" stroke="white" strokeWidth="1.5"/>
+        <line x1="24" y1="18" x2="26" y2="18" stroke="white" strokeWidth="1.5"/>
       </svg>
     )
   },
   {
     label:'SPECIAL MARKET', badge:'NEW', action:'cricket',
     icon: (
-      <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-        {/* Medal/award shape */}
-        <circle cx="22" cy="26" r="12" stroke="white" strokeWidth="2.2"/>
-        {/* Star inside */}
-        <path d="M22 18 L23.8 23.5 L29.5 23.5 L25 27 L26.8 32.5 L22 29 L17.2 32.5 L19 27 L14.5 23.5 L20.2 23.5 Z" fill="white" opacity="0.9"/>
-        {/* Ribbon left */}
-        <path d="M16 16 L12 6 L18 10 L22 6" stroke="white" strokeWidth="2" fill="none" strokeLinejoin="round"/>
-        {/* Ribbon right */}
-        <path d="M28 16 L32 6 L26 10 L22 6" stroke="white" strokeWidth="2" fill="none" strokeLinejoin="round"/>
+      <svg width="42" height="42" viewBox="0 0 42 42" fill="none">
+        {/* Medal circle */}
+        <circle cx="21" cy="28" r="11" stroke="white" strokeWidth="2.2"/>
+        {/* Star inside medal */}
+        <path d="M21 20 L22.5 25 L28 25 L23.5 28.5 L25 33.5 L21 30.5 L17 33.5 L18.5 28.5 L14 25 L19.5 25 Z" fill="white"/>
+        {/* Left ribbon */}
+        <path d="M15 18 L11 7 L17 12" stroke="white" strokeWidth="2.2" fill="none" strokeLinejoin="round"/>
+        <path d="M17 12 L21 7" stroke="white" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
+        {/* Right ribbon */}
+        <path d="M27 18 L31 7 L25 12" stroke="white" strokeWidth="2.2" fill="none" strokeLinejoin="round"/>
+        <path d="M25 12 L21 7" stroke="white" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
       </svg>
     )
   },
   {
     label:'PLAYER BATTLE', badge:null, path:'/player-battle',
     icon: (
-      <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-        {/* Two fists facing each other — exactly like Mahaling777 */}
-        {/* Left fist */}
-        <rect x="4" y="18" width="14" height="10" rx="3" stroke="white" strokeWidth="2"/>
-        <rect x="6" y="14" width="10" height="6" rx="2" stroke="white" strokeWidth="1.8"/>
-        <line x1="9" y1="14" x2="9" y2="18" stroke="white" strokeWidth="1.5"/>
-        <line x1="12" y1="14" x2="12" y2="18" stroke="white" strokeWidth="1.5"/>
-        <line x1="15" y1="14" x2="15" y2="18" stroke="white" strokeWidth="1.5"/>
-        {/* Right fist (mirrored) */}
-        <rect x="26" y="18" width="14" height="10" rx="3" stroke="white" strokeWidth="2"/>
-        <rect x="28" y="14" width="10" height="6" rx="2" stroke="white" strokeWidth="1.8"/>
-        <line x1="31" y1="14" x2="31" y2="18" stroke="white" strokeWidth="1.5"/>
-        <line x1="34" y1="14" x2="34" y2="18" stroke="white" strokeWidth="1.5"/>
-        <line x1="37" y1="14" x2="37" y2="18" stroke="white" strokeWidth="1.5"/>
-        {/* Impact lines in middle */}
-        <path d="M20 20 L24 20" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
-        <path d="M21 17 L23 15" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M21 23 L23 25" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
+      <svg width="42" height="42" viewBox="0 0 42 42" fill="none">
+        {/* Left fist — fingers */}
+        <rect x="4" y="13" width="12" height="8" rx="2" stroke="white" strokeWidth="1.8"/>
+        {/* Left thumb */}
+        <path d="M4 17 L4 21 Q4 25 8 25 L16 25 L16 21" stroke="white" strokeWidth="1.8" fill="none"/>
+        {/* Left knuckle lines */}
+        <line x1="8" y1="13" x2="8" y2="21" stroke="white" strokeWidth="1.2"/>
+        <line x1="12" y1="13" x2="12" y2="21" stroke="white" strokeWidth="1.2"/>
+        {/* Right fist (mirrored) — fingers */}
+        <rect x="26" y="13" width="12" height="8" rx="2" stroke="white" strokeWidth="1.8"/>
+        {/* Right thumb */}
+        <path d="M38 17 L38 21 Q38 25 34 25 L26 25 L26 21" stroke="white" strokeWidth="1.8" fill="none"/>
+        {/* Right knuckle lines */}
+        <line x1="30" y1="13" x2="30" y2="21" stroke="white" strokeWidth="1.2"/>
+        <line x1="34" y1="13" x2="34" y2="21" stroke="white" strokeWidth="1.2"/>
+        {/* Impact sparks in middle */}
+        <path d="M19 16 L23 16" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
+        <path d="M20 12 L22 10" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
+        <path d="M20 20 L22 22" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
+        <path d="M21 13 L21 10" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+        <path d="M21 19 L21 22" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
       </svg>
     )
   },
