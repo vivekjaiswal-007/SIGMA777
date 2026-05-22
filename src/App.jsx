@@ -51,6 +51,8 @@ import BaccaratGame from './games/BaccaratGame'
 import TeenPattiGame from './games/TeenPattiGame'
 import AndarBahar from './games/AndarBahar'
 import GameWrapper from './components/GameWrapper'
+import ESports from './pages/ESports'
+import PlayerBattle from './pages/PlayerBattle'
 import EsportsPage from './pages/EsportsPage'
 import PlayerBattle from './pages/PlayerBattle'
 import DragonTiger from './games/DragonTiger'
@@ -87,6 +89,8 @@ export default function App() {
         <Route path="lobby" element={<GameLobby />} />
         <Route path="live-casino" element={<LiveCasino />} />
         <Route path="live-casino/return" element={<LiveCasino />} />
+        <Route path="e-sports" element={<ESports />} />
+        <Route path="player-battle" element={<PlayerBattle />} />
         <Route path="dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="games/aviator" element={<ProtectedRoute><GameWrapper><AviatorGame /></GameWrapper></ProtectedRoute>} />
         <Route path="games/crash-rocket" element={<ProtectedRoute><GameWrapper><CrashRocket /></GameWrapper></ProtectedRoute>} />
@@ -128,7 +132,6 @@ export default function App() {
         <Route path="games/mini-baccarat" element={<ProtectedRoute><GameWrapper><MiniBaccarat /></GameWrapper></ProtectedRoute>} />
         <Route path="games/penalty" element={<ProtectedRoute><GameWrapper><PenaltyShootout /></GameWrapper></ProtectedRoute>} />
         <Route path="esports" element={<EsportsPage />} />
-        <Route path="player-battle" element={<PlayerBattle />} />
       </Route>
     </Routes>
     <Footer />

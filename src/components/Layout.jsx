@@ -7,46 +7,36 @@ import Sidebar from './Sidebar'
 function BottomNav() {
   const { user } = useStore()
   const navigate = useNavigate()
-  const p = useLocation().pathname
+  const location = useLocation()
+  const p = location.pathname
 
-  const items = [
-    { icon:'🏠', label:'HOME', path:'/' },
-    { icon:'🎰', label:'CASINO', path:'/lobby' },
+  const tabs = [
+    { label:'HOME', icon:'🏠', path:'/' },
+    { label:'CASINO', icon:'🎰', path:'/lobby' },
+    { label:'IN-PLAY', icon:'🏏', path:'live', action:'inplay' },
+    { label:'OPEN BETS', icon:'📋', path:'/dashboard' },
+    { label:'ACCOUNT', icon:'👤', path: user ? '/dashboard' : '/login' },
   ]
-  const rightItems = [
-    { icon:'🏏', label:'IN-PLAY', path:'/live-casino' },
-    { icon:'📋', label:'OPEN BETS', path: user ? '/dashboard' : '/login' },
-    { icon:'👤', label:'ACCOUNT', path: user ? '/dashboard' : '/login' },
-  ]
-
-  const BtnStyle = (active) => ({
-    flex:1, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center',
-    gap:'3px', cursor:'pointer', border:'none', background:'transparent',
-    color: active ? 'var(--primary)' : 'var(--text-muted)',
-    fontSize:'9px', fontWeight:'700', letterSpacing:'0.3px', textTransform:'uppercase', padding:'0',
-    transition:'color 0.15s',
-  })
 
   return (
     <nav className="bottom-nav">
-      <div className="bottom-nav-inner">
-        {items.map(it => (
-          <button key={it.path} style={BtnStyle(p===it.path)} onClick={() => navigate(it.path)}>
-            <span style={{ fontSize:'20px' }}>{it.icon}</span>
-            <span>{it.label}</span>
-          </button>
-        ))}
-        {/* Center play button */}
-        <button style={{ flex:1, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:'2px', cursor:'pointer', border:'none', background:'transparent', padding:0 }} onClick={() => navigate('/lobby')}>
-          <div style={{ width:'44px', height:'44px', background:'linear-gradient(135deg,#c91818,#ff4040)', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'20px', boxShadow:'0 0 16px rgba(224,48,48,0.5)', marginTop:'-14px', border:'3px solid var(--bg-primary)' }}>▶</div>
-          <span style={{ fontSize:'9px', fontWeight:'700', color:'var(--primary)', textTransform:'uppercase', letterSpacing:'0.3px' }}>PLAY</span>
-        </button>
-        {rightItems.map(it => (
-          <button key={it.label} style={BtnStyle(p===it.path)} onClick={() => navigate(it.path)}>
-            <span style={{ fontSize:'20px' }}>{it.icon}</span>
-            <span>{it.label}</span>
-          </button>
-        ))}
+      <div className="bottom-nav-inner" style={{ display:'flex', height:'100%' }}>
+        {tabs.map((tab, i) => {
+          const isCenter = i === 2
+          const active = p === tab.path || (tab.path === '/lobby' && p.startsWith('/lobby')) || (tab.path === '/live-casino' && p.startsWith('/live-casino'))
+          if (isCenter) return (
+            <button key={i} className="bnav-center-btn" onClick={() => navigate('/live-casino')}>
+              <div className="bnav-center-circle" style={{ fontSize:'18px' }}>{tab.icon}</div>
+              <span className="bnav-center-label">{tab.label}</span>
+            </button>
+          )
+          return (
+            <button key={i} className={`bnav-item${active?' active':''}`} onClick={() => navigate(tab.path)}>
+              <span style={{ fontSize:'19px', lineHeight:1 }}>{tab.icon}</span>
+              <span>{tab.label}</span>
+            </button>
+          )
+        })}
       </div>
     </nav>
   )
@@ -69,13 +59,14 @@ export default function Layout() {
     return () => window.removeEventListener('resize', onResize)
   }, [])
 
-  useEffect(() => setMobileSidebarOpen(false), [location.pathname])
+  useEffect(() => { setMobileSidebarOpen(false) }, [location.pathname])
 
   const getSidebarClass = () => {
     if (isMobile) return `app-sidebar${mobileSidebarOpen ? ' open' : ''}`
     if (isTablet) return `app-sidebar${sidebarOpen ? ' open' : ''}`
     return `app-sidebar${!sidebarOpen ? ' collapsed' : ''}`
   }
+
   const getMainClass = () => {
     if (isMobile) return 'app-main'
     if (isTablet) return `app-main${sidebarOpen ? ' sidebar-open' : ''}`
