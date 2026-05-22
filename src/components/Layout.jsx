@@ -55,7 +55,7 @@ function BottomNav() {
       )
     },
     {
-      label:'ACCOUNT', path: user ? '/dashboard' : '/login',
+      label:'ACCOUNT', path: user ? '/account' : '/login',
       icon: (active) => (
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active?'#4caf50':'#888'} strokeWidth="2" strokeLinecap="round">
           <circle cx="12" cy="8" r="4"/>
