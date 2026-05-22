@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { CAT_ICONS } from '../catIcons.js'
 import { Link, useNavigate } from 'react-router-dom'
 import { useStore, api } from '../store/useStore'
 import toast from 'react-hot-toast'
@@ -15,128 +16,12 @@ const BANNERS = [
 
 /* ── 6 Categories with exact Mahaling777-style SVG icons ── */
 const CATEGORIES = [
-  {
-    label:'IN-PLAY', badge:null, action:'cricket',
-    icon: (
-      <svg width="42" height="42" viewBox="0 0 42 42" fill="none">
-        {/* Basketball hoop ring */}
-        <ellipse cx="21" cy="14" rx="11" ry="3" stroke="white" strokeWidth="2.2"/>
-        {/* Net lines going down */}
-        <line x1="10" y1="14" x2="12" y2="26" stroke="white" strokeWidth="1.8"/>
-        <line x1="32" y1="14" x2="30" y2="26" stroke="white" strokeWidth="1.8"/>
-        <line x1="14" y1="14" x2="15" y2="26" stroke="white" strokeWidth="1.5"/>
-        <line x1="21" y1="14" x2="21" y2="27" stroke="white" strokeWidth="1.5"/>
-        <line x1="28" y1="14" x2="27" y2="26" stroke="white" strokeWidth="1.5"/>
-        {/* Net bottom curve */}
-        <path d="M12 26 Q21 30 30 26" stroke="white" strokeWidth="1.8" fill="none"/>
-        {/* Horizontal net lines */}
-        <path d="M11 18 Q21 21 31 18" stroke="white" strokeWidth="1.2" fill="none"/>
-        <path d="M11.5 22 Q21 25 30.5 22" stroke="white" strokeWidth="1.2" fill="none"/>
-        {/* LIVE badge */}
-        <rect x="13" y="32" width="16" height="7" rx="2" fill="white"/>
-        <text x="21" y="38" textAnchor="middle" fontSize="5.5" fontWeight="900" fill="#111" fontFamily="Arial,sans-serif">LIVE</text>
-      </svg>
-    )
-  },
-  {
-    label:'SPORTSBOOK', badge:null, action:'cricket',
-    icon: (
-      <svg width="42" height="42" viewBox="0 0 42 42" fill="none">
-        {/* Ticket shape */}
-        <path d="M4 13 L38 13 L38 19 Q34 19 34 21 Q34 23 38 23 L38 29 L4 29 L4 23 Q8 23 8 21 Q8 19 4 19 Z" stroke="white" strokeWidth="2" fill="none"/>
-        {/* Cricket ball inside ticket */}
-        <circle cx="21" cy="21" r="6" stroke="white" strokeWidth="1.8"/>
-        {/* Ball seam */}
-        <path d="M16 19 Q21 16 26 19" stroke="white" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
-        <path d="M16 23 Q21 26 26 23" stroke="white" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
-        <line x1="21" y1="15" x2="21" y2="27" stroke="white" strokeWidth="1.2"/>
-        {/* Dashed perforation line */}
-        <line x1="34" y1="14" x2="34" y2="28" stroke="white" strokeWidth="1.2" strokeDasharray="2 2"/>
-      </svg>
-    )
-  },
-  {
-    label:'VIRTUAL', badge:null, path:'/live-casino',
-    icon: (
-      <svg width="42" height="42" viewBox="0 0 42 42" fill="none">
-        {/* Index finger pointing up */}
-        <rect x="18" y="6" width="6" height="18" rx="3" stroke="white" strokeWidth="2"/>
-        {/* Middle finger */}
-        <rect x="25" y="12" width="5" height="14" rx="2.5" stroke="white" strokeWidth="1.8"/>
-        {/* Ring finger */}
-        <rect x="31" y="14" width="5" height="12" rx="2.5" stroke="white" strokeWidth="1.8"/>
-        {/* Palm */}
-        <path d="M18 22 L18 30 Q18 34 22 34 Q26 34 26 30 L26 24" stroke="white" strokeWidth="2" fill="none"/>
-        <path d="M26 26 L26 30 Q26 34 30 34 Q34 34 34 30 L34 24" stroke="white" strokeWidth="1.8" fill="none"/>
-        {/* Touch ripple at bottom */}
-        <path d="M9 36 Q15 33 21 36" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.7"/>
-      </svg>
-    )
-  },
-  {
-    label:'E-SPORTS', badge:'NEW', path:'/e-sports',
-    icon: (
-      <svg width="42" height="42" viewBox="0 0 42 42" fill="none">
-        {/* Monitor screen */}
-        <rect x="5" y="7" width="32" height="22" rx="3" stroke="white" strokeWidth="2.2"/>
-        {/* Screen content - simple game display */}
-        <rect x="9" y="11" width="24" height="14" rx="1.5" stroke="white" strokeWidth="1.5"/>
-        {/* Stand */}
-        <line x1="21" y1="29" x2="21" y2="34" stroke="white" strokeWidth="2.2"/>
-        <line x1="14" y1="34" x2="28" y2="34" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
-        {/* Game cursor/crosshair on screen */}
-        <circle cx="21" cy="18" r="3" stroke="white" strokeWidth="1.5"/>
-        <line x1="21" y1="13" x2="21" y2="15" stroke="white" strokeWidth="1.5"/>
-        <line x1="21" y1="21" x2="21" y2="23" stroke="white" strokeWidth="1.5"/>
-        <line x1="16" y1="18" x2="18" y2="18" stroke="white" strokeWidth="1.5"/>
-        <line x1="24" y1="18" x2="26" y2="18" stroke="white" strokeWidth="1.5"/>
-      </svg>
-    )
-  },
-  {
-    label:'SPECIAL MARKET', badge:'NEW', action:'cricket',
-    icon: (
-      <svg width="42" height="42" viewBox="0 0 42 42" fill="none">
-        {/* Medal circle */}
-        <circle cx="21" cy="28" r="11" stroke="white" strokeWidth="2.2"/>
-        {/* Star inside medal */}
-        <path d="M21 20 L22.5 25 L28 25 L23.5 28.5 L25 33.5 L21 30.5 L17 33.5 L18.5 28.5 L14 25 L19.5 25 Z" fill="white"/>
-        {/* Left ribbon */}
-        <path d="M15 18 L11 7 L17 12" stroke="white" strokeWidth="2.2" fill="none" strokeLinejoin="round"/>
-        <path d="M17 12 L21 7" stroke="white" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
-        {/* Right ribbon */}
-        <path d="M27 18 L31 7 L25 12" stroke="white" strokeWidth="2.2" fill="none" strokeLinejoin="round"/>
-        <path d="M25 12 L21 7" stroke="white" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
-      </svg>
-    )
-  },
-  {
-    label:'PLAYER BATTLE', badge:null, path:'/player-battle',
-    icon: (
-      <svg width="42" height="42" viewBox="0 0 42 42" fill="none">
-        {/* Left fist — fingers */}
-        <rect x="4" y="13" width="12" height="8" rx="2" stroke="white" strokeWidth="1.8"/>
-        {/* Left thumb */}
-        <path d="M4 17 L4 21 Q4 25 8 25 L16 25 L16 21" stroke="white" strokeWidth="1.8" fill="none"/>
-        {/* Left knuckle lines */}
-        <line x1="8" y1="13" x2="8" y2="21" stroke="white" strokeWidth="1.2"/>
-        <line x1="12" y1="13" x2="12" y2="21" stroke="white" strokeWidth="1.2"/>
-        {/* Right fist (mirrored) — fingers */}
-        <rect x="26" y="13" width="12" height="8" rx="2" stroke="white" strokeWidth="1.8"/>
-        {/* Right thumb */}
-        <path d="M38 17 L38 21 Q38 25 34 25 L26 25 L26 21" stroke="white" strokeWidth="1.8" fill="none"/>
-        {/* Right knuckle lines */}
-        <line x1="30" y1="13" x2="30" y2="21" stroke="white" strokeWidth="1.2"/>
-        <line x1="34" y1="13" x2="34" y2="21" stroke="white" strokeWidth="1.2"/>
-        {/* Impact sparks in middle */}
-        <path d="M19 16 L23 16" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
-        <path d="M20 12 L22 10" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M20 20 L22 22" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M21 13 L21 10" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-        <path d="M21 19 L21 22" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
-    )
-  },
+  { label:'IN-PLAY',        badge:null,  action:'cricket',        iconKey:'inplay'       },
+  { label:'SPORTSBOOK',     badge:null,  action:'cricket',        iconKey:'sportsbook'   },
+  { label:'VIRTUAL',        badge:null,  path:'/live-casino',     iconKey:'virtual'      },
+  { label:'E-SPORTS',       badge:'NEW', path:'/e-sports',        iconKey:'esports'      },
+  { label:'SPECIAL MARKET', badge:'NEW', action:'cricket',        iconKey:'special'      },
+  { label:'PLAYER BATTLE',  badge:null,  path:'/player-battle',   iconKey:'playerbattle' },
 ]
 
 const ROW_TAGS = [
@@ -344,7 +229,7 @@ export default function Home() {
             )}
             {/* Icon */}
             <div style={{ width:'52px', height:'52px', display:'flex', alignItems:'center', justifyContent:'center' }}>
-              {cat.icon}
+              <img src={CAT_ICONS[cat.iconKey]} alt={cat.label} style={{ width:'48px', height:'48px', objectFit:'contain', filter:'brightness(0) invert(1)' }} />
             </div>
             {/* Label */}
             <div style={{ fontSize:'clamp(9px,2.5vw,11px)', fontWeight:'800', color:'#ffffff', textAlign:'center', lineHeight:1.2, letterSpacing:'0.5px' }}>{cat.label}</div>
