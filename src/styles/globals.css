@@ -188,6 +188,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
   display: flex;
   height: 100%;
   align-items: stretch;
+  width: 100%;
+  justify-content: space-around;
 }
 
 .bnav-item {
@@ -205,8 +207,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
   font-weight: 600;
   letter-spacing: 0.3px;
   transition: color 0.15s;
-  padding: 0;
+  padding: 0 4px;
   text-transform: uppercase;
+  width: 100%;
 }
 .bnav-item.active { color: #ffffff; font-weight: 800; }
 .bnav-item svg { width: 32px; height: 32px; }
