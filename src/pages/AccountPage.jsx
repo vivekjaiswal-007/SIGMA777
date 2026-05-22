@@ -27,8 +27,15 @@ function DepositWithdraw({ balance }) {
   const IS = { width:'100%', padding:'11px 14px', background:'#f8f8f8', border:'1px solid #ddd', borderRadius:'8px', color:'#111', fontSize:'15px', outline:'none', marginBottom:'10px', boxSizing:'border-box' }
   const QUICK = [200,500,1000,2000,5000]
 
+  const [showWarning, setShowWarning] = useState(false)
+
   const generateQR = async () => {
     if (depositAmount < 100) return toast.error('Minimum deposit ₹100')
+    setShowWarning(true)
+  }
+
+  const proceedQR = async () => {
+    setShowWarning(false)
     setQrLoading(true); setSelectedQR(null); setQrCodes([])
     try {
       const { data } = await api.get(`/wallet/qr-all?amount=${depositAmount}&_t=${Date.now()}`)
@@ -82,16 +89,34 @@ function DepositWithdraw({ balance }) {
 
       {tab==='deposit' && (
         <div>
+          {/* Warning Popup */}
+          {showWarning && (
+            <div style={{ position:'fixed',inset:0,background:'rgba(0,0,0,0.7)',zIndex:9999,display:'flex',alignItems:'center',justifyContent:'center',padding:'20px' }}>
+              <div style={{ background:'#fff',borderRadius:'16px',padding:'28px 24px',maxWidth:'320px',width:'100%',textAlign:'center' }}>
+                <div style={{ fontSize:'40px',marginBottom:'12px' }}>⚠️</div>
+                <h3 style={{ color:'#e53935',fontWeight:'900',fontSize:'17px',marginBottom:'10px' }}>Important Notice</h3>
+                <p style={{ color:'#444',fontSize:'13px',lineHeight:1.7,marginBottom:'20px' }}>
+                  Please do <strong>not</strong> make any fake or invalid payments. Fake payment attempts waste both your time and ours, and may result in your account being permanently suspended.
+                </p>
+                <div style={{ display:'flex',gap:'10px' }}>
+                  <button onClick={()=>setShowWarning(false)} style={{ flex:1,padding:'11px',background:'#f0f0f0',border:'none',borderRadius:'8px',color:'#555',fontWeight:'700',fontSize:'13px',cursor:'pointer' }}>Cancel</button>
+                  <button onClick={proceedQR} style={{ flex:1,padding:'11px',background:'#1e7d32',border:'none',borderRadius:'8px',color:'#fff',fontWeight:'700',fontSize:'13px',cursor:'pointer' }}>I Agree</button>
+                </div>
+              </div>
+            </div>
+          )}
+
           <label style={{ fontSize:'12px',color:'#666',fontWeight:'700',display:'block',marginBottom:'6px' }}>AMOUNT (₹)</label>
           <input type="number" value={depositAmount} onChange={e=>setDepositAmount(Number(e.target.value))} style={IS}/>
           <div style={{ display:'flex',gap:'6px',flexWrap:'wrap',marginBottom:'14px' }}>
             {QUICK.map(a=><button key={a} onClick={()=>setDepositAmount(a)} style={{ padding:'6px 12px',background:depositAmount===a?'#1e7d32':'#eee',border:'none',borderRadius:'6px',fontSize:'12px',fontWeight:'700',color:depositAmount===a?'#fff':'#333',cursor:'pointer' }}>₹{a}</button>)}
           </div>
-          <button onClick={generateQR} disabled={qrLoading} style={{ width:'100%',padding:'12px',background:'#1e7d32',border:'none',borderRadius:'8px',color:'#fff',fontWeight:'700',fontSize:'14px',cursor:'pointer',marginBottom:'14px' }}>
+          <button onClick={generateQR} disabled={qrLoading} style={{ width:'100%',padding:'12px',background:'#1e7d32',border:'none',borderRadius:'8px',color:'#fff',fontWeight:'700',fontSize:'14px',cursor:'pointer',marginBottom:'16px' }}>
             {qrLoading?'⏳ Generating...':'📱 Generate QR Code'}
           </button>
+
           {qrCodes.length>0 && selectedQR!==null && (
-            <div style={{ textAlign:'center',background:'#f8f8f8',borderRadius:'10px',padding:'16px',marginBottom:'14px',border:'1px solid #ddd' }}>
+            <div style={{ textAlign:'center',background:'#f8f8f8',borderRadius:'10px',padding:'16px',marginBottom:'16px',border:'1px solid #ddd' }}>
               <img src={qrCodes[selectedQR]?.qrUrl} alt="QR" style={{ width:'200px',height:'200px',borderRadius:'8px' }}/>
               <div style={{ marginTop:'8px',fontSize:'13px',color:'#555',lineHeight:1.6 }}>
                 <strong>UPI:</strong> {qrCodes[selectedQR]?.upiId}<br/>
@@ -104,14 +129,21 @@ function DepositWithdraw({ balance }) {
               </a>
             </div>
           )}
-          <label style={{ fontSize:'12px',color:'#666',fontWeight:'700',display:'block',marginBottom:'6px' }}>UTR / TRANSACTION ID</label>
-          <input type="text" value={utrId} onChange={e=>setUtrId(e.target.value)} placeholder="Enter 12-digit UTR" style={IS}/>
-          <label style={{ fontSize:'12px',color:'#666',fontWeight:'700',display:'block',marginBottom:'6px' }}>PAYMENT SCREENSHOT</label>
-          <input type="file" accept="image/*" onChange={e=>{const f=e.target.files[0];if(f){setScreenshot(f);setScreenshotName(f.name)}}} style={{ marginBottom:'10px',fontSize:'13px',color:'#555',width:'100%' }}/>
-          {screenshotName && <div style={{ fontSize:'12px',color:'#1e7d32',marginBottom:'10px' }}>✅ {screenshotName}</div>}
-          <button onClick={submitDeposit} disabled={submitLoading} style={{ width:'100%',padding:'13px',background:'#e53935',border:'none',borderRadius:'8px',color:'#fff',fontWeight:'900',fontSize:'14px',cursor:'pointer' }}>
-            {submitLoading?'⏳ Submitting...':'✅ SUBMIT DEPOSIT'}
-          </button>
+
+          {/* Instructions */}
+          <div style={{ background:'#f0f7f0',border:'1px solid #c8e6c9',borderRadius:'10px',padding:'14px' }}>
+            <div style={{ fontWeight:'800',color:'#1e7d32',fontSize:'13px',marginBottom:'10px',letterSpacing:'0.3px' }}>📋 HOW TO DEPOSIT</div>
+            {[
+              { n:'1', text:'Scan the QR code above and complete the payment. Take a screenshot of your payment confirmation immediately.' },
+              { n:'2', text:'Click the WhatsApp icon on the screen to open our support chat directly.' },
+              { n:'3', text:'Send your payment screenshot on WhatsApp and wait up to 5 minutes. Your coins will be credited once payment is verified.' },
+            ].map(step=>(
+              <div key={step.n} style={{ display:'flex',gap:'10px',marginBottom:'10px',alignItems:'flex-start' }}>
+                <div style={{ width:'24px',height:'24px',borderRadius:'50%',background:'#1e7d32',color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'12px',fontWeight:'900',flexShrink:0 }}>{step.n}</div>
+                <p style={{ fontSize:'13px',color:'#333',lineHeight:1.6,margin:0 }}>{step.text}</p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
