@@ -194,7 +194,9 @@ export default function Home() {
       {/* QUICK TABS */}
       <style>{`
         @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+        @keyframes icon-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(0.9)} }
         .live-dot { animation: blink 1.2s infinite; }
+        .tab-icon-blink { animation: icon-pulse 2s infinite; display:flex; align-items:center; }
       `}</style>
       <div style={{ display:'flex', gap:'6px', overflowX:'auto', paddingBottom:'10px', marginBottom:'2px', scrollbarWidth:'none', marginLeft:'-12px', marginRight:'-12px', paddingLeft:'12px', paddingRight:'12px' }}>
         {[
@@ -245,7 +247,7 @@ export default function Home() {
             onMouseLeave={e => { e.currentTarget.style.background='#1a1a1a'; e.currentTarget.style.borderColor='#2a2a2a' }}
           >
             {tab.live && <span className="live-dot" style={{ width:'6px', height:'6px', borderRadius:'50%', background:'#4caf50', display:'inline-block', marginRight:'1px' }}/>}
-            <span style={{ display:'flex', alignItems:'center' }}>{tab.icon}</span>
+            <span className="tab-icon-blink" style={{ display:'flex', alignItems:'center' }}>{tab.icon}</span>
             <span>{tab.label}</span>
           </button>
         ))}
@@ -257,7 +259,7 @@ export default function Home() {
       {/* 6 CATEGORY GRID */}
       <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'8px', marginBottom:'18px' }}>
         {CATEGORIES.map((cat, i) => (
-          <button key={i} onClick={() => handleCat(cat)} style={{ position:'relative', background:'#181818', border:'1px solid #2a2a2a', borderRadius:'12px', padding:'18px 8px 14px', display:'flex', flexDirection:'column', alignItems:'center', gap:'10px', cursor:'pointer', transition:'all 0.2s', overflow:'hidden' }}
+          <button key={i} onClick={() => handleCat(cat)} style={{ position:'relative', background:'#181818', border:'1px solid #2a2a2a', borderRadius:'12px', padding:'14px 8px', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:'0', cursor:'pointer', transition:'all 0.2s', overflow:'hidden' }}
             onMouseEnter={e => { e.currentTarget.style.background='#222'; e.currentTarget.style.borderColor='#3a3a3a' }}
             onMouseLeave={e => { e.currentTarget.style.background='#181818'; e.currentTarget.style.borderColor='#2a2a2a' }}
           >
@@ -265,11 +267,11 @@ export default function Home() {
               <div style={{ position:'absolute', top:0, right:0, background:'#e03030', color:'#fff', fontSize:'8px', fontWeight:'900', padding:'3px 8px 3px 12px', borderBottomLeftRadius:'10px', letterSpacing:'0.5px' }}>NEW</div>
             )}
             {/* Icon */}
-            <div style={{ width:'68px', height:'68px', display:'flex', alignItems:'center', justifyContent:'center' }}>
-              <img src={CAT_ICONS[cat.iconKey]} alt={cat.label} style={{ width:'64px', height:'64px', objectFit:'contain', filter:'brightness(0) invert(1)' }} />
+            <div style={{ width:'84px', height:'84px', display:'flex', alignItems:'center', justifyContent:'center' }}>
+              <img src={CAT_ICONS[cat.iconKey]} alt={cat.label} style={{ width:'80px', height:'80px', objectFit:'contain', filter:'brightness(0) invert(1)' }} />
             </div>
             {/* Label */}
-            <div style={{ fontSize:'clamp(9px,2.5vw,11px)', fontWeight:'800', color:'#ffffff', textAlign:'center', lineHeight:1.2, letterSpacing:'0.5px' }}>{cat.label}</div>
+
           </button>
         ))}
       </div>
