@@ -270,14 +270,14 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 /* Game card */
 .game-card {
-  flex-shrink:0; width:130px;
+  flex-shrink:0; width:155px;
   background:var(--bg-card); border-radius:10px; overflow:hidden;
   cursor:pointer; transition:transform 0.2s, box-shadow 0.2s;
   border:1px solid var(--border);
 }
 .game-card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,0.4); }
-.game-card-thumb { width:100%; height:90px; object-fit:cover; display:block; }
-.game-card-thumb-placeholder { width:100%; height:90px; display:flex; align-items:center; justify-content:center; font-size:32px; }
+.game-card-thumb { width:100%; height:110px; object-fit:cover; display:block; }
+.game-card-thumb-placeholder { width:100%; height:110px; display:flex; align-items:center; justify-content:center; font-size:32px; }
 .game-card-name { padding:6px 8px; font-size:11px; font-weight:600; color:#ccc; line-height:1.3; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .game-card-badge { position:absolute; top:5px; right:5px; font-size:8px; font-weight:800; padding:2px 5px; border-radius:3px; text-transform:uppercase; }
 
@@ -327,8 +327,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 @media (max-width:479px) {
   .app-main { padding:8px 8px calc(var(--bottom-nav-h) + 8px); }
-  .game-card { width:115px; }
-  .game-card-thumb, .game-card-thumb-placeholder { height:78px; }
+  .game-card { width:140px; }
+  .game-card-thumb, .game-card-thumb-placeholder { height:98px; }
 }
 
 @supports (-webkit-touch-callout:none) {
