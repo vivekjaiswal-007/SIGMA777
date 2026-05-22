@@ -12,7 +12,7 @@ export default function Header({ onMobileMenuClick, isMobile }) {
 
   return (
     <header className="app-header" style={{
-      background: 'linear-gradient(90deg, #1a6b2a 0%, #1e7d32 50%, #1a6b2a 100%)',
+      background: '#0d3b1a',
       borderBottom: '1px solid rgba(0,0,0,0.3)',
       boxShadow: '0 2px 12px rgba(0,0,0,0.4)'
     }}>
