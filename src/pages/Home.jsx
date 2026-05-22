@@ -191,24 +191,61 @@ export default function Home() {
         </div>
       )}
 
-      {/* QUICK TABS — Mahaling777 style horizontal scroll below header */}
+      {/* QUICK TABS */}
+      <style>{`
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+        .live-dot { animation: blink 1.2s infinite; }
+      `}</style>
       <div style={{ display:'flex', gap:'6px', overflowX:'auto', paddingBottom:'10px', marginBottom:'2px', scrollbarWidth:'none', marginLeft:'-12px', marginRight:'-12px', paddingLeft:'12px', paddingRight:'12px' }}>
         {[
-          { icon:'✈️', label:'Aviator', path:'/games/aviator' },
-          { icon:'🎮', label:'Grey Gaming', action:'cricket' },
-          { icon:'🏏', label:'Live Cricket', action:'cricket' },
-          { icon:'⚽', label:'E-Soccer', path:'/e-sports' },
-          { icon:'🎰', label:'Live Casino', path:'/live-casino' },
-          { icon:'♠️', label:'Teen Patti', path:'/games/teen-patti' },
-          { icon:'🚀', label:'Crash Games', path:'/games/crash-rocket' },
-          { icon:'💎', label:'Mines', path:'/games/mines' },
+          {
+            label:'Aviator',
+            icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M21 3L3 10.5l7 2.5 1.5 6.5 3.5-4 4.5 3L21 3z"/></svg>,
+            path:'/games/aviator', live: false
+          },
+          {
+            label:'Grey Gaming',
+            icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><rect x="2" y="6" width="20" height="12" rx="4"/><line x1="8" y1="12" x2="12" y2="12"/><line x1="10" y1="10" x2="10" y2="14"/><circle cx="17" cy="11" r="1" fill="white"/><circle cx="17" cy="13" r="1" fill="white"/></svg>,
+            action:'cricket', live: false
+          },
+          {
+            label:'Live Cricket',
+            icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><circle cx="12" cy="12" r="9"/><path d="M8 12 Q12 8 16 12 Q12 16 8 12"/></svg>,
+            action:'cricket', live: true
+          },
+          {
+            label:'E-Soccer',
+            icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><circle cx="12" cy="12" r="9"/><path d="M12 3 L14 8 L19 8 L15 11 L17 16 L12 13 L7 16 L9 11 L5 8 L10 8 Z" fill="white" stroke="none"/></svg>,
+            path:'/e-sports', live: false
+          },
+          {
+            label:'Live Casino',
+            icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M3 10h18"/></svg>,
+            path:'/live-casino', live: true
+          },
+          {
+            label:'Teen Patti',
+            icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M7 2h10a2 2 0 012 2v16a2 2 0 01-2 2H7a2 2 0 01-2-2V4a2 2 0 012-2zm5 3a1 1 0 100 2 1 1 0 000-2zm0 4a3 3 0 100 6 3 3 0 000-6z"/></svg>,
+            path:'/games/teen-patti', live: false
+          },
+          {
+            label:'Crash',
+            icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M3 17 L9 11 L13 15 L21 7"/><polyline points="15 7 21 7 21 13" fill="none" stroke="white" strokeWidth="2"/></svg>,
+            path:'/games/crash-rocket', live: false
+          },
+          {
+            label:'Mines',
+            icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><circle cx="12" cy="12" r="5" fill="white"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="7.1" y2="7.1"/><line x1="16.9" y1="16.9" x2="19.1" y2="19.1"/></svg>,
+            path:'/games/mines', live: false
+          },
         ].map((tab, i) => (
           <button key={i} onClick={() => tab.action === 'cricket' ? launchCricket() : navigate(tab.path)}
             style={{ flexShrink:0, display:'flex', alignItems:'center', gap:'5px', padding:'5px 12px', background:'#1a1a1a', border:'1px solid #2a2a2a', borderRadius:'20px', color:'#ccc', fontSize:'11px', fontWeight:'600', cursor:'pointer', whiteSpace:'nowrap' }}
             onMouseEnter={e => { e.currentTarget.style.background='#222'; e.currentTarget.style.borderColor='#3a3a3a' }}
             onMouseLeave={e => { e.currentTarget.style.background='#1a1a1a'; e.currentTarget.style.borderColor='#2a2a2a' }}
           >
-            <span style={{ fontSize:'13px' }}>{tab.icon}</span>
+            {tab.live && <span className="live-dot" style={{ width:'6px', height:'6px', borderRadius:'50%', background:'#4caf50', display:'inline-block', marginRight:'1px' }}/>}
+            <span style={{ display:'flex', alignItems:'center' }}>{tab.icon}</span>
             <span>{tab.label}</span>
           </button>
         ))}
@@ -228,8 +265,8 @@ export default function Home() {
               <div style={{ position:'absolute', top:0, right:0, background:'#e03030', color:'#fff', fontSize:'8px', fontWeight:'900', padding:'3px 8px 3px 12px', borderBottomLeftRadius:'10px', letterSpacing:'0.5px' }}>NEW</div>
             )}
             {/* Icon */}
-            <div style={{ width:'52px', height:'52px', display:'flex', alignItems:'center', justifyContent:'center' }}>
-              <img src={CAT_ICONS[cat.iconKey]} alt={cat.label} style={{ width:'48px', height:'48px', objectFit:'contain', filter:'brightness(0) invert(1)' }} />
+            <div style={{ width:'68px', height:'68px', display:'flex', alignItems:'center', justifyContent:'center' }}>
+              <img src={CAT_ICONS[cat.iconKey]} alt={cat.label} style={{ width:'64px', height:'64px', objectFit:'contain', filter:'brightness(0) invert(1)' }} />
             </div>
             {/* Label */}
             <div style={{ fontSize:'clamp(9px,2.5vw,11px)', fontWeight:'800', color:'#ffffff', textAlign:'center', lineHeight:1.2, letterSpacing:'0.5px' }}>{cat.label}</div>
