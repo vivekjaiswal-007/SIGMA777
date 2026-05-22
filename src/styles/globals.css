@@ -21,7 +21,7 @@
   --blue: #4488ff;
   --purple: #9944ff;
   --header-height: 34px;
-  --bottom-nav-h: 58px;
+  --bottom-nav-h: 64px;
   --sidebar-w: 230px;
   --sidebar-collapsed: 56px;
 }
@@ -196,7 +196,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3px;
+  gap: 4px;
   cursor: pointer;
   border: none;
   background: transparent;
@@ -209,7 +209,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   text-transform: uppercase;
 }
 .bnav-item.active { color: #ffffff; font-weight: 800; }
-.bnav-item svg { width: 22px; height: 22px; }
+.bnav-item svg { width: 32px; height: 32px; }
 .bnav-center-btn {
   flex: 1;
   display: flex;
@@ -281,7 +281,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .game-card-badge { position:absolute; top:5px; right:5px; font-size:8px; font-weight:800; padding:2px 5px; border-radius:3px; text-transform:uppercase; }
 
 /* Horizontal scroll row */
-.hscroll { display:flex; gap:8px; overflow-x:auto; padding-bottom:6px; padding-right:12px; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+.hscroll { display:flex; gap:8px; overflow-x:auto; padding-bottom:6px; padding-right:4px; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
 .hscroll::-webkit-scrollbar { display:none; }
 
 /* Input style */
@@ -319,13 +319,13 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .app-sidebar { width:var(--sidebar-w) !important; transform:translateX(-100%); box-shadow:none; visibility:hidden; }
   .app-sidebar.open { transform:translateX(0); box-shadow:4px 0 24px rgba(0,0,0,0.6); visibility:visible; }
   .sidebar-overlay.visible { display:block; }
-  .app-main { margin-left:0 !important; padding:8px 12px calc(var(--bottom-nav-h) + 8px); width:100%; }
+  .app-main { margin-left:0 !important; padding:6px 6px calc(var(--bottom-nav-h) + 6px); width:100%; }
   .bottom-nav { display:flex !important; }
   .hide-mobile { display:none !important; }
 }
 
 @media (max-width:479px) {
-  .app-main { padding:8px 12px calc(var(--bottom-nav-h) + 8px); }
+  .app-main { padding:6px 6px calc(var(--bottom-nav-h) + 6px); }
   .game-card { width:110px; }
   .game-card-thumb, .game-card-thumb-placeholder { height:138px; }
 }

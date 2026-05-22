@@ -14,7 +14,7 @@ function BottomNav({ onLoginClick, onSignupClick }) {
   const tabs = [
     { label:'HOME', path:'/',
       icon: (active) => (
-        <svg width="26" height="26" viewBox="0 0 24 24" fill={active?'#fff':'#666'}>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill={active?'#fff':'#666'}>
           <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
           <text x="12" y="17" textAnchor="middle" fontSize="6" fontWeight="900" fill={active?'#222':'#999'} fontFamily="Arial">n</text>
         </svg>
@@ -22,7 +22,7 @@ function BottomNav({ onLoginClick, onSignupClick }) {
     },
     { label:'CASINO', path:'/lobby',
       icon: (active) => (
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={active?'#fff':'#666'} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke={active?'#fff':'#666'} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
           {/* 3 playing cards fanned */}
           <rect x="9" y="5" width="11" height="15" rx="2" transform="rotate(10 9 5)" fill={active?'#fff':'#666'} stroke="none" opacity="0.3"/>
           <rect x="5" y="4" width="11" height="15" rx="2" fill={active?'#555':'#333'} stroke={active?'#fff':'#666'}/>
@@ -36,14 +36,14 @@ function BottomNav({ onLoginClick, onSignupClick }) {
     },
     { label:'IN-PLAY', path:'/live-casino', isCenter:true,
       icon: () => (
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff">
           <polygon points="6,3 21,12 6,21"/>
         </svg>
       )
     },
     { label:'OPEN BETS', path:'/dashboard',
       icon: (active) => (
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
           {/* Cricket ball */}
           <circle cx="12" cy="12" r="9" stroke={active?'#fff':'#666'} strokeWidth="1.8"/>
           {/* Vertical seam */}
@@ -58,7 +58,7 @@ function BottomNav({ onLoginClick, onSignupClick }) {
     },
     { label:'ACCOUNT', path: user?'/account':null,
       icon: (active) => (
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={active?'#fff':'#666'} strokeWidth="1.8">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke={active?'#fff':'#666'} strokeWidth="1.8">
           <circle cx="12" cy="12" r="10"/>
           <circle cx="12" cy="9" r="3.5"/>
           <path d="M5.5 20 C6.5 16.5 9 14.5 12 14.5 C15 14.5 17.5 16.5 18.5 20" strokeLinecap="round"/>
