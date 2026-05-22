@@ -54,6 +54,7 @@ import GameWrapper from './components/GameWrapper'
 import ESports from './pages/ESports'
 import PlayerBattle from './pages/PlayerBattle'
 import AccountPage from './pages/AccountPage'
+const AccountRedirect = () => <Navigate to="/account" replace />
 import DragonTiger from './games/DragonTiger'
 import PokerGame from './games/PokerGame'
 import TowerGame from './games/TowerGame'
@@ -91,7 +92,7 @@ export default function App() {
         <Route path="e-sports" element={<ESports />} />
         <Route path="player-battle" element={<PlayerBattle />} />
         <Route path="account" element={<AccountPage />} />
-        <Route path="dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="dashboard" element={<ProtectedRoute><AccountRedirect /></ProtectedRoute>} />
         <Route path="games/aviator" element={<ProtectedRoute><GameWrapper><AviatorGame /></GameWrapper></ProtectedRoute>} />
         <Route path="games/crash-rocket" element={<ProtectedRoute><GameWrapper><CrashRocket /></GameWrapper></ProtectedRoute>} />
         <Route path="games/color-prediction" element={<ProtectedRoute><GameWrapper><ColorPrediction /></GameWrapper></ProtectedRoute>} />
