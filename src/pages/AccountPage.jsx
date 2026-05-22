@@ -1,3 +1,4 @@
+import { openAuthModal } from '../utils/authModal.js'
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useStore, api } from '../store/useStore'
@@ -360,7 +361,7 @@ export default function AccountPage() {
   const navigate = useNavigate()
   const [expanded, setExpanded] = useState(null)
 
-  if (!user) { navigate('/login'); return null }
+  if (!user) { openAuthModal('login'); return null }
 
   const toggle = (key) => setExpanded(expanded===key ? null : key)
 

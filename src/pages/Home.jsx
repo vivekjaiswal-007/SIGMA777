@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { CAT_ICONS } from '../catIcons.js'
+import { openAuthModal } from '../utils/authModal.js'
 import { Link, useNavigate } from 'react-router-dom'
 import { useStore, api } from '../store/useStore'
 import toast from 'react-hot-toast'
@@ -151,7 +152,7 @@ export default function Home() {
   for (let i = 0; i < liveGames.length; i += 15) rows.push(liveGames.slice(i, i+15))
 
   async function launchCricket() {
-    if (!user) { toast.error('Login karein pehle!'); navigate('/login'); return }
+    if (!user) { toast.error('Login karein pehle!'); openAuthModal('login'); return }
     setLaunching(true)
     try {
       const res = await api.post('/live-casino/launch', { game_uid:'7004', language:'hi', currency_code:'INR' })
@@ -162,7 +163,7 @@ export default function Home() {
   }
 
   async function launchGame(g) {
-    if (!user) { toast.error('Login karein pehle!'); navigate('/login'); return }
+    if (!user) { toast.error('Login karein pehle!'); openAuthModal('login'); return }
     setLaunchingGame(g.game_uid)
     try {
       const res = await api.post('/live-casino/launch', { game_uid: g.game_uid || '7004', language:'hi', currency_code:'INR' })

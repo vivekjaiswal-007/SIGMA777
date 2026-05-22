@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useStore } from '../store/useStore'
 
-export default function Header({ onMobileMenuClick, isMobile }) {
+export default function Header({ onMobileMenuClick, isMobile, onLoginClick, onSignupClick }) {
   const { user, balance, logout, toggleSidebar } = useStore()
   const navigate = useNavigate()
   const [searchOpen, setSearchOpen] = useState(false)
@@ -70,12 +70,8 @@ export default function Header({ onMobileMenuClick, isMobile }) {
           </>
         ) : (
           <>
-            <Link to="/login">
-              <button style={{ background:'rgba(0,0,0,0.3)', border:'1px solid rgba(255,255,255,0.25)', color:'#fff', padding:'4px 9px', borderRadius:'4px', fontSize:'11px', fontWeight:'700', cursor:'pointer', whiteSpace:'nowrap' }}>LOGIN</button>
-            </Link>
-            <Link to="/signup">
-              <button style={{ background:'rgba(0,0,0,0.4)', border:'1.5px solid rgba(255,255,255,0.4)', color:'#fff', padding:'3px 8px', borderRadius:'4px', fontSize:'11px', fontWeight:'800', cursor:'pointer', whiteSpace:'nowrap' }}>SIGNUP</button>
-            </Link>
+            <button onClick={onLoginClick} style={{ background:'rgba(0,0,0,0.3)', border:'1px solid rgba(255,255,255,0.25)', color:'#fff', padding:'4px 9px', borderRadius:'4px', fontSize:'11px', fontWeight:'700', cursor:'pointer', whiteSpace:'nowrap' }}>LOGIN</button>
+            <button onClick={onSignupClick} style={{ background:'rgba(0,0,0,0.4)', border:'1.5px solid rgba(255,255,255,0.4)', color:'#fff', padding:'3px 8px', borderRadius:'4px', fontSize:'11px', fontWeight:'800', cursor:'pointer', whiteSpace:'nowrap' }}>SIGNUP</button>
           </>
         )}
       </div>

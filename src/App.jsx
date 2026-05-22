@@ -5,8 +5,8 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { useStore } from './store/useStore'
 import Layout from './components/Layout'
 import Home from './pages/Home'
-import Login from './pages/Login'
-import Signup from './pages/Signup'
+
+
 import ForgotPassword from './pages/ForgotPassword'
 import KenoGame from './games/KenoGame'
 import CoinFlip from './games/CoinFlip'
@@ -66,7 +66,7 @@ import SpinWin from './games/SpinWin'
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useStore()
-  if (!user) return <Navigate to="/login" replace />
+  if (!user) return <Navigate to="/" replace />
   return children
 }
 
@@ -81,8 +81,8 @@ export default function App() {
     <>
     <Routes>
       <Route path="/terms" element={<Terms />} />
-        <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Navigate to="/" replace />} />
+      <Route path="/signup" element={<Navigate to="/" replace />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
