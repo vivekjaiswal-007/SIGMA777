@@ -276,20 +276,6 @@ export default function Home() {
         ))}
       </div>
 
-      {/* WELCOME */}
-      {user && (
-        <div style={{ padding:'9px 13px', background:'rgba(34,139,34,0.1)', border:'1px solid rgba(34,139,34,0.2)', borderRadius:'10px', marginBottom:'12px', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
-          <div>
-            <div style={{ fontSize:'10px', color:'var(--text-muted)', letterSpacing:'0.5px' }}>WELCOME BACK</div>
-            <div style={{ fontSize:'15px', fontWeight:'700' }}>{user.username} 👑</div>
-          </div>
-          <div style={{ textAlign:'right' }}>
-            <div style={{ fontSize:'10px', color:'var(--text-muted)' }}>BALANCE</div>
-            <div style={{ color:'#4caf50', fontWeight:'800', fontSize:'16px' }}>🪙 {Number(balance||0).toLocaleString()}</div>
-          </div>
-        </div>
-      )}
-
       {/* BANNER */}
       <BannerSlider onLaunch={launchCricket} launching={launching} />
 
