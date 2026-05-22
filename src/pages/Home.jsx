@@ -138,7 +138,7 @@ function StaticRow({ games, onPlay, launchingGame }) {
   return (
     <div style={{ position:'relative' }}>
       <button onClick={() => scroll(-1)} style={{ position:'absolute', left:0, top:'50%', transform:'translateY(-50%)', zIndex:10, width:'28px', height:'28px', borderRadius:'50%', background:'rgba(30,30,40,0.9)', border:'1px solid rgba(255,255,255,0.15)', color:'white', fontSize:'16px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>‹</button>
-      <div ref={ref} className="hscroll" style={{ paddingLeft:'34px', paddingRight:'34px' }}>
+      <div ref={ref} className="hscroll" style={{ paddingLeft:'34px', paddingRight:'34px', gap:'10px' }}>
         {games.map((g, i) => {
           const busy = launchingGame === g.game_uid
           return (
