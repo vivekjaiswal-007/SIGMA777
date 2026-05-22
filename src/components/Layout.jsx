@@ -11,28 +11,74 @@ function BottomNav() {
   const p = location.pathname
 
   const tabs = [
-    { label:'HOME', icon:'🏠', path:'/' },
-    { label:'CASINO', icon:'🎰', path:'/lobby' },
-    { label:'IN-PLAY', icon:'🏏', path:'live', action:'inplay' },
-    { label:'OPEN BETS', icon:'📋', path:'/dashboard' },
-    { label:'ACCOUNT', icon:'👤', path: user ? '/dashboard' : '/login' },
+    {
+      label:'HOME', path:'/',
+      icon: (active) => (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill={active?'#4caf50':'none'} stroke={active?'#4caf50':'#888'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      )
+    },
+    {
+      label:'CASINO', path:'/lobby',
+      icon: (active) => (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active?'#4caf50':'#888'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M4 4h4v4H4zM10 4h4v4h-4zM16 4h4v4h-4z"/>
+          <path d="M7 8v2M12 8v2M17 8v2"/>
+          <path d="M5 14h14"/>
+          <path d="M5 14l1 6h12l1-6"/>
+          <circle cx="9" cy="17" r="1" fill={active?'#4caf50':'#888'}/>
+          <circle cx="15" cy="17" r="1" fill={active?'#4caf50':'#888'}/>
+        </svg>
+      )
+    },
+    {
+      label:'IN-PLAY', path:'/live-casino', isCenter: true,
+      icon: (active) => (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill={active?'#fff':'#fff'} stroke="none">
+          <polygon points="6,3 20,12 6,21"/>
+        </svg>
+      )
+    },
+    {
+      label:'OPEN BETS', path:'/dashboard',
+      icon: (active) => (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active?'#4caf50':'#888'} strokeWidth="2" strokeLinecap="round">
+          <circle cx="12" cy="12" r="9"/>
+          <circle cx="12" cy="12" r="4"/>
+          <line x1="12" y1="3" x2="12" y2="7"/>
+          <line x1="12" y1="17" x2="12" y2="21"/>
+          <line x1="3" y1="12" x2="7" y2="12"/>
+          <line x1="17" y1="12" x2="21" y2="12"/>
+        </svg>
+      )
+    },
+    {
+      label:'ACCOUNT', path: user ? '/dashboard' : '/login',
+      icon: (active) => (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active?'#4caf50':'#888'} strokeWidth="2" strokeLinecap="round">
+          <circle cx="12" cy="8" r="4"/>
+          <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+        </svg>
+      )
+    },
   ]
 
   return (
     <nav className="bottom-nav">
       <div className="bottom-nav-inner" style={{ display:'flex', height:'100%' }}>
         {tabs.map((tab, i) => {
-          const isCenter = i === 2
-          const active = p === tab.path || (tab.path === '/lobby' && p.startsWith('/lobby')) || (tab.path === '/live-casino' && p.startsWith('/live-casino'))
-          if (isCenter) return (
-            <button key={i} className="bnav-center-btn" onClick={() => navigate('/live-casino')}>
-              <div className="bnav-center-circle" style={{ fontSize:'18px' }}>{tab.icon}</div>
+          const active = p === tab.path || (tab.path === '/lobby' && p.startsWith('/lobby'))
+          if (tab.isCenter) return (
+            <button key={i} className="bnav-center-btn" onClick={() => navigate(tab.path)}>
+              <div className="bnav-center-circle">{tab.icon(true)}</div>
               <span className="bnav-center-label">{tab.label}</span>
             </button>
           )
           return (
             <button key={i} className={`bnav-item${active?' active':''}`} onClick={() => navigate(tab.path)}>
-              <span style={{ fontSize:'19px', lineHeight:1 }}>{tab.icon}</span>
+              {tab.icon(active)}
               <span>{tab.label}</span>
             </button>
           )

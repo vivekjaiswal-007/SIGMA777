@@ -17,7 +17,7 @@ export default function WhatsAppButton() {
     <div
       style={{
         position: 'fixed',
-        bottom: '24px',
+        bottom: 'calc(var(--bottom-nav-h, 58px) + 16px)',
         right: '24px',
         zIndex: 9999,
         display: 'flex',
