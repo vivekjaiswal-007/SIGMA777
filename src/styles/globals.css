@@ -270,13 +270,14 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 /* Game card */
 .game-card {
-  flex-shrink:0; width:116px;
+  flex-shrink:0; width:calc((100vw - 28px) / 3);
   background:var(--bg-card); border-radius:10px; overflow:hidden;
   cursor:pointer; transition:transform 0.2s, box-shadow 0.2s;
   border:1px solid rgba(255,255,255,0.06);
 }
 .game-card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,0.5); }
-.game-card-thumb { width:100%; height:155px; object-fit:cover; display:block; }
+.game-card { scroll-snap-align: start; }
+.game-card-thumb { width:100%; height:calc((100vw - 28px) / 3 * 1.4); object-fit:cover; display:block; }
 .game-card-thumb-placeholder { width:100%; height:155px; display:flex; align-items:center; justify-content:center; font-size:30px; }
 .game-card-name { padding:7px 10px 9px; font-size:11px; font-weight:700; color:#ccc; line-height:1.3; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-transform:uppercase; letter-spacing:0.3px; }
 .game-card-badge { position:absolute; top:5px; right:5px; font-size:8px; font-weight:800; padding:2px 5px; border-radius:3px; text-transform:uppercase; }
@@ -284,7 +285,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .game-card-badge { position:absolute; top:5px; right:5px; font-size:8px; font-weight:800; padding:2px 5px; border-radius:3px; text-transform:uppercase; }
 
 /* Horizontal scroll row */
-.hscroll { display:flex; gap:8px; overflow-x:auto; padding-bottom:6px; padding-right:4px; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+.hscroll { display:flex; gap:8px; overflow-x:auto; padding-bottom:6px; scrollbar-width:none; -webkit-overflow-scrolling:touch; scroll-snap-type:x mandatory; }
 .hscroll::-webkit-scrollbar { display:none; }
 
 /* Input style */
@@ -329,8 +330,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 @media (max-width:479px) {
   .app-main { padding:8px 14px calc(var(--bottom-nav-h) + 8px); }
-  .game-card { width:110px; }
-  .game-card-thumb, .game-card-thumb-placeholder { height:138px; }
+  .game-card { width:calc((100vw - 28px) / 3); }
+  .game-card-thumb, .game-card-thumb-placeholder { height:calc((100vw - 28px) / 3 * 1.35); }
 }
 
 @supports (-webkit-touch-callout:none) {
