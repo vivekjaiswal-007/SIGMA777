@@ -116,10 +116,11 @@ function ArrowBtns({ rowRef }) {
 
 function GameRow({ row, idx, onPlay, launchingGame }) {
   const rowRef = useRef(null)
-  const [expanded, setExpanded] = useState(false)
+  const navigate = useNavigate()
   const LIMIT = 8
-  const showAll = expanded || row.games.length <= LIMIT
-  const visibleGames = showAll ? row.games : row.games.slice(0, LIMIT)
+  const visibleGames = row.games.slice(0, LIMIT)
+  const hasMore = row.games.length > LIMIT
+  const goToCategory = () => navigate(`/category/${encodeURIComponent(row.label)}`)
 
   return (
     <section style={{ marginBottom:'20px' }}>
@@ -129,16 +130,9 @@ function GameRow({ row, idx, onPlay, launchingGame }) {
           {idx === 0 && <span style={{ fontSize:'9px', fontWeight:'800', padding:'2px 6px', borderRadius:'3px', background:'rgba(224,48,48,0.18)', color:'#e03030', border:'1px solid rgba(224,48,48,0.3)' }}>HOT</span>}
         </div>
         <div style={{ display:'flex', gap:'5px', alignItems:'center' }}>
-          {!expanded && row.games.length > LIMIT && (
-            <button onClick={() => setExpanded(true)}
-              style={{ fontSize:'10px', color:'#4caf50', fontWeight:'700', background:'none', border:'none', cursor:'pointer', padding:'2px 6px' }}>
-              View All ({row.games.length})
-            </button>
-          )}
-          <button onClick={() => rowRef.current?.scrollBy({ left:-300, behavior:'smooth' })}
-            style={{ width:'28px', height:'28px', borderRadius:'6px', background:'#222', border:'1px solid #333', color:'#ccc', fontSize:'16px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:'700' }}>‹</button>
-          <button onClick={() => rowRef.current?.scrollBy({ left:300, behavior:'smooth' })}
-            style={{ width:'28px', height:'28px', borderRadius:'6px', background:'#222', border:'1px solid #333', color:'#ccc', fontSize:'16px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:'700' }}>›</button>
+          {hasMore && <button onClick={goToCategory} style={{ fontSize:'10px', color:'#4caf50', fontWeight:'700', background:'none', border:'none', cursor:'pointer', padding:'2px 6px' }}>View All ({row.games.length})</button>}
+          <button onClick={() => rowRef.current?.scrollBy({ left:-300, behavior:'smooth' })} style={{ width:'28px', height:'28px', borderRadius:'6px', background:'#222', border:'1px solid #333', color:'#ccc', fontSize:'16px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:'700' }}>‹</button>
+          <button onClick={() => rowRef.current?.scrollBy({ left:300, behavior:'smooth' })} style={{ width:'28px', height:'28px', borderRadius:'6px', background:'#222', border:'1px solid #333', color:'#ccc', fontSize:'16px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:'700' }}>›</button>
         </div>
       </div>
       <div ref={rowRef} className="hscroll" style={{ gap:'8px' }}>
@@ -146,38 +140,29 @@ function GameRow({ row, idx, onPlay, launchingGame }) {
           const busy = launchingGame === g.game_uid
           return (
             <div key={i} className="game-card" onClick={() => !busy && onPlay(g)} style={{ opacity:busy?0.6:1, cursor:busy?'wait':'pointer' }}>
-              {g.img
-                ? <img src={g.img} alt={g.name} className="game-card-thumb" onError={e=>{e.target.style.display='none';e.target.nextSibling&&(e.target.nextSibling.style.display='flex')}}/>
-                : null}
+              {g.img ? <img src={g.img} alt={g.name} className="game-card-thumb" onError={e=>{e.target.style.display='none';e.target.nextSibling&&(e.target.nextSibling.style.display='flex')}}/> : null}
               <div className="game-card-thumb-placeholder" style={{ background:'#1a1a2a', fontSize:'28px', display:g.img?'none':'flex' }}>🎰</div>
               <div className="game-card-name">{busy?'⏳':g.name}</div>
             </div>
           )
         })}
-
-        {/* View More blur card */}
-        {!expanded && row.games.length > LIMIT && (
-          <div className="game-card" onClick={() => setExpanded(true)}
-            style={{ cursor:'pointer', position:'relative', flexShrink:0 }}>
-            {/* Blurred last game behind */}
-            {row.games[LIMIT]?.img && (
-              <img src={row.games[LIMIT].img} alt="" className="game-card-thumb" style={{ filter:'blur(3px)', opacity:0.5 }}/>
-            )}
-            {!row.games[LIMIT]?.img && (
-              <div className="game-card-thumb-placeholder" style={{ background:'#1a1a2a', filter:'blur(3px)', opacity:0.5 }}>🎰</div>
-            )}
-            {/* Overlay */}
-            <div style={{ position:'absolute', inset:0, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', background:'rgba(0,0,0,0.55)', gap:'4px' }}>
-              <div style={{ fontSize:'20px', fontWeight:'900', color:'#fff' }}>+{row.games.length - LIMIT}</div>
-              <div style={{ fontSize:'10px', fontWeight:'700', color:'#fff', letterSpacing:'0.5px' }}>VIEW MORE</div>
+        {hasMore && (
+          <div className="game-card" onClick={goToCategory} style={{ cursor:'pointer', position:'relative', flexShrink:0 }}>
+            {row.games[LIMIT]?.img
+              ? <img src={row.games[LIMIT].img} alt="" className="game-card-thumb" style={{ filter:'blur(3px)', opacity:0.4 }}/>
+              : <div className="game-card-thumb-placeholder" style={{ background:'#1a1a2a', filter:'blur(3px)', opacity:0.4 }}>🎰</div>}
+            <div style={{ position:'absolute', top:0, left:0, right:0, bottom:'30px', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', background:'rgba(0,0,0,0.55)', gap:'4px' }}>
+              <div style={{ fontSize:'22px', fontWeight:'900', color:'#fff' }}>+{row.games.length - LIMIT}</div>
+              <div style={{ fontSize:'10px', fontWeight:'800', color:'#fff', letterSpacing:'0.5px' }}>VIEW MORE</div>
             </div>
-            <div className="game-card-name" style={{ color:'#4caf50', fontWeight:'700' }}>Show All</div>
+            <div className="game-card-name" style={{ color:'#4caf50', fontWeight:'700', textAlign:'center' }}>Show All</div>
           </div>
         )}
       </div>
     </section>
   )
 }
+
 
 export default function Home() {
   const { user, balance } = useStore()
