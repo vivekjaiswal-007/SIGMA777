@@ -447,9 +447,14 @@ function CryptoDeposit() {
       {/* USDT card */}
       <div style={{ background:'#f8f8f8', border:'1px solid #ddd', borderRadius:'12px', padding:'16px', marginBottom:'14px', textAlign:'center' }}>
         <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:'8px', marginBottom:'14px' }}>
-          <div style={{ width:'36px', height:'36px', borderRadius:'50%', background:'#26a17b', display:'flex', alignItems:'center', justifyContent:'center' }}>
-            <span style={{ color:'#fff', fontWeight:'900', fontSize:'16px' }}>₮</span>
-          </div>
+          <div style={{ width:'42px', height:'42px', borderRadius:'50%', background:'#26a17b', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
+              <svg width="26" height="26" viewBox="0 0 64 64" fill="white">
+                <rect x="10" y="8" width="44" height="10" rx="2"/>
+                <rect x="27" y="18" width="10" height="12" rx="1"/>
+                <ellipse cx="32" cy="30" rx="20" ry="5" fill="none" stroke="white" strokeWidth="4"/>
+                <rect x="27" y="34" width="10" height="18" rx="1"/>
+              </svg>
+            </div>
           <div style={{ textAlign:'left' }}>
             <div style={{ fontWeight:'900', fontSize:'16px', color:'#111' }}>USDT</div>
             <div style={{ fontSize:'11px', color:'#26a17b', fontWeight:'700' }}>TRC20 Network</div>
