@@ -83,8 +83,8 @@ function DepositWithdraw({ balance }) {
   return (
     <div style={{ padding:'14px' }}>
       <div style={{ display:'flex', gap:'8px', marginBottom:'16px' }}>
-        {[['deposit','Deposit'],['withdraw','Withdraw'],['history','History']].map(([k,l]) => (
-          <button key={k} onClick={() => setTab(k)} style={{ flex:1, padding:'10px', background:tab===k?'#1e7d32':'#f0f0f0', border:'none', borderRadius:'8px', color:tab===k?'#fff':'#555', fontWeight:'700', fontSize:'13px', cursor:'pointer' }}>{l}</button>
+        {[['deposit','💳 UPI'],['crypto','🪙 Crypto'],['withdraw','Withdraw'],['history','History']].map(([k,l]) => (
+          <button key={k} onClick={() => setTab(k)} style={{ flex:1, padding:'10px', background:tab===k?'#1e7d32':'#f0f0f0', border:'none', borderRadius:'8px', color:tab===k?'#fff':'#555', fontWeight:'700', fontSize:'12px', cursor:'pointer' }}>{l}</button>
         ))}
       </div>
 
@@ -153,6 +153,82 @@ function DepositWithdraw({ balance }) {
               <path d="M16 2C8.268 2 2 8.268 2 16c0 2.49.648 4.823 1.777 6.845L2 30l7.379-1.752A13.93 13.93 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.6a11.55 11.55 0 01-5.89-1.607l-.422-.252-4.378 1.04 1.077-4.267-.277-.438A11.554 11.554 0 014.4 16C4.4 9.593 9.593 4.4 16 4.4S27.6 9.593 27.6 16 22.407 27.6 16 27.6zm6.34-8.64c-.347-.174-2.055-1.013-2.374-1.129-.319-.116-.551-.174-.783.174-.232.347-.9 1.129-1.103 1.361-.203.232-.406.26-.753.087-.347-.174-1.464-.54-2.789-1.72-1.031-.919-1.727-2.054-1.93-2.4-.203-.348-.022-.535.152-.708.157-.155.347-.406.521-.608.174-.203.232-.348.347-.58.116-.232.058-.435-.029-.608-.087-.174-.783-1.888-1.073-2.587-.283-.68-.57-.587-.783-.598l-.666-.012c-.232 0-.608.087-.927.435-.319.347-1.218 1.19-1.218 2.903s1.247 3.365 1.42 3.597c.174.232 2.453 3.745 5.943 5.252.831.359 1.479.573 1.985.733.834.265 1.594.228 2.194.138.669-.1 2.055-.84 2.346-1.651.29-.812.29-1.508.203-1.651-.086-.145-.318-.232-.666-.406z"/>
             </svg>
             Send Screenshot on WhatsApp
+          </a>
+        </div>
+      )}
+
+      {tab==='crypto' && (
+        <div>
+          {/* Warning */}
+          <div style={{ background:'#fff3cd', border:'1px solid #ffc107', borderRadius:'10px', padding:'12px 14px', marginBottom:'14px', display:'flex', gap:'10px', alignItems:'flex-start' }}>
+            <span style={{ fontSize:'20px' }}>⚠️</span>
+            <p style={{ fontSize:'12px', color:'#856404', lineHeight:1.6, margin:0 }}>
+              Please do <strong>not</strong> make any fake payments. Fake transactions will result in permanent account suspension.
+            </p>
+          </div>
+
+          {/* USDT TRC20 wallet */}
+          <div style={{ background:'#f8f8f8', border:'1px solid #ddd', borderRadius:'12px', padding:'16px', marginBottom:'14px', textAlign:'center' }}>
+            {/* USDT Logo */}
+            <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:'8px', marginBottom:'12px' }}>
+              <div style={{ width:'36px', height:'36px', borderRadius:'50%', background:'#26a17b', display:'flex', alignItems:'center', justifyContent:'center' }}>
+                <span style={{ color:'#fff', fontWeight:'900', fontSize:'14px' }}>₮</span>
+              </div>
+              <div style={{ textAlign:'left' }}>
+                <div style={{ fontWeight:'900', fontSize:'15px', color:'#111' }}>USDT</div>
+                <div style={{ fontSize:'11px', color:'#26a17b', fontWeight:'700' }}>TRC20 Network</div>
+              </div>
+            </div>
+
+            {/* QR Code */}
+            <div style={{ background:'#fff', borderRadius:'10px', padding:'12px', display:'inline-block', marginBottom:'12px', border:'1px solid #eee' }}>
+              <img
+                src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=TRC20:TRjX9PGyPoDTMzxwikw69hayDRcHHqEC2q&margin=8`}
+                alt="USDT TRC20 QR"
+                style={{ width:'160px', height:'160px', display:'block' }}
+              />
+            </div>
+
+            {/* Wallet Address */}
+            <div style={{ marginBottom:'8px' }}>
+              <div style={{ fontSize:'11px', color:'#666', fontWeight:'700', marginBottom:'4px', textTransform:'uppercase', letterSpacing:'0.5px' }}>Wallet Address</div>
+              <div style={{ background:'#fff', border:'1px solid #ddd', borderRadius:'8px', padding:'10px 12px', fontSize:'12px', color:'#111', wordBreak:'break-all', fontFamily:'monospace', textAlign:'left', lineHeight:1.5 }}>
+                TRjX9PGyPoDTMzxwikw69hayDRcHHqEC2q
+              </div>
+              <button
+                onClick={() => { navigator.clipboard?.writeText('TRjX9PGyPoDTMzxwikw69hayDRcHHqEC2q'); toast.success('Address copied!') }}
+                style={{ marginTop:'8px', padding:'8px 16px', background:'#26a17b', border:'none', borderRadius:'6px', color:'#fff', fontWeight:'700', fontSize:'12px', cursor:'pointer' }}>
+                📋 Copy Address
+              </button>
+            </div>
+
+            <div style={{ fontSize:'11px', color:'#e53935', fontWeight:'700', marginTop:'8px' }}>
+              ⚠️ Only send USDT on TRC20 network
+            </div>
+          </div>
+
+          {/* Instructions */}
+          <div style={{ background:'#f0f7f0', border:'1px solid #c8e6c9', borderRadius:'10px', padding:'14px', marginBottom:'12px' }}>
+            <div style={{ fontWeight:'800', color:'#1e7d32', fontSize:'13px', marginBottom:'10px' }}>📋 HOW TO DEPOSIT CRYPTO</div>
+            {[
+              { n:'1', text:'Copy the USDT TRC20 wallet address above or scan the QR code.' },
+              { n:'2', text:'Send your USDT (TRC20) from your wallet or exchange. Take a screenshot of the transaction.' },
+              { n:'3', text:'Click the WhatsApp button below, send your transaction screenshot & TxID. Wait 5-10 minutes for confirmation.' },
+            ].map(step => (
+              <div key={step.n} style={{ display:'flex', gap:'10px', marginBottom:'10px', alignItems:'flex-start' }}>
+                <div style={{ width:'24px', height:'24px', borderRadius:'50%', background:'#1e7d32', color:'#fff', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'12px', fontWeight:'900', flexShrink:0 }}>{step.n}</div>
+                <p style={{ fontSize:'13px', color:'#333', lineHeight:1.6, margin:0 }}>{step.text}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* WhatsApp Button */}
+          <a href="https://wa.me/584167724805" target="_blank" rel="noopener noreferrer"
+            style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:'10px', width:'100%', padding:'14px', background:'#25D366', border:'none', borderRadius:'10px', color:'#fff', fontWeight:'800', fontSize:'15px', textDecoration:'none', boxShadow:'0 4px 14px rgba(37,211,102,0.4)' }}>
+            <svg width="22" height="22" viewBox="0 0 32 32" fill="white">
+              <path d="M16 2C8.268 2 2 8.268 2 16c0 2.49.648 4.823 1.777 6.845L2 30l7.379-1.752A13.93 13.93 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm6.34 19.36c-.347-.174-2.055-1.013-2.374-1.129-.319-.116-.551-.174-.783.174-.232.347-.9 1.129-1.103 1.361-.203.232-.406.26-.753.087-.347-.174-1.464-.54-2.789-1.72-1.031-.919-1.727-2.054-1.93-2.4-.203-.348-.022-.535.152-.708.157-.155.347-.406.521-.608.174-.203.232-.348.347-.58.116-.232.058-.435-.029-.608-.087-.174-.783-1.888-1.073-2.587-.283-.68-.57-.587-.783-.598l-.666-.012c-.232 0-.608.087-.927.435-.319.347-1.218 1.19-1.218 2.903s1.247 3.365 1.42 3.597c.174.232 2.453 3.745 5.943 5.252.831.359 1.479.573 1.985.733.834.265 1.594.228 2.194.138.669-.1 2.055-.84 2.346-1.651.29-.812.29-1.508.203-1.651-.086-.145-.318-.232-.666-.406z"/>
+            </svg>
+            Send TxID on WhatsApp
           </a>
         </div>
       )}
@@ -356,6 +432,80 @@ function ChangePassword() {
 }
 
 /* ── Main AccountPage ── */
+function CryptoDeposit() {
+  const WALLET = 'TRjX9PGyPoDTMzxwikw69hayDRcHHqEC2q'
+  return (
+    <div style={{ padding:'14px' }}>
+      {/* Warning */}
+      <div style={{ background:'#fff3cd', border:'1px solid #ffc107', borderRadius:'10px', padding:'12px 14px', marginBottom:'14px', display:'flex', gap:'10px', alignItems:'flex-start' }}>
+        <span style={{ fontSize:'20px' }}>⚠️</span>
+        <p style={{ fontSize:'12px', color:'#856404', lineHeight:1.6, margin:0 }}>
+          Please do <strong>not</strong> make any fake payments. Fake transactions will result in permanent account suspension.
+        </p>
+      </div>
+
+      {/* USDT card */}
+      <div style={{ background:'#f8f8f8', border:'1px solid #ddd', borderRadius:'12px', padding:'16px', marginBottom:'14px', textAlign:'center' }}>
+        <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:'8px', marginBottom:'14px' }}>
+          <div style={{ width:'36px', height:'36px', borderRadius:'50%', background:'#26a17b', display:'flex', alignItems:'center', justifyContent:'center' }}>
+            <span style={{ color:'#fff', fontWeight:'900', fontSize:'16px' }}>₮</span>
+          </div>
+          <div style={{ textAlign:'left' }}>
+            <div style={{ fontWeight:'900', fontSize:'16px', color:'#111' }}>USDT</div>
+            <div style={{ fontSize:'11px', color:'#26a17b', fontWeight:'700' }}>TRC20 Network</div>
+          </div>
+        </div>
+
+        {/* QR */}
+        <div style={{ background:'#fff', borderRadius:'10px', padding:'12px', display:'inline-block', marginBottom:'12px', border:'1px solid #eee' }}>
+          <img src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${WALLET}&margin=8`}
+            alt="USDT QR" style={{ width:'160px', height:'160px', display:'block' }}/>
+        </div>
+
+        {/* Address */}
+        <div style={{ marginBottom:'8px' }}>
+          <div style={{ fontSize:'11px', color:'#666', fontWeight:'700', marginBottom:'6px', textTransform:'uppercase', letterSpacing:'0.5px' }}>Wallet Address (TRC20)</div>
+          <div style={{ background:'#fff', border:'1px solid #ddd', borderRadius:'8px', padding:'10px 12px', fontSize:'12px', color:'#111', wordBreak:'break-all', fontFamily:'monospace', textAlign:'left', lineHeight:1.5 }}>
+            {WALLET}
+          </div>
+          <button onClick={() => { navigator.clipboard?.writeText(WALLET); toast.success('Address copied!') }}
+            style={{ marginTop:'8px', padding:'8px 20px', background:'#26a17b', border:'none', borderRadius:'6px', color:'#fff', fontWeight:'700', fontSize:'13px', cursor:'pointer' }}>
+            📋 Copy Address
+          </button>
+        </div>
+
+        <div style={{ fontSize:'12px', color:'#e53935', fontWeight:'700', marginTop:'10px', padding:'8px', background:'#ffebee', borderRadius:'6px' }}>
+          ⚠️ Only send USDT on TRC20 network. Other networks will result in permanent loss.
+        </div>
+      </div>
+
+      {/* Instructions */}
+      <div style={{ background:'#f0f7f0', border:'1px solid #c8e6c9', borderRadius:'10px', padding:'14px', marginBottom:'12px' }}>
+        <div style={{ fontWeight:'800', color:'#1e7d32', fontSize:'13px', marginBottom:'10px' }}>📋 HOW TO DEPOSIT</div>
+        {[
+          'Copy the USDT TRC20 wallet address above or scan the QR code.',
+          'Send your USDT (TRC20) from your wallet or exchange. Take a screenshot of the transaction hash (TxID).',
+          'Click WhatsApp below, send your transaction screenshot & TxID. Coins credited within 5-10 minutes.',
+        ].map((text, i) => (
+          <div key={i} style={{ display:'flex', gap:'10px', marginBottom:'10px', alignItems:'flex-start' }}>
+            <div style={{ width:'22px', height:'22px', borderRadius:'50%', background:'#1e7d32', color:'#fff', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'11px', fontWeight:'900', flexShrink:0 }}>{i+1}</div>
+            <p style={{ fontSize:'13px', color:'#333', lineHeight:1.6, margin:0 }}>{text}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* WhatsApp */}
+      <a href="https://wa.me/584167724805" target="_blank" rel="noopener noreferrer"
+        style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:'10px', width:'100%', padding:'14px', background:'#25D366', border:'none', borderRadius:'10px', color:'#fff', fontWeight:'800', fontSize:'15px', textDecoration:'none', boxShadow:'0 4px 14px rgba(37,211,102,0.4)' }}>
+        <svg width="22" height="22" viewBox="0 0 32 32" fill="white">
+          <path d="M16 2C8.268 2 2 8.268 2 16c0 2.49.648 4.823 1.777 6.845L2 30l7.379-1.752A13.93 13.93 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm6.34 19.36c-.347-.174-2.055-1.013-2.374-1.129-.319-.116-.551-.174-.783.174-.232.347-.9 1.129-1.103 1.361-.203.232-.406.26-.753.087-.347-.174-1.464-.54-2.789-1.72-1.031-.919-1.727-2.054-1.93-2.4-.203-.348-.022-.535.152-.708.157-.155.347-.406.521-.608.174-.203.232-.348.347-.58.116-.232.058-.435-.029-.608-.087-.174-.783-1.888-1.073-2.587-.283-.68-.57-.587-.783-.598l-.666-.012c-.232 0-.608.087-.927.435-.319.347-1.218 1.19-1.218 2.903s1.247 3.365 1.42 3.597c.174.232 2.453 3.745 5.943 5.252.831.359 1.479.573 1.985.733.834.265 1.594.228 2.194.138.669-.1 2.055-.84 2.346-1.651.29-.812.29-1.508.203-1.651-.086-.145-.318-.232-.666-.406z"/>
+        </svg>
+        Send TxID on WhatsApp
+      </a>
+    </div>
+  )
+}
+
 export default function AccountPage() {
   const { user, balance, logout } = useStore()
   const navigate = useNavigate()
@@ -367,6 +517,7 @@ export default function AccountPage() {
 
   const menuItems = [
     { key:'deposit', label:'Deposit & Withdrawal', content:<DepositWithdraw balance={balance}/> },
+    { key:'crypto', label:'🪙 Crypto Deposit (USDT)', content:<CryptoDeposit/> },
     { key:'bets', label:'Bet History', content:<BetHistory/> },
     { key:'pl', label:'Profit & Loss', content:<ProfitLoss/> },
     { key:'statements', label:'Account Statements', content:<AccountStatements/> },
