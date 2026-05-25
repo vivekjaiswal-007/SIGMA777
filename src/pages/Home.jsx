@@ -8,12 +8,31 @@ import toast from 'react-hot-toast'
 
 /* ── Banners ── */
 const BANNERS = [
-  { bg:'linear-gradient(135deg,#0a0020,#1a0040)', accent:'#9944ff', tag:'TRENDING', title:'Aviator', sub:'Crash & Win — Up to 100x', icon:'✈️', btn:'Play Now', path:'/games/aviator' },
-  { bg:'linear-gradient(135deg,#001a00,#003a10)', accent:'#00d084', tag:'GREY GAMING', title:'GreyJet Live', sub:'The Ultimate Crash Game', icon:'🚀', btn:'Play Now', path:'/games/crash-rocket' },
-  { bg:'linear-gradient(135deg,#1a0000,#3a0010)', accent:'#ff4444', tag:'LIVE NOW 🔴', title:'Live Cricket Betting', sub:'IPL • T20 • PSL • Real Money', icon:'🏏', btn:'Bet Now', action:'cricket' },
-  { bg:'linear-gradient(135deg,#100a00,#2a1800)', accent:'#ff9900', tag:'HOT', title:'Guess It Right', sub:'Turn Picks Into Prizes!', icon:'💰', btn:'Join Now', action:'cricket' },
-  { bg:'linear-gradient(135deg,#0a1020,#102040)', accent:'#4488ff', tag:'POPULAR', title:'Teen Patti', sub:"India's Favourite Card Game", icon:'♠️', btn:'Play Now', path:'/games/teen-patti' },
-  { bg:'linear-gradient(135deg,#001520,#002a40)', accent:'#00ccff', tag:'NEW', title:'Sportsbook', sub:'All Sports • Live Odds', icon:'🎯', btn:'Bet Now', action:'cricket' },
+  {
+    img: 'https://res.cloudinary.com/dgzoyuo9q/image/upload/v1779749481/WhatsApp_Image_2026-05-26_at_4.06.42_AM_vip5wj.jpg',
+    label: '🏏 Live Cricket',
+    action: 'cricket',
+  },
+  {
+    img: 'https://res.cloudinary.com/dgzoyuo9q/image/upload/v1779749481/WhatsApp_Image_2026-05-26_at_4.18.29_AM_tgmb1o.jpg',
+    label: '⚽ Live Football',
+    action: 'cricket',
+  },
+  {
+    img: 'https://res.cloudinary.com/dgzoyuo9q/image/upload/v1779749481/WhatsApp_Image_2026-05-26_at_4.13.24_AM_amtffy.jpg',
+    label: '✈️ Aviator',
+    path: '/games/aviator',
+  },
+  {
+    img: 'https://res.cloudinary.com/dgzoyuo9q/image/upload/v1779749480/WhatsApp_Image_2026-05-26_at_4.18.32_AM_vzlnlj.jpg',
+    label: '🎰 Live Casino',
+    path: '/live-casino',
+  },
+  {
+    img: 'https://res.cloudinary.com/dgzoyuo9q/image/upload/v1779749702/WhatsApp_Image_2026-05-26_at_4.21.44_AM_ghf3po.jpg',
+    label: '🪙 Crypto Deposit',
+    path: '/account',
+  },
 ]
 
 /* ── 6 Categories with exact Mahaling777-style SVG icons ── */
@@ -51,8 +70,8 @@ function BannerSlider({ onLaunch, launching }) {
     return () => clearInterval(timer.current)
   }, [])
 
-  const goNext = () => { setIdx(i => { const n=(i+1)%BANNERS.length; resetTimer(); return n }); }
-  const goPrev = () => { setIdx(i => { const n=(i-1+BANNERS.length)%BANNERS.length; resetTimer(); return n }); }
+  const goNext = () => setIdx(i => { const n=(i+1)%BANNERS.length; resetTimer(); return n })
+  const goPrev = () => setIdx(i => { const n=(i-1+BANNERS.length)%BANNERS.length; resetTimer(); return n })
 
   const onTouchStart = (e) => { touchStart.current = e.targetTouches[0].clientX; touchEnd.current = null }
   const onTouchMove = (e) => { touchEnd.current = e.targetTouches[0].clientX }
@@ -64,32 +83,43 @@ function BannerSlider({ onLaunch, launching }) {
   }
 
   const b = BANNERS[idx]
-  const handleBtn = () => { if (b.action === 'cricket') onLaunch(); else if (b.path) navigate(b.path) }
+  const handleClick = () => {
+    if (b.action === 'cricket') onLaunch()
+    else if (b.path) navigate(b.path)
+  }
 
   return (
     <div
-      style={{ position:'relative', width:'100%', aspectRatio:'16/9', borderRadius:'12px', overflow:'hidden', marginBottom:'14px', background:b.bg, transition:'background 0.5s', minHeight:'200px', userSelect:'none' }}
+      style={{ position:'relative', width:'100%', aspectRatio:'16/9', borderRadius:'12px', overflow:'hidden', marginBottom:'14px', minHeight:'180px', cursor:'pointer', userSelect:'none' }}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
+      onClick={handleClick}
     >
-      <div style={{ position:'absolute', inset:0, background:`radial-gradient(ellipse at 75% 50%, ${b.accent}30 0%, transparent 65%)` }} />
-      <div style={{ position:'absolute', right:'-3%', top:'50%', transform:'translateY(-50%)', fontSize:'clamp(70px,22vw,160px)', opacity:0.1, userSelect:'none', pointerEvents:'none' }}>{b.icon}</div>
-      <div style={{ position:'relative', zIndex:2, height:'100%', display:'flex', flexDirection:'column', justifyContent:'center', padding:'clamp(14px,5vw,48px)' }}>
-        <div style={{ display:'flex', alignItems:'center', gap:'6px', marginBottom:'7px' }}>
-          <span style={{ width:7, height:7, borderRadius:'50%', background:b.accent, display:'inline-block', animation:'pulse-live 1.4s infinite' }} />
-          <span style={{ fontSize:'clamp(9px,2vw,11px)', color:b.accent, fontWeight:'800', letterSpacing:'2.5px', textTransform:'uppercase' }}>{b.tag}</span>
-        </div>
-        <h2 style={{ fontFamily:'Cinzel,serif', fontSize:'clamp(18px,5.5vw,48px)', color:'white', lineHeight:1.1, marginBottom:'5px', textShadow:'0 2px 16px rgba(0,0,0,0.6)', fontWeight:'900' }}>{b.title}</h2>
-        <p style={{ color:'rgba(255,255,255,0.65)', fontSize:'clamp(10px,2.2vw,15px)', marginBottom:'clamp(12px,3vw,24px)', maxWidth:'65%' }}>{b.sub}</p>
-        <button onClick={handleBtn} disabled={launching} style={{ alignSelf:'flex-start', padding:'clamp(8px,2vw,14px) clamp(16px,4vw,32px)', background:`linear-gradient(135deg,${b.accent}cc,${b.accent})`, border:'none', borderRadius:'8px', color:'#fff', fontWeight:'800', fontSize:'clamp(11px,2.2vw,15px)', cursor:'pointer', boxShadow:`0 4px 18px ${b.accent}55`, whiteSpace:'nowrap' }}>
-          {launching ? '⏳ Loading...' : `${b.btn} →`}
+      {/* Image */}
+      <img
+        src={b.img}
+        alt={b.label}
+        style={{ width:'100%', height:'100%', objectFit:'cover', display:'block', transition:'opacity 0.3s' }}
+      />
+
+      {/* Bottom gradient + label */}
+      <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'linear-gradient(transparent, rgba(0,0,0,0.7))', padding:'20px 14px 14px', display:'flex', alignItems:'center', justifyContent:'space-between' }}>
+        <span style={{ color:'#fff', fontWeight:'800', fontSize:'14px', textShadow:'0 1px 4px rgba(0,0,0,0.8)' }}>{b.label}</span>
+        <button
+          onClick={e => { e.stopPropagation(); handleClick() }}
+          disabled={launching}
+          style={{ padding:'6px 14px', background:'rgba(255,255,255,0.2)', backdropFilter:'blur(8px)', border:'1px solid rgba(255,255,255,0.4)', borderRadius:'20px', color:'#fff', fontWeight:'700', fontSize:'12px', cursor:'pointer', whiteSpace:'nowrap' }}
+        >
+          {launching ? '⏳' : 'Play →'}
         </button>
       </div>
+
       {/* Dots */}
       <div className="banner-dots">
         {BANNERS.map((_,i) => (
-          <button key={i} className={`banner-dot${i===idx?' active':''}`} onClick={() => resetTimer(i)} />
+          <button key={i} className={`banner-dot${i===idx?' active':''}`}
+            onClick={e => { e.stopPropagation(); resetTimer(i) }} />
         ))}
       </div>
     </div>
