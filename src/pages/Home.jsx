@@ -37,17 +37,42 @@ function BannerSlider({ onLaunch, launching }) {
   const [idx, setIdx] = useState(0)
   const navigate = useNavigate()
   const timer = useRef(null)
+  const touchStart = useRef(null)
+  const touchEnd = useRef(null)
+
+  const resetTimer = (newIdx) => {
+    clearInterval(timer.current)
+    timer.current = setInterval(() => setIdx(i => (i+1) % BANNERS.length), 4000)
+    if (newIdx !== undefined) setIdx(newIdx)
+  }
 
   useEffect(() => {
     timer.current = setInterval(() => setIdx(i => (i+1) % BANNERS.length), 4000)
     return () => clearInterval(timer.current)
   }, [])
 
+  const goNext = () => { setIdx(i => { const n=(i+1)%BANNERS.length; resetTimer(); return n }); }
+  const goPrev = () => { setIdx(i => { const n=(i-1+BANNERS.length)%BANNERS.length; resetTimer(); return n }); }
+
+  const onTouchStart = (e) => { touchStart.current = e.targetTouches[0].clientX; touchEnd.current = null }
+  const onTouchMove = (e) => { touchEnd.current = e.targetTouches[0].clientX }
+  const onTouchEnd = () => {
+    if (!touchStart.current || !touchEnd.current) return
+    const diff = touchStart.current - touchEnd.current
+    if (Math.abs(diff) > 40) { diff > 0 ? goNext() : goPrev() }
+    touchStart.current = null; touchEnd.current = null
+  }
+
   const b = BANNERS[idx]
   const handleBtn = () => { if (b.action === 'cricket') onLaunch(); else if (b.path) navigate(b.path) }
 
   return (
-    <div style={{ position:'relative', width:'100%', aspectRatio:'16/9', borderRadius:'12px', overflow:'hidden', marginBottom:'14px', background:b.bg, transition:'background 0.5s', minHeight:'200px' }}>
+    <div
+      style={{ position:'relative', width:'100%', aspectRatio:'16/9', borderRadius:'12px', overflow:'hidden', marginBottom:'14px', background:b.bg, transition:'background 0.5s', minHeight:'200px', userSelect:'none' }}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+    >
       <div style={{ position:'absolute', inset:0, background:`radial-gradient(ellipse at 75% 50%, ${b.accent}30 0%, transparent 65%)` }} />
       <div style={{ position:'absolute', right:'-3%', top:'50%', transform:'translateY(-50%)', fontSize:'clamp(70px,22vw,160px)', opacity:0.1, userSelect:'none', pointerEvents:'none' }}>{b.icon}</div>
       <div style={{ position:'relative', zIndex:2, height:'100%', display:'flex', flexDirection:'column', justifyContent:'center', padding:'clamp(14px,5vw,48px)' }}>
@@ -64,7 +89,7 @@ function BannerSlider({ onLaunch, launching }) {
       {/* Dots */}
       <div className="banner-dots">
         {BANNERS.map((_,i) => (
-          <button key={i} className={`banner-dot${i===idx?' active':''}`} onClick={() => { setIdx(i); clearInterval(timer.current); timer.current=setInterval(()=>setIdx(j=>(j+1)%BANNERS.length),4000) }} />
+          <button key={i} className={`banner-dot${i===idx?' active':''}`} onClick={() => resetTimer(i)} />
         ))}
       </div>
     </div>
