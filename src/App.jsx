@@ -55,6 +55,7 @@ import ESports from './pages/ESports'
 import PlayerBattle from './pages/PlayerBattle'
 import AccountPage from './pages/AccountPage'
 import CategoryGames from './pages/CategoryGames'
+import OpenBets from './pages/OpenBets'
 import DragonTiger from './games/DragonTiger'
 import PokerGame from './games/PokerGame'
 import TowerGame from './games/TowerGame'
@@ -93,6 +94,7 @@ export default function App() {
         <Route path="player-battle" element={<PlayerBattle />} />
         <Route path="account" element={<AccountPage />} />
         <Route path="category/:category" element={<CategoryGames />} />
+        <Route path="open-bets" element={<OpenBets />} />
         <Route path="dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="games/aviator" element={<ProtectedRoute><GameWrapper><AviatorGame /></GameWrapper></ProtectedRoute>} />
         <Route path="games/crash-rocket" element={<ProtectedRoute><GameWrapper><CrashRocket /></GameWrapper></ProtectedRoute>} />

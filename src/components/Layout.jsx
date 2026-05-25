@@ -42,7 +42,7 @@ function BottomNav({ onLoginClick, onSignupClick }) {
         </svg>
       )
     },
-    { label:'OPEN BETS', path:'/dashboard',
+    { label:'OPEN BETS', path:'/open-bets',
       icon: (active) => (
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
           {/* Cricket ball */}
