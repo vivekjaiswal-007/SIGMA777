@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { useStore } from '../store/useStore'
 import Header from './Header'
+import { openAuthModal } from '../utils/authModal.js'
 import Sidebar from './Sidebar'
 import AuthModal from './AuthModal'
 
@@ -20,7 +21,7 @@ function BottomNav({ onLoginClick, onSignupClick }) {
         </svg>
       )
     },
-    { label:'CASINO', path:'/lobby',
+    { label:'CASINO', path:'/live-casino',
       icon: (active) => (
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke={active?'#fff':'#666'} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
           {/* 3 playing cards fanned */}
@@ -34,7 +35,7 @@ function BottomNav({ onLoginClick, onSignupClick }) {
         </svg>
       )
     },
-    { label:'IN-PLAY', path:'/live-casino', isCenter:true,
+    { label:'IN-PLAY', path:null, isCenter:true, action:'cricket',
       icon: () => (
         <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff">
           <polygon points="6,3 21,12 6,21"/>
@@ -73,7 +74,9 @@ function BottomNav({ onLoginClick, onSignupClick }) {
         {tabs.map((tab, i) => {
           const active = p === tab.path
           if (tab.isCenter) return (
-            <button key={i} className="bnav-center-btn" onClick={() => navigate(tab.path)}>
+            <button key={i} className="bnav-center-btn" onClick={() => {
+              window.dispatchEvent(new CustomEvent('launch-cricket'))
+            }}>
               <div className="bnav-center-circle">{tab.icon()}</div>
               <span className="bnav-center-label">{tab.label}</span>
             </button>

@@ -199,6 +199,9 @@ export default function Home() {
 
   useEffect(() => {
     api.get('/live-casino/games').then(r => setLiveGames(r.data.games || [])).catch(() => {})
+    const handler = () => launchCricket()
+    window.addEventListener('launch-cricket', handler)
+    return () => window.removeEventListener('launch-cricket', handler)
   }, [])
 
   const rows = filterGames(liveGames)
