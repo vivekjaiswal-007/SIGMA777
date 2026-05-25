@@ -5,8 +5,8 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { useStore } from './store/useStore'
 import Layout from './components/Layout'
 import Home from './pages/Home'
-import Login from './pages/Login'
-import Signup from './pages/Signup'
+
+
 import ForgotPassword from './pages/ForgotPassword'
 import KenoGame from './games/KenoGame'
 import CoinFlip from './games/CoinFlip'
@@ -54,7 +54,7 @@ import GameWrapper from './components/GameWrapper'
 import ESports from './pages/ESports'
 import PlayerBattle from './pages/PlayerBattle'
 import AccountPage from './pages/AccountPage'
-const AccountRedirect = () => <Navigate to="/account" replace />
+import CategoryGames from './pages/CategoryGames'
 import DragonTiger from './games/DragonTiger'
 import PokerGame from './games/PokerGame'
 import TowerGame from './games/TowerGame'
@@ -66,7 +66,7 @@ import SpinWin from './games/SpinWin'
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useStore()
-  if (!user) return <Navigate to="/login" replace />
+  if (!user) return <Navigate to="/" replace />
   return children
 }
 
@@ -81,8 +81,8 @@ export default function App() {
     <>
     <Routes>
       <Route path="/terms" element={<Terms />} />
-        <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Navigate to="/" replace />} />
+      <Route path="/signup" element={<Navigate to="/" replace />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
@@ -92,7 +92,8 @@ export default function App() {
         <Route path="e-sports" element={<ESports />} />
         <Route path="player-battle" element={<PlayerBattle />} />
         <Route path="account" element={<AccountPage />} />
-        <Route path="dashboard" element={<ProtectedRoute><AccountRedirect /></ProtectedRoute>} />
+        <Route path="category/:category" element={<CategoryGames />} />
+        <Route path="dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="games/aviator" element={<ProtectedRoute><GameWrapper><AviatorGame /></GameWrapper></ProtectedRoute>} />
         <Route path="games/crash-rocket" element={<ProtectedRoute><GameWrapper><CrashRocket /></GameWrapper></ProtectedRoute>} />
         <Route path="games/color-prediction" element={<ProtectedRoute><GameWrapper><ColorPrediction /></GameWrapper></ProtectedRoute>} />

@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { CAT_ICONS } from '../catIcons.js'
+import { openAuthModal } from '../utils/authModal.js'
+import { filterGames } from '../utils/gameFilter.js'
 import { Link, useNavigate } from 'react-router-dom'
 import { useStore, api } from '../store/useStore'
 import toast from 'react-hot-toast'
@@ -114,26 +116,53 @@ function ArrowBtns({ rowRef }) {
 
 function GameRow({ row, idx, onPlay, launchingGame }) {
   const rowRef = useRef(null)
-  const tag = ROW_TAGS[idx] || '🎮 Games'
+  const navigate = useNavigate()
+  const LIMIT = 8
+  const visibleGames = row.games.slice(0, LIMIT)
+  const hasMore = row.games.length > LIMIT
+  const goToCategory = () => navigate(`/category/${encodeURIComponent(row.label)}`)
+
   return (
     <section style={{ marginBottom:'20px' }}>
       <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'8px' }}>
         <div style={{ display:'flex', alignItems:'center', gap:'7px' }}>
-          <span style={{ fontSize:'13px', fontWeight:'800', color:'#fff', textTransform:'uppercase', letterSpacing:'0.5px' }}>{tag}</span>
+          <span style={{ fontSize:'13px', fontWeight:'800', color:'#fff', textTransform:'uppercase', letterSpacing:'0.5px' }}>{row.label}</span>
           {idx === 0 && <span style={{ fontSize:'9px', fontWeight:'800', padding:'2px 6px', borderRadius:'3px', background:'rgba(224,48,48,0.18)', color:'#e03030', border:'1px solid rgba(224,48,48,0.3)' }}>HOT</span>}
-          {idx === 1 && <span style={{ fontSize:'9px', fontWeight:'800', padding:'2px 6px', borderRadius:'3px', background:'rgba(68,136,255,0.18)', color:'#4488ff', border:'1px solid rgba(68,136,255,0.3)' }}>LIVE</span>}
         </div>
-        <div style={{ display:'flex', gap:'5px' }}>
-          <button onClick={() => rowRef.current?.scrollBy({ left:-300, behavior:'smooth' })}
-            style={{ width:'28px', height:'28px', borderRadius:'6px', background:'#222', border:'1px solid #333', color:'#ccc', fontSize:'16px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:'700' }}>‹</button>
-          <button onClick={() => rowRef.current?.scrollBy({ left:300, behavior:'smooth' })}
-            style={{ width:'28px', height:'28px', borderRadius:'6px', background:'#222', border:'1px solid #333', color:'#ccc', fontSize:'16px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:'700' }}>›</button>
+        <div style={{ display:'flex', gap:'5px', alignItems:'center' }}>
+          {hasMore && <button onClick={goToCategory} style={{ fontSize:'10px', color:'#4caf50', fontWeight:'700', background:'none', border:'none', cursor:'pointer', padding:'2px 6px' }}>View All ({row.games.length})</button>}
+          <button onClick={() => rowRef.current?.scrollBy({ left:-300, behavior:'smooth' })} style={{ width:'28px', height:'28px', borderRadius:'6px', background:'#222', border:'1px solid #333', color:'#ccc', fontSize:'16px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:'700' }}>‹</button>
+          <button onClick={() => rowRef.current?.scrollBy({ left:300, behavior:'smooth' })} style={{ width:'28px', height:'28px', borderRadius:'6px', background:'#222', border:'1px solid #333', color:'#ccc', fontSize:'16px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:'700' }}>›</button>
         </div>
       </div>
-      <StaticRow games={row} onPlay={onPlay} launchingGame={launchingGame} rowRef={rowRef} />
+      <div ref={rowRef} className="hscroll" style={{ gap:'8px' }}>
+        {visibleGames.map((g, i) => {
+          const busy = launchingGame === g.game_uid
+          return (
+            <div key={i} className="game-card" onClick={() => !busy && onPlay(g)} style={{ opacity:busy?0.6:1, cursor:busy?'wait':'pointer' }}>
+              {g.img ? <img src={g.img} alt={g.name} className="game-card-thumb" onError={e=>{e.target.style.display='none';e.target.nextSibling&&(e.target.nextSibling.style.display='flex')}}/> : null}
+              <div className="game-card-thumb-placeholder" style={{ background:'#1a1a2a', fontSize:'28px', display:g.img?'none':'flex' }}>🎰</div>
+              <div className="game-card-name">{busy?'⏳':g.name}</div>
+            </div>
+          )
+        })}
+        {hasMore && (
+          <div className="game-card" onClick={goToCategory} style={{ cursor:'pointer', position:'relative', flexShrink:0 }}>
+            {row.games[LIMIT]?.img
+              ? <img src={row.games[LIMIT].img} alt="" className="game-card-thumb" style={{ filter:'blur(3px)', opacity:0.4 }}/>
+              : <div className="game-card-thumb-placeholder" style={{ background:'#1a1a2a', filter:'blur(3px)', opacity:0.4 }}>🎰</div>}
+            <div style={{ position:'absolute', top:0, left:0, right:0, bottom:'30px', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', background:'rgba(0,0,0,0.55)', gap:'4px' }}>
+              <div style={{ fontSize:'22px', fontWeight:'900', color:'#fff' }}>+{row.games.length - LIMIT}</div>
+              <div style={{ fontSize:'10px', fontWeight:'800', color:'#fff', letterSpacing:'0.5px' }}>VIEW MORE</div>
+            </div>
+            <div className="game-card-name" style={{ color:'#4caf50', fontWeight:'700', textAlign:'center' }}>Show All</div>
+          </div>
+        )}
+      </div>
     </section>
   )
 }
+
 
 export default function Home() {
   const { user, balance } = useStore()
@@ -147,11 +176,10 @@ export default function Home() {
     api.get('/live-casino/games').then(r => setLiveGames(r.data.games || [])).catch(() => {})
   }, [])
 
-  const rows = []
-  for (let i = 0; i < liveGames.length; i += 15) rows.push(liveGames.slice(i, i+15))
+  const rows = filterGames(liveGames)
 
   async function launchCricket() {
-    if (!user) { toast.error('Login karein pehle!'); navigate('/login'); return }
+    if (!user) { toast.error('Login karein pehle!'); openAuthModal('login'); return }
     setLaunching(true)
     try {
       const res = await api.post('/live-casino/launch', { game_uid:'7004', language:'hi', currency_code:'INR' })
@@ -162,7 +190,7 @@ export default function Home() {
   }
 
   async function launchGame(g) {
-    if (!user) { toast.error('Login karein pehle!'); navigate('/login'); return }
+    if (!user) { toast.error('Login karein pehle!'); openAuthModal('login'); return }
     setLaunchingGame(g.game_uid)
     try {
       const res = await api.post('/live-casino/launch', { game_uid: g.game_uid || '7004', language:'hi', currency_code:'INR' })

@@ -1,3 +1,4 @@
+import { openAuthModal } from '../utils/authModal.js'
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useStore, api } from '../store/useStore'
@@ -309,7 +310,7 @@ export default function LiveCasino() {
   const evolutionGames = allGames.filter(g => g.category === 'evolution')
 
   async function playGame(game) {
-    if (!user) { toast.error('Please login to play!'); navigate('/login'); return }
+    if (!user) { toast.error('Please login to play!'); openAuthModal('login'); return }
     if (balance < 1) { toast.error('Insufficient balance!'); return }
     setLaunching(game.game_uid)
     try {
@@ -426,7 +427,7 @@ export default function LiveCasino() {
             <div style={{ marginTop: '24px', padding: '16px', background: 'rgba(224,48,48,0.06)', border: '1px solid rgba(224,48,48,0.15)', borderRadius: '12px', textAlign: 'center' }}>
               <p style={{ color: 'var(--text-secondary)', fontSize: '14px', marginBottom: '10px' }}>Login to play live games! 🎰</p>
               <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
-                <button onClick={() => navigate('/login')} className="btn-gold" style={{ padding: '9px 20px' }}>Login</button>
+                <button onClick={() => openAuthModal('login')} className="btn-gold" style={{ padding: '9px 20px' }}>Login</button>
                 <button onClick={() => navigate('/signup')} style={{ padding: '9px 20px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text-secondary)', cursor: 'pointer', fontWeight: '600', fontSize: '13px' }}>Sign Up Free</button>
               </div>
             </div>

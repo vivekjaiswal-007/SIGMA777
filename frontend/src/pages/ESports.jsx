@@ -1,3 +1,4 @@
+import { openAuthModal } from '../utils/authModal.js'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useStore, api } from '../store/useStore'
@@ -24,7 +25,7 @@ export default function ESports() {
   const [modal, setModal] = useState(null)
 
   async function launch(game) {
-    if (!user) { toast.error('Login karein pehle!'); navigate('/login'); return }
+    if (!user) { toast.error('Login karein pehle!'); openAuthModal('login'); return }
     setLaunching(game.name)
     try {
       const res = await api.post('/live-casino/launch', { game_uid: game.uid, language:'hi', currency_code:'INR' })
