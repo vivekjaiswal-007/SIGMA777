@@ -136,7 +136,7 @@ export default function AuthModal({ mode, onClose, onSwitch }) {
 
           {/* Try Demo */}
           <button onClick={handleDemo} disabled={isLoading}
-            style={{ width:'100%', padding:'12px', background:'transparent', border:'1px solid rgba(255,255,255,0.2)', borderRadius:'8px', color:'#aaa', fontWeight:'700', fontSize:'13px', cursor:'pointer', marginBottom:'14px', display:'flex', alignItems:'center', justifyContent:'center', gap:'6px' }}>
+            style={{ width:'100%', padding:'12px', background:'linear-gradient(135deg,#1e7d32,#4caf50)', border:'none', borderRadius:'8px', color:'#fff', fontWeight:'700', fontSize:'13px', cursor:'pointer', marginBottom:'14px', display:'flex', alignItems:'center', justifyContent:'center', gap:'6px', boxShadow:'0 4px 14px rgba(76,175,80,0.3)' }}>
             🎮 Try Demo — 10,000 Free Coins
           </button>
 
