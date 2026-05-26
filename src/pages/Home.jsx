@@ -168,7 +168,7 @@ function ArrowBtns({ rowRef }) {
   )
 }
 
-function GameRow({ row, idx, onPlay, launchingGame }) {
+function GameRow({ row, idx, onPlay, onDemo, launchingGame }) {
   const rowRef = useRef(null)
   const navigate = useNavigate()
   const LIMIT = 8
@@ -193,10 +193,16 @@ function GameRow({ row, idx, onPlay, launchingGame }) {
         {visibleGames.map((g, i) => {
           const busy = launchingGame === g.game_uid
           return (
-            <div key={i} className="game-card" onClick={() => !busy && onPlay(g)} style={{ opacity:busy?0.6:1, cursor:busy?'wait':'pointer' }}>
-              {g.img ? <img src={g.img} alt={g.name} className="game-card-thumb" onError={e=>{e.target.style.display='none';e.target.nextSibling&&(e.target.nextSibling.style.display='flex')}}/> : null}
-              <div className="game-card-thumb-placeholder" style={{ background:'#1a1a2a', fontSize:'28px', display:g.img?'none':'flex' }}>🎰</div>
-              <div className="game-card-name">{busy?'⏳':g.name}</div>
+            <div key={i} className="game-card" style={{ opacity:busy?0.6:1, position:'relative' }}>
+              <div onClick={() => !busy && onPlay(g)} style={{ cursor:busy?'wait':'pointer' }}>
+                {g.img ? <img src={g.img} alt={g.name} className="game-card-thumb" onError={e=>{e.target.style.display='none';e.target.nextSibling&&(e.target.nextSibling.style.display='flex')}}/> : null}
+                <div className="game-card-thumb-placeholder" style={{ background:'#1a1a2a', fontSize:'28px', display:g.img?'none':'flex' }}>🎰</div>
+                <div className="game-card-name">{busy?'⏳':g.name}</div>
+              </div>
+              <button onClick={e=>{e.stopPropagation(); onDemo(g)}}
+                style={{ position:'absolute', top:'4px', right:'4px', background:'rgba(0,0,0,0.7)', border:'1px solid rgba(255,255,255,0.3)', color:'#fff', fontSize:'8px', fontWeight:'800', padding:'2px 5px', borderRadius:'4px', cursor:'pointer', letterSpacing:'0.3px' }}>
+                DEMO
+              </button>
             </div>
           )
         })}
@@ -254,6 +260,17 @@ export default function Home() {
       if (res.data.success && res.data.gameUrl) setModal(res.data.gameUrl)
       else toast.error(res.data.message || 'Launch failed')
     } catch { toast.error('Launch failed') }
+    setLaunchingGame(null)
+  }
+
+  async function launchDemo(g) {
+    if (!user) { openAuthModal('login'); return }
+    setLaunchingGame(g.game_uid + '_demo')
+    try {
+      const res = await api.post('/live-casino/launch', { game_uid: g.game_uid || '7004', language:'hi', currency_code:'INR' })
+      if (res.data.success && res.data.gameUrl) setModal(res.data.gameUrl)
+      else toast.error('Demo mode not available for this game')
+    } catch { toast.error('Demo launch failed') }
     setLaunchingGame(null)
   }
 
@@ -367,7 +384,7 @@ export default function Home() {
       )}
 
       {rows.map((row, idx) => (
-        <GameRow key={idx} row={row} idx={idx} onPlay={launchGame} launchingGame={launchingGame} />
+        <GameRow key={idx} row={row} idx={idx} onPlay={launchGame} onDemo={launchDemo} launchingGame={launchingGame} />
       ))}
 
       {/* LIVE SPORTS EMBED */}
