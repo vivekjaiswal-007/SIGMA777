@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { CAT_ICONS } from '../catIcons.js'
 import { openAuthModal } from '../utils/authModal.js'
 import { filterGames } from '../utils/gameFilter.js'
 import { Link, useNavigate } from 'react-router-dom'
@@ -37,12 +36,12 @@ const BANNERS = [
 
 /* ── 6 Categories with exact Mahaling777-style SVG icons ── */
 const CATEGORIES = [
-  { label:'IN-PLAY',        badge:null,  action:'cricket',        iconKey:'inplay'       },
-  { label:'SPORTSBOOK',     badge:null,  action:'cricket',        iconKey:'sportsbook'   },
-  { label:'VIRTUAL',        badge:null,  path:'/live-casino',     iconKey:'virtual'      },
-  { label:'E-SPORTS',       badge:'NEW', path:'/e-sports',        iconKey:'esports'      },
-  { label:'SPECIAL MARKET', badge:'NEW', action:'cricket',        iconKey:'special'      },
-  { label:'PLAYER BATTLE',  badge:null,  path:'/player-battle',   iconKey:'playerbattle' },
+  { label:'IN-PLAY',        badge:null,  action:'cricket',    img:'https://res.cloudinary.com/dgzoyuo9q/image/upload/v1779750866/WhatsApp_Image_2026-05-26_at_4.43.16_AM_qion93.jpg' },
+  { label:'SPORTSBOOK',     badge:null,  action:'cricket',    img:'https://res.cloudinary.com/dgzoyuo9q/image/upload/v1779750866/WhatsApp_Image_2026-05-26_at_4.43.16_AM_1_sz0u1y.jpg' },
+  { label:'VIRTUAL',        badge:null,  path:'/live-casino', img:'https://res.cloudinary.com/dgzoyuo9q/image/upload/v1779750866/WhatsApp_Image_2026-05-26_at_4.43.16_AM_2_vg35he.jpg' },
+  { label:'E-SPORTS',       badge:'NEW', path:'/e-sports',    img:'https://res.cloudinary.com/dgzoyuo9q/image/upload/v1779750866/WhatsApp_Image_2026-05-26_at_4.43.16_AM_3_hj0c7l.jpg' },
+  { label:'SPECIAL MARKET', badge:'NEW', action:'cricket',    img:'https://res.cloudinary.com/dgzoyuo9q/image/upload/v1779750866/WhatsApp_Image_2026-05-26_at_4.43.17_AM_jbh1ud.jpg' },
+  { label:'PLAYER BATTLE',  badge:null,  path:'/player-battle', img:'https://res.cloudinary.com/dgzoyuo9q/image/upload/v1779750866/WhatsApp_Image_2026-05-26_at_4.43.17_AM_1_ocp4fl.jpg' },
 ]
 
 const ROW_TAGS = [
@@ -354,7 +353,7 @@ export default function Home() {
             )}
             {/* Icon */}
             <div style={{ width:'84px', height:'84px', display:'flex', alignItems:'center', justifyContent:'center' }}>
-              <img src={CAT_ICONS[cat.iconKey]} alt={cat.label} style={{ width:'80px', height:'80px', objectFit:'contain', filter:'brightness(0) invert(1)' }} />
+              <img src={cat.img} alt={cat.label} style={{ width:'84px', height:'84px', objectFit:'contain' }} />
             </div>
             {/* Label */}
 
