@@ -26,7 +26,11 @@ export default function AuthModal({ mode, onClose, onSwitch }) {
     </svg>
   )
 
-  const handleSubmit = async () => {
+  const handleDemo = async () => {
+    const res = await login('demo777', 'demo@123')
+    if (res.success) { toast.success('🎮 Demo mode — 10,000 free coins!'); onClose() }
+    else toast.error('Demo not available right now')
+  }
     if (isLogin) {
       if (!phone.trim()) return toast.error('Enter phone or email')
       if (!password) return toast.error('Enter password')
@@ -124,8 +128,14 @@ export default function AuthModal({ mode, onClose, onSwitch }) {
 
           {/* Submit */}
           <button onClick={handleSubmit} disabled={isLoading}
-            style={{ width:'100%', padding:'15px', background:'#fff', border:'none', borderRadius:'8px', color:'#111', fontWeight:'900', fontSize:'15px', cursor:'pointer', letterSpacing:'1px', marginBottom:'14px' }}>
+            style={{ width:'100%', padding:'15px', background:'#fff', border:'none', borderRadius:'8px', color:'#111', fontWeight:'900', fontSize:'15px', cursor:'pointer', letterSpacing:'1px', marginBottom:'10px' }}>
             {isLoading ? 'Please wait...' : isLogin ? 'LOGIN' : 'SIGN UP'}
+          </button>
+
+          {/* Try Demo */}
+          <button onClick={handleDemo} disabled={isLoading}
+            style={{ width:'100%', padding:'12px', background:'transparent', border:'1px solid rgba(255,255,255,0.2)', borderRadius:'8px', color:'#aaa', fontWeight:'700', fontSize:'13px', cursor:'pointer', marginBottom:'14px', display:'flex', alignItems:'center', justifyContent:'center', gap:'6px' }}>
+            🎮 Try Demo — 10,000 Free Coins
           </button>
 
           {/* Switch */}
