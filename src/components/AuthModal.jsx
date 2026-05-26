@@ -31,6 +31,8 @@ export default function AuthModal({ mode, onClose, onSwitch }) {
     if (res.success) { toast.success('🎮 Demo mode — 10,000 free coins!'); onClose() }
     else toast.error('Demo not available right now')
   }
+
+  const handleSubmit = async () => {
     if (isLogin) {
       if (!phone.trim()) return toast.error('Enter phone or email')
       if (!password) return toast.error('Enter password')
