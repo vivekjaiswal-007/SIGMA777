@@ -26,9 +26,6 @@ export default function AuthModal({ mode, onClose, onSwitch }) {
     </svg>
   )
 
-  const handleDemo = async () => {
-    const res = await login('demo777', 'demo@123')
-    if (res.success) { toast.success('🎮 Demo mode — 10,000 free coins!'); onClose() }
     else toast.error('Demo not available right now')
   }
 
@@ -132,12 +129,6 @@ export default function AuthModal({ mode, onClose, onSwitch }) {
           <button onClick={handleSubmit} disabled={isLoading}
             style={{ width:'100%', padding:'15px', background:'#fff', border:'none', borderRadius:'8px', color:'#111', fontWeight:'900', fontSize:'15px', cursor:'pointer', letterSpacing:'1px', marginBottom:'10px' }}>
             {isLoading ? 'Please wait...' : isLogin ? 'LOGIN' : 'SIGN UP'}
-          </button>
-
-          {/* Try Demo */}
-          <button onClick={handleDemo} disabled={isLoading}
-            style={{ width:'100%', padding:'12px', background:'linear-gradient(135deg,#1e7d32,#4caf50)', border:'none', borderRadius:'8px', color:'#fff', fontWeight:'700', fontSize:'13px', cursor:'pointer', marginBottom:'14px', display:'flex', alignItems:'center', justifyContent:'center', gap:'6px', boxShadow:'0 4px 14px rgba(76,175,80,0.3)' }}>
-            🎮 Try Demo — 10,000 Free Coins
           </button>
 
           {/* Switch */}
