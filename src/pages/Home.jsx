@@ -41,7 +41,7 @@ const CATEGORIES = [
   { label:'VIRTUAL',        badge:null,  path:'/live-casino',   img:'https://res.cloudinary.com/dblqd29s3/image/upload/v1779901056/17721098612002083_r7jhm6.gif' },
   { label:'E-SPORTS',       badge:'NEW', path:'/e-sports',      img:'https://res.cloudinary.com/dblqd29s3/image/upload/v1779901056/17721098435339176_bs8tur.gif' },
   { label:'SPECIAL MARKET', badge:'NEW', action:'cricket',      img:'https://res.cloudinary.com/dblqd29s3/image/upload/v1779901056/17721097199816647_utlelp.gif' },
-  { label:'PLAYER BATTLE',  badge:null,  path:'/player-battle', img:'https://res.cloudinary.com/dgzoyuo9q/image/upload/v1779750866/WhatsApp_Image_2026-05-26_at_4.43.17_AM_1_ocp4fl.jpg' },
+  { label:'PLAYER BATTLE',  badge:null,  path:'/player-battle', img:'https://res.cloudinary.com/dblqd29s3/image/upload/v1779901899/17721097112033203_1_exvkiq.gif' },
 ]
 
 const ROW_TAGS = [
@@ -361,7 +361,7 @@ export default function Home() {
       {/* 6 CATEGORY GRID */}
       <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'8px', marginBottom:'18px' }}>
         {CATEGORIES.map((cat, i) => (
-          <button key={i} onClick={() => handleCat(cat)} style={{ position:'relative', background:'#181818', border:'1px solid #2a2a2a', borderRadius:'12px', padding:'14px 8px', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:'0', cursor:'pointer', transition:'all 0.2s', overflow:'hidden' }}
+          <button key={i} onClick={() => handleCat(cat)} style={{ position:'relative', background:'transparent', border:'1px solid #2a2a2a', borderRadius:'12px', padding:'0', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:'0', cursor:'pointer', transition:'all 0.2s', overflow:'hidden', aspectRatio:'1/1' }}
             onMouseEnter={e => { e.currentTarget.style.background='#222'; e.currentTarget.style.borderColor='#3a3a3a' }}
             onMouseLeave={e => { e.currentTarget.style.background='#181818'; e.currentTarget.style.borderColor='#2a2a2a' }}
           >
@@ -369,9 +369,7 @@ export default function Home() {
               <div style={{ position:'absolute', top:0, right:0, background:'#e03030', color:'#fff', fontSize:'8px', fontWeight:'900', padding:'3px 8px 3px 12px', borderBottomLeftRadius:'10px', letterSpacing:'0.5px' }}>NEW</div>
             )}
             {/* Icon */}
-            <div style={{ width:'84px', height:'84px', display:'flex', alignItems:'center', justifyContent:'center' }}>
-              <img src={cat.img} alt={cat.label} style={{ width:'84px', height:'84px', objectFit:'contain' }} />
-            </div>
+            <img src={cat.img} alt={cat.label} style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
             {/* Label */}
 
           </button>
