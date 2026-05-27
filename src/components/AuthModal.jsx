@@ -26,9 +26,6 @@ export default function AuthModal({ mode, onClose, onSwitch }) {
     </svg>
   )
 
-    else toast.error('Demo not available right now')
-  }
-
   const handleSubmit = async () => {
     if (isLogin) {
       if (!phone.trim()) return toast.error('Enter phone or email')
