@@ -151,6 +151,7 @@ export default function Layout() {
       </div>
       <BottomNav onLoginClick={()=>setAuthModal('login')} onSignupClick={()=>setAuthModal('signup')} />
 
+      <PWAInstallBanner />
       {authModal && (
         <AuthModal
           mode={authModal}
@@ -158,6 +159,36 @@ export default function Layout() {
           onSwitch={() => setAuthModal(authModal==='login'?'signup':'login')}
         />
       )}
+    </div>
+  )
+}
+
+// PWA Install Banner — add this before export
+export function PWAInstallBanner() {
+  const [prompt, setPrompt] = React.useState(null)
+  const [show, setShow] = React.useState(false)
+
+  React.useEffect(() => {
+    const handler = (e) => { e.preventDefault(); setPrompt(e); setShow(true) }
+    window.addEventListener('beforeinstallprompt', handler)
+    return () => window.removeEventListener('beforeinstallprompt', handler)
+  }, [])
+
+  if (!show) return null
+
+  return (
+    <div style={{ position:'fixed', bottom:'calc(var(--bottom-nav-h, 72px) + 10px)', left:'10px', right:'10px', background:'#0a2e14', border:'1px solid #1e7d32', borderRadius:'12px', padding:'12px 16px', zIndex:998, display:'flex', alignItems:'center', justifyContent:'space-between', boxShadow:'0 4px 20px rgba(0,0,0,0.5)' }}>
+      <div style={{ display:'flex', alignItems:'center', gap:'10px' }}>
+        <span style={{ fontSize:'24px' }}>📲</span>
+        <div>
+          <div style={{ color:'#fff', fontWeight:'700', fontSize:'13px' }}>Install SIGMA777</div>
+          <div style={{ color:'rgba(255,255,255,0.6)', fontSize:'11px' }}>Add to home screen</div>
+        </div>
+      </div>
+      <div style={{ display:'flex', gap:'8px' }}>
+        <button onClick={() => setShow(false)} style={{ background:'rgba(255,255,255,0.1)', border:'none', color:'#fff', padding:'6px 12px', borderRadius:'6px', fontSize:'12px', cursor:'pointer' }}>Later</button>
+        <button onClick={() => { prompt?.prompt(); setShow(false) }} style={{ background:'#4caf50', border:'none', color:'#fff', padding:'6px 12px', borderRadius:'6px', fontSize:'12px', fontWeight:'700', cursor:'pointer' }}>Install</button>
+      </div>
     </div>
   )
 }
