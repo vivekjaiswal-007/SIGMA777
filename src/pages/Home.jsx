@@ -36,11 +36,11 @@ const BANNERS = [
 
 /* ── 6 Categories with exact Mahaling777-style SVG icons ── */
 const CATEGORIES = [
-  { label:'IN-PLAY',        badge:null,  action:'cricket',    img:'https://res.cloudinary.com/dgzoyuo9q/image/upload/v1779750866/WhatsApp_Image_2026-05-26_at_4.43.16_AM_qion93.jpg' },
-  { label:'SPORTSBOOK',     badge:null,  action:'cricket',    img:'https://res.cloudinary.com/dgzoyuo9q/image/upload/v1779750866/WhatsApp_Image_2026-05-26_at_4.43.16_AM_1_sz0u1y.jpg' },
-  { label:'VIRTUAL',        badge:null,  path:'/live-casino', img:'https://res.cloudinary.com/dgzoyuo9q/image/upload/v1779750866/WhatsApp_Image_2026-05-26_at_4.43.16_AM_2_vg35he.jpg' },
-  { label:'E-SPORTS',       badge:'NEW', path:'/e-sports',    img:'https://res.cloudinary.com/dgzoyuo9q/image/upload/v1779750866/WhatsApp_Image_2026-05-26_at_4.43.16_AM_3_hj0c7l.jpg' },
-  { label:'SPECIAL MARKET', badge:'NEW', action:'cricket',    img:'https://res.cloudinary.com/dgzoyuo9q/image/upload/v1779750866/WhatsApp_Image_2026-05-26_at_4.43.17_AM_jbh1ud.jpg' },
+  { label:'IN-PLAY',        badge:null,  action:'cricket',      img:'https://res.cloudinary.com/dblqd29s3/image/upload/v1779901064/17721097199816647_1_mfrwrt.gif' },
+  { label:'SPORTSBOOK',     badge:null,  action:'cricket',      img:'https://res.cloudinary.com/dblqd29s3/image/upload/v1779901057/17721097044064323_kylxsf.gif' },
+  { label:'VIRTUAL',        badge:null,  path:'/live-casino',   img:'https://res.cloudinary.com/dblqd29s3/image/upload/v1779901056/17721098612002083_r7jhm6.gif' },
+  { label:'E-SPORTS',       badge:'NEW', path:'/e-sports',      img:'https://res.cloudinary.com/dblqd29s3/image/upload/v1779901056/17721098435339176_bs8tur.gif' },
+  { label:'SPECIAL MARKET', badge:'NEW', action:'cricket',      img:'https://res.cloudinary.com/dblqd29s3/image/upload/v1779901056/17721097199816647_utlelp.gif' },
   { label:'PLAYER BATTLE',  badge:null,  path:'/player-battle', img:'https://res.cloudinary.com/dgzoyuo9q/image/upload/v1779750866/WhatsApp_Image_2026-05-26_at_4.43.17_AM_1_ocp4fl.jpg' },
 ]
 
