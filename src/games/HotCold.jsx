@@ -58,7 +58,7 @@ export default function HotCold() {
         <div>
           <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px', padding: '24px' }}>
             <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-              <div style={{ fontSize: 'clamp(60px,20vw,90px)', fontWeight: '900', color: result ? (result.isHot ? '#ff4444' : '#44ccff') : 'var(--gold)', textShadow: `0 0 20px ${result ? (result.isHot ? 'rgba(255,68,68,0.4)' : 'rgba(68,204,255,0.4)') : 'rgba(201,162,39,0.4)'}`, transition: 'all 0.3s', minHeight: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ fontSize: 'clamp(60px,20vw,90px)', fontWeight: '900', color: result ? (result.isHot ? '#ff4444' : '#44ccff') : 'var(--gold)', textShadow: `0 0 20px ${result ? (result.isHot ? 'rgba(255,68,68,0.4)' : 'rgba(68,204,255,0.4)') : 'rgba(224,48,48,0.4)'}`, transition: 'all 0.3s', minHeight: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 {phase === 'spinning' ? (numbers[numbers.length - 1] || '?') :
                  result ? result.drawn :
                  '?'}

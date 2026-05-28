@@ -94,7 +94,7 @@ export default function WarGame() {
                 {playerCard && <div style={{ marginTop: '8px', fontWeight: '700', color: 'var(--gold)', fontSize: '14px' }}>{playerCard.r} of {playerCard.s}</div>}
               </div>
 
-              <div style={{ fontSize: 'clamp(28px,8vw,44px)', color: result === 'win' ? '#00d084' : result === 'lose' ? '#ff4444' : result === 'tie' ? '#c9a227' : '#444', fontWeight: '900', transition: 'color 0.3s' }}>
+              <div style={{ fontSize: 'clamp(28px,8vw,44px)', color: result === 'win' ? '#00d084' : result === 'lose' ? '#ff4444' : result === 'tie' ? '#e03030' : '#444', fontWeight: '900', transition: 'color 0.3s' }}>
                 {result === 'win' ? '🏆' : result === 'lose' ? '💔' : result === 'tie' ? '⚔️' : 'VS'}
               </div>
 
@@ -106,7 +106,7 @@ export default function WarGame() {
             </div>
 
             {result && (
-              <div style={{ padding: '14px 24px', borderRadius: '12px', display: 'inline-block', margin: '0 auto', background: result === 'win' ? 'rgba(0,208,132,0.12)' : result === 'lose' ? 'rgba(255,68,68,0.1)' : 'rgba(201,162,39,0.1)', border: `1px solid ${result === 'win' ? 'rgba(0,208,132,0.3)' : result === 'lose' ? 'rgba(255,68,68,0.3)' : 'rgba(201,162,39,0.3)'}`, fontSize: '18px', fontWeight: '900', color: result === 'win' ? '#00d084' : result === 'lose' ? '#ff4444' : '#c9a227' }}>
+              <div style={{ padding: '14px 24px', borderRadius: '12px', display: 'inline-block', margin: '0 auto', background: result === 'win' ? 'rgba(0,208,132,0.12)' : result === 'lose' ? 'rgba(255,68,68,0.1)' : 'rgba(224,48,48,0.1)', border: `1px solid ${result === 'win' ? 'rgba(0,208,132,0.3)' : result === 'lose' ? 'rgba(255,68,68,0.3)' : 'rgba(224,48,48,0.3)'}`, fontSize: '18px', fontWeight: '900', color: result === 'win' ? '#00d084' : result === 'lose' ? '#ff4444' : '#e03030' }}>
                 {result === 'win' ? '🏆 You Win! 2x' : result === 'lose' ? '💔 Dealer Wins' : '⚔️ WAR — Tie!'}
               </div>
             )}

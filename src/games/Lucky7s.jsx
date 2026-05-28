@@ -113,7 +113,7 @@ export default function Lucky7s() {
               {reels.map((reel, ri) => (
                 <div key={ri} style={{ background: '#0a0a14', border: '2px solid #2a2a3a', borderRadius: '12px', padding: '8px', overflow: 'hidden', height: 'clamp(130px,35vw,180px)', display: 'flex', flexDirection: 'column', justifyContent: 'center', width: 'clamp(70px,20vw,100px)' }}>
                   {reel.map((sym, si) => (
-                    <div key={si} style={{ fontSize: 'clamp(24px,7vw,38px)', lineHeight: '1.4', textAlign: 'center', opacity: si === 1 ? 1 : 0.35, background: si === 1 && !spinning ? 'rgba(201,162,39,0.08)' : 'transparent', borderRadius: '6px', padding: '2px' }}>
+                    <div key={si} style={{ fontSize: 'clamp(24px,7vw,38px)', lineHeight: '1.4', textAlign: 'center', opacity: si === 1 ? 1 : 0.35, background: si === 1 && !spinning ? 'rgba(224,48,48,0.08)' : 'transparent', borderRadius: '6px', padding: '2px' }}>
                       {sym}
                     </div>
                   ))}
@@ -123,9 +123,9 @@ export default function Lucky7s() {
 
             {/* Pay line indicator */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'center', marginBottom: '12px' }}>
-              <div style={{ height: '2px', flex: 1, background: 'rgba(201,162,39,0.4)' }} />
+              <div style={{ height: '2px', flex: 1, background: 'rgba(224,48,48,0.4)' }} />
               <span style={{ fontSize: '11px', color: 'var(--gold)', fontWeight: '600', whiteSpace: 'nowrap' }}>PAY LINE</span>
-              <div style={{ height: '2px', flex: 1, background: 'rgba(201,162,39,0.4)' }} />
+              <div style={{ height: '2px', flex: 1, background: 'rgba(224,48,48,0.4)' }} />
             </div>
 
             {win !== null && (
@@ -146,7 +146,7 @@ export default function Lucky7s() {
                 </div>
               ))}
               <div style={{ padding: '5px 10px', background: 'var(--bg-hover)', borderRadius: '6px', fontSize: '12px', display: 'flex', justifyContent: 'space-between' }}>
-                <span>7️⃣7️⃣</span><span style={{ color: '#c9a227', fontWeight: '700' }}>10x</span>
+                <span>7️⃣7️⃣</span><span style={{ color: '#e03030', fontWeight: '700' }}>10x</span>
               </div>
               <div style={{ padding: '5px 10px', background: 'var(--bg-hover)', borderRadius: '6px', fontSize: '12px', display: 'flex', justifyContent: 'space-between' }}>
                 <span>7️⃣</span><span style={{ color: '#888', fontWeight: '700' }}>2x</span>

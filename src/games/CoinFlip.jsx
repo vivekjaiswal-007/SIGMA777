@@ -74,7 +74,7 @@ export default function CoinFlip() {
             <div style={{ perspective: '400px', display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
               <div style={{ width: 'clamp(100px,30vw,140px)', height: 'clamp(100px,30vw,140px)', position: 'relative', transformStyle: 'preserve-3d', transform: `rotateY(${rotation}deg)`, transition: spinning ? 'none' : 'transform 0.3s' }}>
                 {/* Heads */}
-                <div style={{ position: 'absolute', inset: 0, backfaceVisibility: 'hidden', borderRadius: '50%', background: 'linear-gradient(135deg,#f0c84a,#c9a227)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 24px rgba(201,162,39,0.4), inset 0 2px 4px rgba(255,255,255,0.3)', border: '4px solid #9a7a10' }}>
+                <div style={{ position: 'absolute', inset: 0, backfaceVisibility: 'hidden', borderRadius: '50%', background: 'linear-gradient(135deg,#ff5555,#e03030)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 24px rgba(224,48,48,0.4), inset 0 2px 4px rgba(255,255,255,0.3)', border: '4px solid #9a7a10' }}>
                   <span style={{ fontSize: 'clamp(32px,10vw,48px)' }}>♛</span>
                 </div>
                 {/* Tails */}
@@ -88,7 +88,7 @@ export default function CoinFlip() {
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginBottom: '16px' }}>
               {['heads', 'tails'].map(s => (
                 <button key={s} onClick={() => phase === 'bet' && setSide(s)}
-                  style={{ padding: '12px 28px', borderRadius: '10px', fontWeight: '800', fontSize: '15px', textTransform: 'capitalize', cursor: phase === 'bet' ? 'pointer' : 'default', background: side === s ? 'rgba(201,162,39,0.18)' : 'var(--bg-hover)', border: `2px solid ${side === s ? 'var(--gold)' : 'var(--border)'}`, color: side === s ? 'var(--gold)' : 'var(--text-secondary)', transition: 'all 0.2s' }}>
+                  style={{ padding: '12px 28px', borderRadius: '10px', fontWeight: '800', fontSize: '15px', textTransform: 'capitalize', cursor: phase === 'bet' ? 'pointer' : 'default', background: side === s ? 'rgba(224,48,48,0.18)' : 'var(--bg-hover)', border: `2px solid ${side === s ? 'var(--gold)' : 'var(--border)'}`, color: side === s ? 'var(--gold)' : 'var(--text-secondary)', transition: 'all 0.2s' }}>
                   {s === 'heads' ? '♛ Heads' : '🦅 Tails'}
                 </button>
               ))}

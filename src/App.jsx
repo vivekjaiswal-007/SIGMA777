@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react'
-import Footer from './components/Footer'
 import Terms from './pages/Terms'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useStore } from './store/useStore'
 import Layout from './components/Layout'
 import Home from './pages/Home'
-import Login from './pages/Login'
-import Signup from './pages/Signup'
+
+
 import ForgotPassword from './pages/ForgotPassword'
 import KenoGame from './games/KenoGame'
 import CoinFlip from './games/CoinFlip'
@@ -51,6 +50,11 @@ import BaccaratGame from './games/BaccaratGame'
 import TeenPattiGame from './games/TeenPattiGame'
 import AndarBahar from './games/AndarBahar'
 import GameWrapper from './components/GameWrapper'
+import ESports from './pages/ESports'
+import PlayerBattle from './pages/PlayerBattle'
+import AccountPage from './pages/AccountPage'
+import CategoryGames from './pages/CategoryGames'
+import OpenBets from './pages/OpenBets'
 import DragonTiger from './games/DragonTiger'
 import PokerGame from './games/PokerGame'
 import TowerGame from './games/TowerGame'
@@ -62,7 +66,7 @@ import SpinWin from './games/SpinWin'
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useStore()
-  if (!user) return <Navigate to="/login" replace />
+  if (!user) return <Navigate to="/" replace />
   return children
 }
 
@@ -77,14 +81,19 @@ export default function App() {
     <>
     <Routes>
       <Route path="/terms" element={<Terms />} />
-        <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Navigate to="/" replace />} />
+      <Route path="/signup" element={<Navigate to="/" replace />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="lobby" element={<GameLobby />} />
         <Route path="live-casino" element={<LiveCasino />} />
         <Route path="live-casino/return" element={<LiveCasino />} />
+        <Route path="e-sports" element={<ESports />} />
+        <Route path="player-battle" element={<PlayerBattle />} />
+        <Route path="account" element={<AccountPage />} />
+        <Route path="category/:category" element={<CategoryGames />} />
+        <Route path="open-bets" element={<OpenBets />} />
         <Route path="dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="games/aviator" element={<ProtectedRoute><GameWrapper><AviatorGame /></GameWrapper></ProtectedRoute>} />
         <Route path="games/crash-rocket" element={<ProtectedRoute><GameWrapper><CrashRocket /></GameWrapper></ProtectedRoute>} />
@@ -127,7 +136,6 @@ export default function App() {
         <Route path="games/penalty" element={<ProtectedRoute><GameWrapper><PenaltyShootout /></GameWrapper></ProtectedRoute>} />
       </Route>
     </Routes>
-    <Footer />
     <WhatsAppButton />
     </>
   )

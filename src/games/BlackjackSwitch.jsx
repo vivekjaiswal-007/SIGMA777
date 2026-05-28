@@ -83,7 +83,7 @@ export default function BlackjackSwitch() {
     setPhase('result')
   }
 
-  const getCol=(o)=>o==='win'?'#00d084':o==='push'?'#c9a227':'#ff4444'
+  const getCol=(o)=>o==='win'?'#00d084':o==='push'?'#e03030':'#ff4444'
 
   return(
     <div style={{maxWidth:'900px',margin:'0 auto'}}>
@@ -123,7 +123,7 @@ export default function BlackjackSwitch() {
               <button onClick={doSwitch} disabled={switched} style={{flex:1,padding:'12px',borderRadius:'9px',background:switched?'rgba(153,68,255,0.05)':'rgba(153,68,255,0.12)',border:`1px solid rgba(153,68,255,${switched?'0.1':'0.3'})`,color:switched?'#555':'#9944ff',fontWeight:'700',fontSize:'13px',cursor:switched?'not-allowed':'pointer'}}>
                 🔄 Switch Top Cards{switched?' (done)':''}
               </button>
-              <button onClick={standBoth} style={{flex:1,padding:'12px',borderRadius:'9px',background:'rgba(201,162,39,0.12)',border:'1px solid rgba(201,162,39,0.3)',color:'var(--gold)',fontWeight:'700',fontSize:'13px',cursor:'pointer'}}>
+              <button onClick={standBoth} style={{flex:1,padding:'12px',borderRadius:'9px',background:'rgba(224,48,48,0.12)',border:'1px solid rgba(224,48,48,0.3)',color:'var(--gold)',fontWeight:'700',fontSize:'13px',cursor:'pointer'}}>
                 ✋ Stand Both
               </button>
             </div>

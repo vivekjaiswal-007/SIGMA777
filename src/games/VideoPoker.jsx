@@ -12,13 +12,13 @@ const isRed = c => c.s === '♥' || c.s === '♦'
 const rankVal = r => RANKS.indexOf(r)
 
 const PAYOUTS = [
-  { name:'Royal Flush',    check: h => isStraightFlush(h) && rankVal(h[4].r)===12,                        pay: 250, color:'#f0c84a' },
+  { name:'Royal Flush',    check: h => isStraightFlush(h) && rankVal(h[4].r)===12,                        pay: 250, color:'#ff5555' },
   { name:'Straight Flush', check: h => isStraightFlush(h),                                                 pay: 50,  color:'#9944ff' },
   { name:'Four of a Kind', check: h => getGroups(h)[0]===4,                                                pay: 25,  color:'#ff4444' },
   { name:'Full House',     check: h => getGroups(h)[0]===3 && getGroups(h)[1]===2,                        pay: 9,   color:'#ff8800' },
   { name:'Flush',          check: h => isFlush(h),                                                         pay: 6,   color:'#4488ff' },
   { name:'Straight',       check: h => isStraight(h),                                                      pay: 4,   color:'#00d084' },
-  { name:'Three of a Kind',check: h => getGroups(h)[0]===3,                                                pay: 3,   color:'#c9a227' },
+  { name:'Three of a Kind',check: h => getGroups(h)[0]===3,                                                pay: 3,   color:'#e03030' },
   { name:'Two Pair',       check: h => getGroups(h)[0]===2 && getGroups(h)[1]===2,                        pay: 2,   color:'#888' },
   { name:'Jacks or Better',check: h => getGroups(h)[0]===2 && highPair(h),                                pay: 1,   color:'#666' },
 ]
@@ -49,12 +49,12 @@ function Card({ card, held, onClick, phase }) {
   const w = 'clamp(52px,13vw,72px)', h = 'clamp(74px,18vw,102px)'
   return (
     <div onClick={onClick} style={{ position:'relative', cursor: phase==='hold'?'pointer':'default' }}>
-      <div style={{ width:w, height:h, background:'white', borderRadius:'8px', border:`3px solid ${held?'#c9a227':'#ccc'}`, padding:'4px', display:'flex', flexDirection:'column', boxShadow: held?'0 0 12px rgba(201,162,39,0.5)':'0 4px 12px rgba(0,0,0,0.4)', transition:'all 0.2s', transform: held?'translateY(-8px)':'none' }}>
+      <div style={{ width:w, height:h, background:'white', borderRadius:'8px', border:`3px solid ${held?'#e03030':'#ccc'}`, padding:'4px', display:'flex', flexDirection:'column', boxShadow: held?'0 0 12px rgba(224,48,48,0.5)':'0 4px 12px rgba(0,0,0,0.4)', transition:'all 0.2s', transform: held?'translateY(-8px)':'none' }}>
         <div style={{fontSize:'clamp(9px,2.5vw,13px)',fontWeight:'900',color:isRed(card)?'#cc2222':'#111'}}>{card.r}</div>
         <div style={{flex:1,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'clamp(16px,5vw,26px)',color:isRed(card)?'#cc2222':'#111'}}>{card.s}</div>
         <div style={{fontSize:'clamp(9px,2.5vw,13px)',fontWeight:'900',color:isRed(card)?'#cc2222':'#111',alignSelf:'flex-end',transform:'rotate(180deg)'}}>{card.r}</div>
       </div>
-      {held && <div style={{ position:'absolute', bottom:'-22px', left:'50%', transform:'translateX(-50%)', fontSize:'10px', fontWeight:'700', color:'#c9a227', whiteSpace:'nowrap' }}>HOLD</div>}
+      {held && <div style={{ position:'absolute', bottom:'-22px', left:'50%', transform:'translateX(-50%)', fontSize:'10px', fontWeight:'700', color:'#e03030', whiteSpace:'nowrap' }}>HOLD</div>}
     </div>
   )
 }

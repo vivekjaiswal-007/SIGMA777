@@ -128,7 +128,7 @@ export default function HiloCard() {
                 <div style={{ display:'flex', gap:'16px', fontSize:'14px', color:'var(--text-secondary)' }}>
                   <span>Streak: <strong style={{ color:'var(--gold)' }}>{streak}</strong></span>
                   <span>Multiplier: <strong style={{ color:'#00d084' }}>{mult}x</strong></span>
-                  <span>Win: <strong style={{ color:'#c9a227' }}>🪙{Math.floor(bet*mult)}</strong></span>
+                  <span>Win: <strong style={{ color:'#e03030' }}>🪙{Math.floor(bet*mult)}</strong></span>
                 </div>
 
                 {(phase === 'lost' || phase === 'cashed') && (
@@ -145,7 +145,7 @@ export default function HiloCard() {
               <button onClick={() => guess('higher')} style={{ flex:1,padding:'14px',borderRadius:'10px',background:'rgba(0,208,132,0.12)',border:'1px solid rgba(0,208,132,0.3)',color:'#00d084',fontWeight:'800',fontSize:'15px',cursor:'pointer' }}>
                 ⬆️ Higher
               </button>
-              <button onClick={cashout} style={{ padding:'14px 18px',borderRadius:'10px',background:'rgba(201,162,39,0.12)',border:'1px solid rgba(201,162,39,0.3)',color:'var(--gold)',fontWeight:'800',fontSize:'14px',cursor:'pointer',whiteSpace:'nowrap' }}>
+              <button onClick={cashout} style={{ padding:'14px 18px',borderRadius:'10px',background:'rgba(224,48,48,0.12)',border:'1px solid rgba(224,48,48,0.3)',color:'var(--gold)',fontWeight:'800',fontSize:'14px',cursor:'pointer',whiteSpace:'nowrap' }}>
                 💰 {mult}x
               </button>
               <button onClick={() => guess('lower')} style={{ flex:1,padding:'14px',borderRadius:'10px',background:'rgba(255,68,68,0.1)',border:'1px solid rgba(255,68,68,0.3)',color:'#ff4444',fontWeight:'800',fontSize:'15px',cursor:'pointer' }}>

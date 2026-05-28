@@ -1,5 +1,5 @@
 /**
- * New Mahadev Gaming Casino — Complete Sound System
+ * SIGMA777 Casino — Complete Sound System
  * All sounds generated via Web Audio API (no files needed)
  * Realistic casino-grade audio
  */

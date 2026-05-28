@@ -76,14 +76,14 @@ export default function DiceBattle() {
           <div style={{background:'var(--bg-card)',border:'1px solid var(--border)',borderRadius:'16px',padding:'28px',textAlign:'center',minHeight:'260px',display:'flex',flexDirection:'column',justifyContent:'center'}}>
             <div style={{display:'flex',justifyContent:'space-around',alignItems:'center',marginBottom:'20px',flexWrap:'wrap',gap:'20px'}}>
               <DicePair dice={playerDice} label="You" color="#00d084"/>
-              <div style={{fontSize:'clamp(24px,7vw,36px)',color:result?result.type==='win'?'#00d084':result.type==='lose'?'#ff4444':'#c9a227':'#444',fontWeight:'900'}}>
+              <div style={{fontSize:'clamp(24px,7vw,36px)',color:result?result.type==='win'?'#00d084':result.type==='lose'?'#ff4444':'#e03030':'#444',fontWeight:'900'}}>
                 {result?result.type==='win'?'🏆':result.type==='lose'?'💔':'🤝':'VS'}
               </div>
               <DicePair dice={dealerDice} label="Dealer" color="#ff4444"/>
             </div>
 
             {result&&(
-              <div style={{padding:'14px',borderRadius:'12px',background:result.type==='win'?'rgba(0,208,132,0.1)':result.type==='lose'?'rgba(255,68,68,0.1)':'rgba(201,162,39,0.1)',border:`1px solid ${result.type==='win'?'rgba(0,208,132,0.3)':result.type==='lose'?'rgba(255,68,68,0.3)':'rgba(201,162,39,0.3)'}`,fontSize:'18px',fontWeight:'900',color:result.type==='win'?'#00d084':result.type==='lose'?'#ff4444':'#c9a227'}}>
+              <div style={{padding:'14px',borderRadius:'12px',background:result.type==='win'?'rgba(0,208,132,0.1)':result.type==='lose'?'rgba(255,68,68,0.1)':'rgba(224,48,48,0.1)',border:`1px solid ${result.type==='win'?'rgba(0,208,132,0.3)':result.type==='lose'?'rgba(255,68,68,0.3)':'rgba(224,48,48,0.3)'}`,fontSize:'18px',fontWeight:'900',color:result.type==='win'?'#00d084':result.type==='lose'?'#ff4444':'#e03030'}}>
                 {result.type==='win'?`🏆 ${result.pSum} > ${result.dSum} — Won ${result.win} 🪙`:result.type==='lose'?`💔 ${result.pSum} < ${result.dSum}`:`🤝 ${result.pSum} = ${result.dSum} — Tie!`}
               </div>
             )}

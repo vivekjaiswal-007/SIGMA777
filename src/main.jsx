@@ -14,10 +14,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         style: {
           background: '#1a1a2e',
           color: '#fff',
-          border: '1px solid #c9a227',
+          border: '1px solid #e03030',
           fontFamily: 'Outfit, sans-serif'
         },
-        success: { iconTheme: { primary: '#c9a227', secondary: '#0a0a0f' } },
+        success: { iconTheme: { primary: '#e03030', secondary: '#0a0a0f' } },
         error: { iconTheme: { primary: '#ff4444', secondary: '#0a0a0f' } }
       }}
     />

@@ -240,7 +240,7 @@ export default function CrashBall() {
 
       // Ball
       if (ph !== 'waiting' && trail.length > 0) {
-        const bc = ph === 'crashed' ? '#ff4444' : ph === 'cashed' ? '#00d084' : '#f0c84a'
+        const bc = ph === 'crashed' ? '#ff4444' : ph === 'cashed' ? '#00d084' : '#ff5555'
         const bx = g.ballX, by = g.ballY
         const gr = ctx.createRadialGradient(bx - 4, by - 4, 2, bx, by, 13)
         gr.addColorStop(0, '#fff'); gr.addColorStop(0.4, bc); gr.addColorStop(1, bc + '55')
@@ -253,8 +253,8 @@ export default function CrashBall() {
       ctx.textAlign = 'center'; ctx.textBaseline = 'middle'
       if (ph === 'playing') {
         ctx.font = `900 ${W < 450 ? 46 : 56}px Arial`
-        ctx.fillStyle = '#f0c84a'
-        ctx.shadowBlur = 20; ctx.shadowColor = 'rgba(201,162,39,0.5)'
+        ctx.fillStyle = '#ff5555'
+        ctx.shadowBlur = 20; ctx.shadowColor = 'rgba(224,48,48,0.5)'
         ctx.fillText(`${m.toFixed(2)}x`, W / 2, H * 0.38); ctx.shadowBlur = 0
       } else if (ph === 'crashed') {
         ctx.font = `700 ${W < 450 ? 16 : 20}px Arial`; ctx.fillStyle = '#ff8888'
@@ -271,8 +271,8 @@ export default function CrashBall() {
       } else {
         ctx.font = '700 15px Arial'; ctx.fillStyle = 'rgba(150,140,180,0.6)'
         ctx.fillText('Waiting for next round...', W / 2, H * 0.38)
-        ctx.font = '900 48px Arial'; ctx.fillStyle = '#c9a227'
-        ctx.shadowBlur = 12; ctx.shadowColor = '#c9a227'
+        ctx.font = '900 48px Arial'; ctx.fillStyle = '#e03030'
+        ctx.shadowBlur = 12; ctx.shadowColor = '#e03030'
         ctx.fillText(String(g.countdown), W / 2, H * 0.56); ctx.shadowBlur = 0
         ctx.font = '13px Arial'; ctx.fillStyle = 'rgba(130,120,160,0.4)'
         ctx.fillText('Place your bets!', W / 2, H * 0.70)
@@ -301,7 +301,7 @@ export default function CrashBall() {
       {/* History bar */}
       <div style={{ display: 'flex', gap: '5px', marginBottom: '10px', overflowX: 'auto', paddingBottom: '2px' }}>
         {history.map((h, i) => (
-          <span key={i} style={{ padding: '2px 9px', borderRadius: '12px', fontSize: '11px', fontWeight: '800', whiteSpace: 'nowrap', flexShrink: 0, background: h < 2 ? 'rgba(255,68,68,0.2)' : h < 5 ? 'rgba(80,200,80,0.15)' : 'rgba(201,162,39,0.2)', color: h < 2 ? '#ff6666' : h < 5 ? '#88cc88' : '#c9a227', border: `1px solid ${h < 2 ? 'rgba(255,68,68,0.3)' : h < 5 ? 'rgba(80,200,80,0.25)' : 'rgba(201,162,39,0.3)'}` }}>
+          <span key={i} style={{ padding: '2px 9px', borderRadius: '12px', fontSize: '11px', fontWeight: '800', whiteSpace: 'nowrap', flexShrink: 0, background: h < 2 ? 'rgba(255,68,68,0.2)' : h < 5 ? 'rgba(80,200,80,0.15)' : 'rgba(224,48,48,0.2)', color: h < 2 ? '#ff6666' : h < 5 ? '#88cc88' : '#e03030', border: `1px solid ${h < 2 ? 'rgba(255,68,68,0.3)' : h < 5 ? 'rgba(80,200,80,0.25)' : 'rgba(224,48,48,0.3)'}` }}>
             {Number(h).toFixed(2)}x
           </span>
         ))}
@@ -336,7 +336,7 @@ export default function CrashBall() {
 
             <div style={{ padding: '12px' }}>
               {/* Balance */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 10px', background: 'rgba(201,162,39,0.07)', borderRadius: '7px', border: '1px solid rgba(201,162,39,0.15)', marginBottom: '10px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 10px', background: 'rgba(224,48,48,0.07)', borderRadius: '7px', border: '1px solid rgba(224,48,48,0.15)', marginBottom: '10px' }}>
                 <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>Balance</span>
                 <span style={{ color: 'var(--gold)', fontWeight: '700' }}>🪙 {balance.toLocaleString()}</span>
               </div>
@@ -353,7 +353,7 @@ export default function CrashBall() {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5,1fr)', gap: '4px', marginBottom: '10px' }}>
                 {[50, 100, 500, 1000, 5000].map(a => (
                   <button key={a} onClick={() => setBetAmt(a)}
-                    style={{ padding: '5px 2px', borderRadius: '6px', border: `1px solid ${betAmt === a ? 'var(--gold)' : 'var(--border)'}`, background: betAmt === a ? 'rgba(201,162,39,0.18)' : 'var(--bg-hover)', color: betAmt === a ? 'var(--gold)' : '#666', fontSize: '11px', fontWeight: '700', cursor: 'pointer' }}>
+                    style={{ padding: '5px 2px', borderRadius: '6px', border: `1px solid ${betAmt === a ? 'var(--gold)' : 'var(--border)'}`, background: betAmt === a ? 'rgba(224,48,48,0.18)' : 'var(--bg-hover)', color: betAmt === a ? 'var(--gold)' : '#666', fontSize: '11px', fontWeight: '700', cursor: 'pointer' }}>
                     {a >= 1000 ? `${a / 1000}K` : a}
                   </button>
                 ))}
@@ -406,11 +406,11 @@ export default function CrashBall() {
               {/* BET button / status */}
               {ui.phase === 'waiting' && !ui.placed ? (
                 <button onClick={handleBet} disabled={!canBet}
-                  style={{ width: '100%', padding: '13px', border: 'none', borderRadius: '11px', background: canBet ? 'linear-gradient(135deg,#c9a227,#f0c84a)' : 'rgba(201,162,39,0.2)', color: canBet ? '#0a0a0f' : 'rgba(255,255,255,0.3)', fontSize: '15px', fontWeight: '900', cursor: canBet ? 'pointer' : 'not-allowed', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  style={{ width: '100%', padding: '13px', border: 'none', borderRadius: '11px', background: canBet ? 'linear-gradient(135deg,#e03030,#ff5555)' : 'rgba(224,48,48,0.2)', color: canBet ? '#0a0a0f' : 'rgba(255,255,255,0.3)', fontSize: '15px', fontWeight: '900', cursor: canBet ? 'pointer' : 'not-allowed', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                   Bet {betAmt.toLocaleString()} 🪙
                 </button>
               ) : ui.phase === 'waiting' && ui.placed ? (
-                <div style={{ padding: '13px', background: 'rgba(201,162,39,0.1)', border: '1px solid rgba(201,162,39,0.3)', borderRadius: '10px', textAlign: 'center', color: 'var(--gold)', fontWeight: '700', fontSize: '14px' }}>
+                <div style={{ padding: '13px', background: 'rgba(224,48,48,0.1)', border: '1px solid rgba(224,48,48,0.3)', borderRadius: '10px', textAlign: 'center', color: 'var(--gold)', fontWeight: '700', fontSize: '14px' }}>
                   ✅ Bet {betAmt.toLocaleString()} placed — Round starting!
                 </div>
               ) : ui.phase === 'playing' && !ui.placed ? (

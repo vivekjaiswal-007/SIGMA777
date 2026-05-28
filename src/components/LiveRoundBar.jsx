@@ -3,7 +3,7 @@ import React from 'react'
 export default function LiveRoundBar({ phase, countdown, roundId }) {
   const cfg = {
     betting: { bg: 'rgba(0,208,132,0.1)', border: 'rgba(0,208,132,0.3)', color: '#00d084', label: '🟢 PLACE BETS', max: 10 },
-    dealing: { bg: 'rgba(201,162,39,0.1)', border: 'rgba(201,162,39,0.3)', color: '#c9a227', label: '🎴 DEALING...', max: 3 },
+    dealing: { bg: 'rgba(224,48,48,0.1)', border: 'rgba(224,48,48,0.3)', color: '#e03030', label: '🎴 DEALING...', max: 3 },
     result:  { bg: 'rgba(68,136,255,0.1)', border: 'rgba(68,136,255,0.3)', color: '#4488ff', label: '📊 RESULT', max: 5 },
   }
   const c = cfg[phase] || cfg.betting

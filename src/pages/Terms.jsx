@@ -38,12 +38,12 @@ export default function Terms() {
       {/* Header */}
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>
         <img src="https://res.cloudinary.com/dnzfce2wa/image/upload/v1778083251/download_ehcf4o.png" alt="Logo" style={{ height: '50px', marginBottom: '12px' }} />
-        <h1 style={{ fontFamily: 'Cinzel,serif', fontSize: 'clamp(20px,4vw,28px)', color: '#c9a227', marginBottom: '8px' }}>Terms & Conditions</h1>
+        <h1 style={{ fontFamily: 'Cinzel,serif', fontSize: 'clamp(20px,4vw,28px)', color: '#e03030', marginBottom: '8px' }}>Terms & Conditions</h1>
         <p style={{ color: '#555', fontSize: '12px' }}>SIGMA777 • Last updated: January 2024</p>
       </div>
 
       {/* Intro box */}
-      <div style={{ background: 'rgba(201,162,39,0.06)', border: '1px solid rgba(201,162,39,0.2)', borderRadius: '12px', padding: '18px 22px', marginBottom: '24px' }}>
+      <div style={{ background: 'rgba(224,48,48,0.06)', border: '1px solid rgba(224,48,48,0.2)', borderRadius: '12px', padding: '18px 22px', marginBottom: '24px' }}>
         <p style={{ color: '#888', fontSize: '13px', lineHeight: '1.8' }}>
           Welcome to SIGMA777. These Terms and Conditions govern your use of our platform and services. Please read them carefully. By accessing this website you agree to be bound by these terms.
         </p>
@@ -56,7 +56,7 @@ export default function Terms() {
             onClick={() => setOpen(open === s.num ? null : s.num)}
             style={{ width: '100%', padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left' }}
           >
-            <span style={{ fontSize: '14px', fontWeight: '700', color: open === s.num ? '#c9a227' : '#ccc' }}>
+            <span style={{ fontSize: '14px', fontWeight: '700', color: open === s.num ? '#e03030' : '#ccc' }}>
               {s.num}. {s.title}
             </span>
             <span style={{ color: '#555', fontSize: '18px' }}>{open === s.num ? '−' : '+'}</span>
@@ -72,7 +72,7 @@ export default function Terms() {
       {/* Contact */}
       <div style={{ background: '#0e0e18', borderRadius: '12px', padding: '24px', textAlign: 'center', marginTop: '28px' }}>
         <p style={{ color: '#666', fontSize: '13px', marginBottom: '8px' }}>Questions about these terms?</p>
-        <p style={{ color: '#c9a227', fontSize: '13px', fontWeight: '700' }}>support@newmahadevgaming.com</p>
+        <p style={{ color: '#e03030', fontSize: '13px', fontWeight: '700' }}>support@newmahadevgaming.com</p>
       </div>
 
       <div style={{ textAlign: 'center', marginTop: '20px' }}>

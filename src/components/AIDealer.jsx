@@ -47,7 +47,7 @@ function ShuffleCards({ active }) {
             boxShadow: '0 3px 8px rgba(0,0,0,0.4)',
           }}>
             {/* Card back pattern */}
-            <div style={{ position: 'absolute', inset: '3px', borderRadius: '3px', background: 'repeating-linear-gradient(45deg,rgba(201,162,39,0.15) 0px,transparent 2px,transparent 4px,rgba(201,162,39,0.1) 6px)', border: '1px solid rgba(201,162,39,0.2)' }} />
+            <div style={{ position: 'absolute', inset: '3px', borderRadius: '3px', background: 'repeating-linear-gradient(45deg,rgba(224,48,48,0.15) 0px,transparent 2px,transparent 4px,rgba(224,48,48,0.1) 6px)', border: '1px solid rgba(224,48,48,0.2)' }} />
           </div>
         )
       })}
@@ -98,9 +98,9 @@ function DealerFace({ expression, size = 80 }) {
       <ellipse cx="22" cy="-15" rx="8" ry="18" fill="#2a1a0a" />
 
       {/* Bow tie */}
-      <polygon points="-12,26 -2,30 -12,34" fill="#c9a227" />
-      <polygon points="12,26 2,30 12,34" fill="#c9a227" />
-      <circle cx="0" cy="30" r="3" fill="#f0c84a" />
+      <polygon points="-12,26 -2,30 -12,34" fill="#e03030" />
+      <polygon points="12,26 2,30 12,34" fill="#e03030" />
+      <circle cx="0" cy="30" r="3" fill="#ff5555" />
 
       {/* Collar */}
       <polygon points="-14,22 0,32 14,22 8,38 -8,38" fill="white" />
@@ -167,8 +167,8 @@ function DealerFace({ expression, size = 80 }) {
       )}
 
       {/* Ear studs */}
-      <circle cx="-26" cy="2" r="2.5" fill="#c9a227" />
-      <circle cx="26" cy="2" r="2.5" fill="#c9a227" />
+      <circle cx="-26" cy="2" r="2.5" fill="#e03030" />
+      <circle cx="26" cy="2" r="2.5" fill="#e03030" />
     </svg>
   )
 }
@@ -197,7 +197,7 @@ function FlyingCard({ from, to, onDone }) {
       borderRadius: '5px', border: '1.5px solid rgba(255,255,255,0.2)',
       boxShadow: '0 6px 20px rgba(0,0,0,0.5)',
     }}>
-      <div style={{ position: 'absolute', inset: '3px', borderRadius: '3px', background: 'repeating-linear-gradient(45deg,rgba(201,162,39,0.15) 0px,transparent 2px,transparent 4px,rgba(201,162,39,0.1) 6px)', border: '1px solid rgba(201,162,39,0.2)' }} />
+      <div style={{ position: 'absolute', inset: '3px', borderRadius: '3px', background: 'repeating-linear-gradient(45deg,rgba(224,48,48,0.15) 0px,transparent 2px,transparent 4px,rgba(224,48,48,0.1) 6px)', border: '1px solid rgba(224,48,48,0.2)' }} />
     </div>
   )
 }
@@ -244,7 +244,7 @@ export default function AIDealer({ phase = 'idle', compact = false, dealerRef })
       <div style={{
         position: 'relative', minWidth: '120px', maxWidth: '200px',
         padding: '8px 12px', background: 'rgba(255,255,255,0.92)',
-        borderRadius: '14px', border: '1px solid rgba(201,162,39,0.3)',
+        borderRadius: '14px', border: '1px solid rgba(224,48,48,0.3)',
         textAlign: 'center', fontSize: '12px', fontWeight: '600',
         color: '#1a1a2e', lineHeight: 1.3,
         opacity: talking ? 1 : 0,
@@ -269,7 +269,7 @@ export default function AIDealer({ phase = 'idle', compact = false, dealerRef })
         {(phase === 'dealing' || phase === 'shuffling') && (
           <div style={{
             position: 'absolute', inset: '-8px', borderRadius: '50%',
-            background: 'radial-gradient(circle,rgba(201,162,39,0.2),transparent 70%)',
+            background: 'radial-gradient(circle,rgba(224,48,48,0.2),transparent 70%)',
             animation: 'dealerGlow 1s ease infinite',
           }} />
         )}
@@ -291,8 +291,8 @@ export default function AIDealer({ phase = 'idle', compact = false, dealerRef })
       {/* Dealer name tag */}
       <div style={{
         padding: '3px 12px', borderRadius: '20px',
-        background: 'rgba(201,162,39,0.15)', border: '1px solid rgba(201,162,39,0.3)',
-        fontSize: '11px', fontWeight: '700', color: '#c9a227',
+        background: 'rgba(224,48,48,0.15)', border: '1px solid rgba(224,48,48,0.3)',
+        fontSize: '11px', fontWeight: '700', color: '#e03030',
         letterSpacing: '0.5px',
       }}>
         🎰 {nameRef.current}

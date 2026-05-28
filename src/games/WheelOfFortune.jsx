@@ -8,7 +8,7 @@ import toast from 'react-hot-toast'
 const SEGS = [
   { label: '2x', mult: 2,   color: '#4488ff', weight: 25 },
   { label: '3x', mult: 3,   color: '#00d084', weight: 20 },
-  { label: '5x', mult: 5,   color: '#c9a227', weight: 15 },
+  { label: '5x', mult: 5,   color: '#e03030', weight: 15 },
   { label: '10x',mult: 10,  color: '#ff8800', weight: 10 },
   { label: '20x',mult: 20,  color: '#ff4444', weight: 6  },
   { label: '50x',mult: 50,  color: '#9944ff', weight: 4  },
@@ -82,7 +82,7 @@ export default function WheelOfFortune() {
     // Center hub
     ctx.beginPath(); ctx.arc(CX, CY, 22, 0, Math.PI*2)
     const g = ctx.createRadialGradient(CX-4, CY-4, 2, CX, CY, 22)
-    g.addColorStop(0,'#f0c84a'); g.addColorStop(1,'#c9a227')
+    g.addColorStop(0,'#ff5555'); g.addColorStop(1,'#e03030')
     ctx.fillStyle = g; ctx.fill()
     ctx.strokeStyle = '#9a7a10'; ctx.lineWidth = 3; ctx.stroke()
     ctx.fillStyle = '#0a0a0f'; ctx.font = 'bold 16px Outfit'
@@ -147,7 +147,7 @@ export default function WheelOfFortune() {
             {/* Pointer */}
             <div style={{ position: 'absolute', top: '-2px', left: '50%', transform: 'translateX(-50%)', zIndex: 2, fontSize: '28px', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.5))' }}>▼</div>
             <canvas ref={canvasRef} width={320} height={320}
-              style={{ maxWidth: '100%', borderRadius: '50%', border: '4px solid var(--gold)', boxShadow: '0 0 30px rgba(201,162,39,0.3)' }} />
+              style={{ maxWidth: '100%', borderRadius: '50%', border: '4px solid var(--gold)', boxShadow: '0 0 30px rgba(224,48,48,0.3)' }} />
           </div>
 
           {result && phase === 'result' && (

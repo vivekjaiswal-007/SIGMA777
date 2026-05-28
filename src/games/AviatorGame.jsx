@@ -370,8 +370,8 @@ export default function AviatorGame() {
         ctx.fillStyle = 'rgba(180,160,220,0.6)'
         ctx.fillText('Waiting for next round...', W/2, H*0.38)
         ctx.font = `900 ${Math.min(W*0.12,44)}px Arial,sans-serif`
-        ctx.fillStyle = '#c9a227'
-        ctx.shadowBlur = 12; ctx.shadowColor = '#c9a227'
+        ctx.fillStyle = '#e03030'
+        ctx.shadowBlur = 12; ctx.shadowColor = '#e03030'
         ctx.fillText(`${countdown}`, W/2, H*0.55)
         ctx.shadowBlur = 0
         ctx.font = `${Math.min(W*0.04,13)}px Arial,sans-serif`
@@ -409,7 +409,7 @@ export default function AviatorGame() {
       {/* History bar */}
       <div style={{ display: 'flex', gap: '5px', padding: '4px 14px 8px', overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
         {history.slice(0,10).map((h,i) => (
-          <span key={i} style={{ padding: '2px 8px', borderRadius: '12px', fontSize: '11px', fontWeight: '800', whiteSpace: 'nowrap', flexShrink: 0, background: h < 2 ? 'rgba(255,68,68,0.2)' : h < 10 ? 'rgba(80,180,80,0.15)' : 'rgba(201,162,39,0.2)', color: h < 2 ? '#ff6666' : h < 10 ? '#66cc66' : '#c9a227', border: `1px solid ${h < 2 ? 'rgba(255,68,68,0.3)' : h < 10 ? 'rgba(80,180,80,0.25)' : 'rgba(201,162,39,0.3)'}` }}>
+          <span key={i} style={{ padding: '2px 8px', borderRadius: '12px', fontSize: '11px', fontWeight: '800', whiteSpace: 'nowrap', flexShrink: 0, background: h < 2 ? 'rgba(255,68,68,0.2)' : h < 10 ? 'rgba(80,180,80,0.15)' : 'rgba(224,48,48,0.2)', color: h < 2 ? '#ff6666' : h < 10 ? '#66cc66' : '#e03030', border: `1px solid ${h < 2 ? 'rgba(255,68,68,0.3)' : h < 10 ? 'rgba(80,180,80,0.25)' : 'rgba(224,48,48,0.3)'}` }}>
             {Number(h).toFixed(2)}x
           </span>
         ))}

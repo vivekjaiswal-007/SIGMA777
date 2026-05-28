@@ -12,10 +12,10 @@ const SYMBOLS_WEIGHTED = [
   { sym: '🍋', name: 'Lemon',   value: 2,  color: '#ffcc00', weight: 22 },
   { sym: '🍊', name: 'Orange',  value: 3,  color: '#ff8800', weight: 18 },
   { sym: '🍇', name: 'Grape',   value: 4,  color: '#9944ff', weight: 14 },
-  { sym: '🔔', name: 'Bell',    value: 6,  color: '#c9a227', weight: 10 },
+  { sym: '🔔', name: 'Bell',    value: 6,  color: '#e03030', weight: 10 },
   { sym: '💎', name: 'Diamond', value: 12, color: '#44ccff', weight: 6  },
   { sym: '7️⃣', name: 'Seven',  value: 20, color: '#ff4488', weight: 3  },
-  { sym: '🃏', name: 'Wild',    value: 35, color: '#f0c84a', weight: 2  },
+  { sym: '🃏', name: 'Wild',    value: 35, color: '#ff5555', weight: 2  },
 ]
 // Build flat weighted array for fast random pick
 const SYMBOLS = (() => {
@@ -100,20 +100,20 @@ export default function SlotMachine() {
 
       // Frame
       const frameG = ctx.createLinearGradient(rx, 0, rx + reelW - 8, 0)
-      frameG.addColorStop(0, '#9a7a10'); frameG.addColorStop(0.5, '#f0c84a'); frameG.addColorStop(1, '#9a7a10')
+      frameG.addColorStop(0, '#9a7a10'); frameG.addColorStop(0.5, '#ff5555'); frameG.addColorStop(1, '#9a7a10')
       ctx.strokeStyle = frameG; ctx.lineWidth = 3
       roundedRect(ctx, rx, ry, reelW - 8, VISIBLE * SYM_H, 10); ctx.stroke()
     })
 
     // Win line
-    ctx.strokeStyle = 'rgba(201,162,39,0.35)'; ctx.setLineDash([5, 5]); ctx.lineWidth = 2
+    ctx.strokeStyle = 'rgba(224,48,48,0.35)'; ctx.setLineDash([5, 5]); ctx.lineWidth = 2
     ctx.beginPath(); ctx.moveTo(20, H/2); ctx.lineTo(W-20, H/2); ctx.stroke()
     ctx.setLineDash([])
 
     if (totalWin > 0) {
-      ctx.fillStyle = 'rgba(201,162,39,0.06)'; ctx.fillRect(0, 0, W, H)
+      ctx.fillStyle = 'rgba(224,48,48,0.06)'; ctx.fillRect(0, 0, W, H)
       ctx.font = 'bold 26px Cinzel'; ctx.textAlign = 'center'
-      ctx.fillStyle = '#f0c84a'; ctx.shadowBlur = 20; ctx.shadowColor = '#c9a227'
+      ctx.fillStyle = '#ff5555'; ctx.shadowBlur = 20; ctx.shadowColor = '#e03030'
       ctx.fillText(`🎉 WIN! ${totalWin} 🪙`, W/2, H - 12); ctx.shadowBlur = 0
     }
   }, [totalWin])
@@ -205,7 +205,7 @@ export default function SlotMachine() {
           <div style={{
             background: 'linear-gradient(180deg,#2a1a00,#1a1000)',
             border: '3px solid var(--gold)', borderRadius: '20px', padding: '20px',
-            boxShadow: '0 0 40px rgba(201,162,39,0.25), inset 0 0 30px rgba(0,0,0,0.5)'
+            boxShadow: '0 0 40px rgba(224,48,48,0.25), inset 0 0 30px rgba(0,0,0,0.5)'
           }}>
             <div style={{ textAlign: 'center', fontFamily: 'Cinzel,serif', fontSize: '16px', marginBottom: '14px', color: 'var(--gold)', letterSpacing: '2px' }}>
               🎰 ROYAL SLOTS 🎰

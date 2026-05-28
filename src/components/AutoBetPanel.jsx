@@ -94,7 +94,7 @@ export default function AutoBet({
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '5px', marginBottom: '10px' }}>
           {[50, 100, 500, 1000].map(a => (
             <button key={a} onClick={() => !running && setAmount(a)}
-              style={{ ...QS, background: amount === a ? 'rgba(201,162,39,0.18)' : 'var(--bg-hover)', borderColor: amount === a ? 'var(--gold)' : 'var(--border)', color: amount === a ? 'var(--gold)' : '#666', opacity: running ? 0.5 : 1, cursor: running ? 'not-allowed' : 'pointer' }}>
+              style={{ ...QS, background: amount === a ? 'rgba(224,48,48,0.18)' : 'var(--bg-hover)', borderColor: amount === a ? 'var(--gold)' : 'var(--border)', color: amount === a ? 'var(--gold)' : '#666', opacity: running ? 0.5 : 1, cursor: running ? 'not-allowed' : 'pointer' }}>
               {a >= 1000 ? `${a/1000}K` : a}
             </button>
           ))}
@@ -141,7 +141,7 @@ export default function AutoBet({
         {/* Main button */}
         {tab === 'Manual' ? (
           <button onClick={() => !disabled && onBet(amount)} disabled={disabled || amount <= 0 || amount > balance}
-            style={{ width: '100%', padding: '13px', border: 'none', borderRadius: '10px', background: disabled || amount > balance ? 'rgba(201,162,39,0.12)' : 'linear-gradient(135deg,#c9a227,#f0c84a)', color: disabled || amount > balance ? 'rgba(0,0,0,0.35)' : '#0a0a0f', fontSize: '15px', fontWeight: '900', cursor: disabled || amount > balance ? 'not-allowed' : 'pointer', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            style={{ width: '100%', padding: '13px', border: 'none', borderRadius: '10px', background: disabled || amount > balance ? 'rgba(224,48,48,0.12)' : 'linear-gradient(135deg,#e03030,#ff5555)', color: disabled || amount > balance ? 'rgba(0,0,0,0.35)' : '#0a0a0f', fontSize: '15px', fontWeight: '900', cursor: disabled || amount > balance ? 'not-allowed' : 'pointer', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
             {disabled ? 'Betting...' : `Bet ${amount.toLocaleString()} 🪙`}
           </button>
         ) : running ? (

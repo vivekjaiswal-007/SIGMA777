@@ -8,7 +8,7 @@ import toast from 'react-hot-toast'
 const MODES = [
   { label: '1-5',  max: 5,  mult: 4.5,  color: '#00d084' },
   { label: '1-10', max: 10, mult: 9,    color: '#4488ff' },
-  { label: '1-25', max: 25, mult: 22,   color: '#c9a227' },
+  { label: '1-25', max: 25, mult: 22,   color: '#e03030' },
   { label: '1-50', max: 50, mult: 45,   color: '#ff8800' },
   { label: '1-100',max: 100,mult: 90,   color: '#ff4444' },
 ]

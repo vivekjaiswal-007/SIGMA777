@@ -50,7 +50,7 @@ export function DiceGame() {
       <div className="game-layout">
         <div>
           <div style={{ background:'var(--bg-card)',border:'1px solid var(--border)',borderRadius:'14px',padding:'clamp(20px,5vw,40px)',textAlign:'center',marginBottom:'14px' }}>
-            <div style={{ fontSize:'clamp(60px,15vw,96px)',fontWeight:'900',fontFamily:'Cinzel,serif',lineHeight:1,color:result?(result.win?'#00d084':'#ff4444'):'#c9a227',textShadow:result?(result.win?'0 0 30px rgba(0,208,132,0.4)':'0 0 30px rgba(255,68,68,0.4)'):'none',transition:'color 0.3s' }}>{display}</div>
+            <div style={{ fontSize:'clamp(60px,15vw,96px)',fontWeight:'900',fontFamily:'Cinzel,serif',lineHeight:1,color:result?(result.win?'#00d084':'#ff4444'):'#e03030',textShadow:result?(result.win?'0 0 30px rgba(0,208,132,0.4)':'0 0 30px rgba(255,68,68,0.4)'):'none',transition:'color 0.3s' }}>{display}</div>
             {result && <div style={{ marginTop:'10px',fontSize:'16px',fontWeight:'700',color:result.win?'#00d084':'#ff4444' }}>{result.win?'🎉 WIN!':'❌ LOSE'} — needed {betOver?'>':'<'}{target}</div>}
           </div>
           <div style={{ background:'var(--bg-card)',border:'1px solid var(--border)',borderRadius:'12px',padding:'18px',marginBottom:'12px' }}>
@@ -62,10 +62,10 @@ export function DiceGame() {
                 </div>
               ))}
             </div>
-            <input type="range" min="2" max="97" value={target} onChange={e=>setTarget(Number(e.target.value))} style={{ width:'100%',accentColor:'#c9a227',cursor:'pointer',height:'6px' }} />
+            <input type="range" min="2" max="97" value={target} onChange={e=>setTarget(Number(e.target.value))} style={{ width:'100%',accentColor:'#e03030',cursor:'pointer',height:'6px' }} />
             <div style={{ display:'flex',gap:'8px',marginTop:'12px' }}>
               {[{l:'Roll Over',v:true},{l:'Roll Under',v:false}].map(b=>(
-                <button key={b.l} onClick={()=>setBetOver(b.v)} style={{ flex:1,padding:'10px',borderRadius:'8px',fontWeight:'700',fontSize:'13px',background:betOver===b.v?'rgba(201,162,39,0.2)':'var(--bg-hover)',border:`1px solid ${betOver===b.v?'var(--gold)':'var(--border)'}`,color:betOver===b.v?'var(--gold)':'var(--text-secondary)',cursor:'pointer' }}>{b.l}</button>
+                <button key={b.l} onClick={()=>setBetOver(b.v)} style={{ flex:1,padding:'10px',borderRadius:'8px',fontWeight:'700',fontSize:'13px',background:betOver===b.v?'rgba(224,48,48,0.2)':'var(--bg-hover)',border:`1px solid ${betOver===b.v?'var(--gold)':'var(--border)'}`,color:betOver===b.v?'var(--gold)':'var(--text-secondary)',cursor:'pointer' }}>{b.l}</button>
               ))}
             </div>
           </div>
@@ -162,7 +162,7 @@ export function HiLoGame() {
                   {autoEnabled && <span style={{ color:'#9944ff',fontSize:'12px' }}>Auto @{autoTarget}x</span>}
                 </div>
                 <div style={{ display:'inline-block',padding:'10px',background:'rgba(255,255,255,0.06)',borderRadius:'12px' }}>
-                  <div style={{ width:'clamp(80px,20vw,100px)',height:'clamp(110px,28vw,140px)',background:'white',borderRadius:'9px',border:`3px solid ${result==='win'?'#c9a227':'#ddd'}`,display:'flex',flexDirection:'column',padding:'7px',boxShadow:'0 6px 20px rgba(0,0,0,0.5)',animation:'dealCard 0.35s ease' }}>
+                  <div style={{ width:'clamp(80px,20vw,100px)',height:'clamp(110px,28vw,140px)',background:'white',borderRadius:'9px',border:`3px solid ${result==='win'?'#e03030':'#ddd'}`,display:'flex',flexDirection:'column',padding:'7px',boxShadow:'0 6px 20px rgba(0,0,0,0.5)',animation:'dealCard 0.35s ease' }}>
                     <div style={{ fontSize:'clamp(11px,3vw,16px)',fontWeight:'900',color:isRed?'#cc2222':'#111' }}>{card.rank}</div>
                     <div style={{ flex:1,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'clamp(28px,8vw,40px)',color:isRed?'#cc2222':'#111' }}>{card.suit}</div>
                   </div>
@@ -175,7 +175,7 @@ export function HiLoGame() {
           {phase==='playing' && (
             <div style={{ display:'flex',gap:'8px',marginTop:'12px',flexWrap:'wrap' }}>
               <button onClick={()=>guess('higher')} style={{ flex:2,minWidth:'80px',padding:'13px',borderRadius:'10px',fontWeight:'800',fontSize:'14px',background:'rgba(0,208,132,0.18)',border:'2px solid #00d084',color:'#00d084',cursor:'pointer' }}>⬆️ Higher</button>
-              <button onClick={doCashout} style={{ flex:1,minWidth:'60px',padding:'13px',borderRadius:'10px',fontWeight:'800',fontSize:'13px',background:'rgba(201,162,39,0.18)',border:'2px solid var(--gold)',color:'var(--gold)',cursor:'pointer' }}>💰</button>
+              <button onClick={doCashout} style={{ flex:1,minWidth:'60px',padding:'13px',borderRadius:'10px',fontWeight:'800',fontSize:'13px',background:'rgba(224,48,48,0.18)',border:'2px solid var(--gold)',color:'var(--gold)',cursor:'pointer' }}>💰</button>
               <button onClick={()=>guess('lower')} style={{ flex:2,minWidth:'80px',padding:'13px',borderRadius:'10px',fontWeight:'800',fontSize:'14px',background:'rgba(255,68,68,0.18)',border:'2px solid #ff4444',color:'#ff4444',cursor:'pointer' }}>⬇️ Lower</button>
             </div>
           )}
@@ -215,7 +215,7 @@ export function HiLoGame() {
 /* ═══════════════════════════════════════
    SPIN & WIN
 ═══════════════════════════════════════ */
-const SW_SEGS = [{l:'2x',m:2,c:'#c9a227'},{l:'LOSE',m:0,c:'#ff4444'},{l:'3x',m:3,c:'#4488ff'},{l:'LOSE',m:0,c:'#ff4444'},{l:'1.5x',m:1.5,c:'#00d084'},{l:'LOSE',m:0,c:'#ff4444'},{l:'5x',m:5,c:'#9944ff'},{l:'LOSE',m:0,c:'#ff4444'}]
+const SW_SEGS = [{l:'2x',m:2,c:'#e03030'},{l:'LOSE',m:0,c:'#ff4444'},{l:'3x',m:3,c:'#4488ff'},{l:'LOSE',m:0,c:'#ff4444'},{l:'1.5x',m:1.5,c:'#00d084'},{l:'LOSE',m:0,c:'#ff4444'},{l:'5x',m:5,c:'#9944ff'},{l:'LOSE',m:0,c:'#ff4444'}]
 
 export function SpinWin() {
   const { setBalance } = useStore()
@@ -247,7 +247,7 @@ export function SpinWin() {
         <div style={{ textAlign:'center' }}>
           <div style={{ position:'relative',display:'inline-block',marginBottom:'14px' }}>
             <div style={{ width:0,height:0,position:'absolute',top:'-4px',left:'50%',transform:'translateX(-50%)',borderLeft:'11px solid transparent',borderRight:'11px solid transparent',borderTop:'22px solid var(--gold)',zIndex:10 }} />
-            <div style={{ width:'clamp(240px,60vw,300px)',height:'clamp(240px,60vw,300px)',borderRadius:'50%',overflow:'hidden',border:'5px solid var(--gold)',boxShadow:spinning?'0 0 35px rgba(201,162,39,0.5)':'0 8px 36px rgba(0,0,0,0.5)',transform:`rotate(${rotation}deg)`,transition:spinning?'transform 4s cubic-bezier(0.17,0,0.08,1)':'none',background:`conic-gradient(${SW_SEGS.map((s,i)=>`${s.c} ${i*(100/SW_SEGS.length)}% ${(i+1)*(100/SW_SEGS.length)}%`).join(',')})`,position:'relative' }}>
+            <div style={{ width:'clamp(240px,60vw,300px)',height:'clamp(240px,60vw,300px)',borderRadius:'50%',overflow:'hidden',border:'5px solid var(--gold)',boxShadow:spinning?'0 0 35px rgba(224,48,48,0.5)':'0 8px 36px rgba(0,0,0,0.5)',transform:`rotate(${rotation}deg)`,transition:spinning?'transform 4s cubic-bezier(0.17,0,0.08,1)':'none',background:`conic-gradient(${SW_SEGS.map((s,i)=>`${s.c} ${i*(100/SW_SEGS.length)}% ${(i+1)*(100/SW_SEGS.length)}%`).join(',')})`,position:'relative' }}>
               {SW_SEGS.map((s,i)=>{
                 const a=(i+0.5)*(360/SW_SEGS.length),r=(a-90)*Math.PI/180
                 const sz=150
