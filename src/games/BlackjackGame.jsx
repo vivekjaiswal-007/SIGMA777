@@ -116,7 +116,7 @@ export function BlackjackGame() {
     else toast('Push — bet returned')
   }
 
-  const col = result==='win'||result==='bj'?'#00d084':result==='push'?'#e03030':'#ff4444'
+  const col = result==='win'||result==='bj'?'#00d084':result==='push'?'#c9a227':'#ff4444'
 
   return (
     <div style={{maxWidth:'900px',margin:'0 auto'}}>
@@ -147,7 +147,7 @@ export function BlackjackGame() {
             </>}
           </div>
           {phase==='playing'&&<div style={{display:'flex',gap:'10px',marginTop:'14px'}}>
-            {[{l:'👊 Hit',fn:hit,col:'#4488ff'},{l:'✋ Stand',fn:()=>standWith(),col:'#ff4444'},{l:'2x Double',fn:dbl,col:'#e03030',dis:player.length>2}].map(({l,fn,col,dis})=>(
+            {[{l:'👊 Hit',fn:hit,col:'#4488ff'},{l:'✋ Stand',fn:()=>standWith(),col:'#ff4444'},{l:'2x Double',fn:dbl,col:'#c9a227',dis:player.length>2}].map(({l,fn,col,dis})=>(
               <button key={l} onClick={fn} disabled={dis} style={{flex:1,padding:'13px',borderRadius:'10px',fontWeight:'800',fontSize:'14px',border:`2px solid ${col}`,background:dis?'transparent':`${col}18`,color:dis?'rgba(255,255,255,0.25)':col,cursor:dis?'not-allowed':'pointer'}}>{l}</button>
             ))}
           </div>}
@@ -292,7 +292,7 @@ export function BaccaratGame() {
       <h1 style={{fontFamily:'Cinzel,serif',fontSize:'clamp(18px,4vw,26px)',marginBottom:'10px'}}>
         🎴 <span className="gold-text">Baccarat</span>
       </h1>
-      <LiveRoundBar phase={roundPhase} countdown={countdown} roundId={roundId} color="#e03030" />
+      <LiveRoundBar phase={roundPhase} countdown={countdown} roundId={roundId} color="#c9a227" />
 
       <div className="game-layout">
         <div>
@@ -320,14 +320,14 @@ export function BaccaratGame() {
                   <div style={{display:'flex',gap:'6px',justifyContent:'center'}}>
                     {bCards.map((card,i)=><CardEl key={i} card={card} size="md"/>)}
                   </div>
-                  {result && <div style={{marginTop:'8px',fontSize:'20px',fontWeight:'900',color:result.winner==='banker'?'#e03030':'rgba(255,255,255,0.5)'}}>{result.bv}</div>}
+                  {result && <div style={{marginTop:'8px',fontSize:'20px',fontWeight:'900',color:result.winner==='banker'?'#c9a227':'rgba(255,255,255,0.5)'}}>{result.bv}</div>}
                 </div>
                 <div style={{textAlign:'center'}}>
                   <div style={{color:'rgba(255,255,255,0.6)',fontSize:'11px',marginBottom:'6px',textTransform:'uppercase',letterSpacing:'1px'}}>Player</div>
                   <div style={{display:'flex',gap:'6px',justifyContent:'center'}}>
                     {pCards.map((card,i)=><CardEl key={i} card={card} size="md"/>)}
                   </div>
-                  {result && <div style={{marginTop:'8px',fontSize:'20px',fontWeight:'900',color:result.winner==='player'?'#e03030':'rgba(255,255,255,0.5)'}}>{result.pv}</div>}
+                  {result && <div style={{marginTop:'8px',fontSize:'20px',fontWeight:'900',color:result.winner==='player'?'#c9a227':'rgba(255,255,255,0.5)'}}>{result.pv}</div>}
                 </div>
               </div>
             ) : (
@@ -380,7 +380,7 @@ export function BaccaratGame() {
               <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'4px',marginTop:'5px'}}>
                 {[50,100,500,1000].map(a=>(
                   <button key={a} onClick={()=>setBetInput(a)}
-                    style={{padding:'5px',borderRadius:'5px',border:`1px solid ${betInput===a?'var(--gold)':'var(--border)'}`,background:betInput===a?'rgba(224,48,48,0.15)':'var(--bg-hover)',color:betInput===a?'var(--gold)':'#666',fontSize:'11px',fontWeight:'700',cursor:'pointer'}}>
+                    style={{padding:'5px',borderRadius:'5px',border:`1px solid ${betInput===a?'var(--gold)':'var(--border)'}`,background:betInput===a?'rgba(201,162,39,0.15)':'var(--bg-hover)',color:betInput===a?'var(--gold)':'#666',fontSize:'11px',fontWeight:'700',cursor:'pointer'}}>
                     {a>=1000?`${a/1000}K`:a}
                   </button>
                 ))}
@@ -388,7 +388,7 @@ export function BaccaratGame() {
             </div>
 
             {/* Balance */}
-            <div style={{display:'flex',justifyContent:'space-between',padding:'7px 10px',background:'rgba(224,48,48,0.07)',borderRadius:'7px',border:'1px solid rgba(224,48,48,0.15)',marginBottom:'10px'}}>
+            <div style={{display:'flex',justifyContent:'space-between',padding:'7px 10px',background:'rgba(201,162,39,0.07)',borderRadius:'7px',border:'1px solid rgba(201,162,39,0.15)',marginBottom:'10px'}}>
               <span style={{color:'var(--text-secondary)',fontSize:'12px'}}>Balance</span>
               <span style={{color:'var(--gold)',fontWeight:'700'}}>🪙 {balance.toLocaleString()}</span>
             </div>
@@ -396,11 +396,11 @@ export function BaccaratGame() {
             {/* Bet button */}
             {!betPlaced ? (
               <button onClick={()=>betSide&&placeBet(betSide,betInput)} disabled={!canBet||!betSide||betInput>balance}
-                style={{width:'100%',padding:'13px',border:'none',borderRadius:'10px',background:canBet&&betSide&&betInput<=balance?'linear-gradient(135deg,#e03030,#ff5555)':'rgba(224,48,48,0.15)',color:canBet&&betSide&&betInput<=balance?'#0a0a0f':'rgba(255,255,255,0.3)',fontSize:'14px',fontWeight:'900',cursor:canBet&&betSide?'pointer':'not-allowed',textTransform:'uppercase'}}>
+                style={{width:'100%',padding:'13px',border:'none',borderRadius:'10px',background:canBet&&betSide&&betInput<=balance?'linear-gradient(135deg,#c9a227,#f0c84a)':'rgba(201,162,39,0.15)',color:canBet&&betSide&&betInput<=balance?'#0a0a0f':'rgba(255,255,255,0.3)',fontSize:'14px',fontWeight:'900',cursor:canBet&&betSide?'pointer':'not-allowed',textTransform:'uppercase'}}>
                 {!betSide?'Pick a side first':!canBet?'Wait for next round':`Bet ${betInput.toLocaleString()} on ${betSide.toUpperCase()}`}
               </button>
             ) : (
-              <div style={{padding:'12px',background:'rgba(224,48,48,0.1)',border:'1px solid rgba(224,48,48,0.3)',borderRadius:'10px',textAlign:'center'}}>
+              <div style={{padding:'12px',background:'rgba(201,162,39,0.1)',border:'1px solid rgba(201,162,39,0.3)',borderRadius:'10px',textAlign:'center'}}>
                 <div style={{color:'var(--gold)',fontWeight:'700',fontSize:'13px'}}>
                   ✅ {betAmt.toLocaleString()} on {betSide?.toUpperCase()}
                 </div>
@@ -502,7 +502,7 @@ export function TeenPattiGame() {
             {/* History */}
             <div style={{display:'flex',gap:'4px',marginBottom:'12px',flexWrap:'wrap'}}>
               {history.map((h,i)=>(
-                <span key={i} style={{width:'18px',height:'18px',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'8px',fontWeight:'800',flexShrink:0,background:h==='win'?'#00d084':h==='lose'?'#ff4444':'#e03030',color:'white'}}>
+                <span key={i} style={{width:'18px',height:'18px',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'8px',fontWeight:'800',flexShrink:0,background:h==='win'?'#00d084':h==='lose'?'#ff4444':'#c9a227',color:'white'}}>
                   {h==='win'?'W':h==='lose'?'L':'T'}
                 </span>
               ))}
@@ -516,7 +516,7 @@ export function TeenPattiGame() {
                 <div style={{color:'rgba(255,255,255,0.5)',fontSize:'11px',marginBottom:'6px'}}>You {result&&<span style={{color:'var(--gold)'}}>{result.pr.name}</span>}</div>
                 <div style={{display:'flex',gap:'6px'}}>{pCards.map((c2,i)=><CardEl key={i} card={c2} size="md"/>)}</div>
               </div>
-              {result&&<div style={{textAlign:'center',marginTop:'12px',padding:'10px',borderRadius:'8px',background:result.outcome==='win'?'rgba(0,208,132,0.15)':result.outcome==='lose'?'rgba(255,68,68,0.15)':'rgba(224,48,48,0.15)',color:result.outcome==='win'?'#00d084':result.outcome==='lose'?'#ff4444':'#e03030',fontWeight:'800',fontSize:'16px'}}>
+              {result&&<div style={{textAlign:'center',marginTop:'12px',padding:'10px',borderRadius:'8px',background:result.outcome==='win'?'rgba(0,208,132,0.15)':result.outcome==='lose'?'rgba(255,68,68,0.15)':'rgba(201,162,39,0.15)',color:result.outcome==='win'?'#00d084':result.outcome==='lose'?'#ff4444':'#c9a227',fontWeight:'800',fontSize:'16px'}}>
                 {result.outcome==='win'?'🎉 You Win!':result.outcome==='lose'?'😞 Dealer Wins':'🤝 Tie'}
               </div>}
             </>) : (
@@ -539,20 +539,20 @@ export function TeenPattiGame() {
                 <button onClick={()=>setBetInput(v=>Math.min(balance,v*2))} style={{padding:'6px 10px',background:'var(--bg-hover)',border:'1px solid var(--border)',borderRadius:'6px',color:'#888',cursor:'pointer'}}>2x</button>
               </div>
               <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'4px',marginTop:'5px'}}>
-                {[50,100,500,1000].map(a=><button key={a} onClick={()=>setBetInput(a)} style={{padding:'5px',borderRadius:'5px',border:`1px solid ${betInput===a?'var(--gold)':'var(--border)'}`,background:betInput===a?'rgba(224,48,48,0.15)':'var(--bg-hover)',color:betInput===a?'var(--gold)':'#666',fontSize:'11px',fontWeight:'700',cursor:'pointer'}}>{a>=1000?`${a/1000}K`:a}</button>)}
+                {[50,100,500,1000].map(a=><button key={a} onClick={()=>setBetInput(a)} style={{padding:'5px',borderRadius:'5px',border:`1px solid ${betInput===a?'var(--gold)':'var(--border)'}`,background:betInput===a?'rgba(201,162,39,0.15)':'var(--bg-hover)',color:betInput===a?'var(--gold)':'#666',fontSize:'11px',fontWeight:'700',cursor:'pointer'}}>{a>=1000?`${a/1000}K`:a}</button>)}
               </div>
             </div>
-            <div style={{display:'flex',justifyContent:'space-between',padding:'7px 10px',background:'rgba(224,48,48,0.07)',borderRadius:'7px',border:'1px solid rgba(224,48,48,0.15)',marginBottom:'10px'}}>
+            <div style={{display:'flex',justifyContent:'space-between',padding:'7px 10px',background:'rgba(201,162,39,0.07)',borderRadius:'7px',border:'1px solid rgba(201,162,39,0.15)',marginBottom:'10px'}}>
               <span style={{color:'var(--text-secondary)',fontSize:'12px'}}>Balance</span>
               <span style={{color:'var(--gold)',fontWeight:'700'}}>🪙 {balance.toLocaleString()}</span>
             </div>
             {!betPlaced ? (
               <button onClick={placeBet} disabled={!canBet||betInput>balance}
-                style={{width:'100%',padding:'13px',border:'none',borderRadius:'10px',background:canBet&&betInput<=balance?'linear-gradient(135deg,#e03030,#ff5555)':'rgba(224,48,48,0.15)',color:canBet&&betInput<=balance?'#0a0a0f':'rgba(255,255,255,0.3)',fontSize:'14px',fontWeight:'900',cursor:canBet?'pointer':'not-allowed',textTransform:'uppercase'}}>
+                style={{width:'100%',padding:'13px',border:'none',borderRadius:'10px',background:canBet&&betInput<=balance?'linear-gradient(135deg,#c9a227,#f0c84a)':'rgba(201,162,39,0.15)',color:canBet&&betInput<=balance?'#0a0a0f':'rgba(255,255,255,0.3)',fontSize:'14px',fontWeight:'900',cursor:canBet?'pointer':'not-allowed',textTransform:'uppercase'}}>
                 {canBet?`Bet ${betInput.toLocaleString()} 🪙`:'Wait for next round'}
               </button>
             ) : (
-              <div style={{padding:'12px',background:'rgba(224,48,48,0.1)',border:'1px solid rgba(224,48,48,0.3)',borderRadius:'10px',textAlign:'center'}}>
+              <div style={{padding:'12px',background:'rgba(201,162,39,0.1)',border:'1px solid rgba(201,162,39,0.3)',borderRadius:'10px',textAlign:'center'}}>
                 <div style={{color:'var(--gold)',fontWeight:'700'}}>✅ {betAmt.toLocaleString()} placed!</div>
                 <div style={{color:'#666',fontSize:'11px',marginTop:'2px'}}>Good luck! 🍀</div>
               </div>
@@ -621,21 +621,21 @@ export function AndarBahar() {
           <div style={{background:'radial-gradient(ellipse,#1a4a2a,#0d2e1a)',border:'3px solid var(--gold)',borderRadius:'20px',padding:'24px',minHeight:'320px'}}>
             {joker&&<div style={{textAlign:'center',marginBottom:'18px'}}>
               <div style={{color:'rgba(255,255,255,0.5)',fontSize:'12px',marginBottom:'8px'}}>Joker Card</div>
-              <div style={{display:'inline-block',padding:'8px',background:'rgba(224,48,48,0.18)',borderRadius:'10px',border:'2px solid var(--gold)'}}><CardEl card={joker} size="md"/></div>
+              <div style={{display:'inline-block',padding:'8px',background:'rgba(201,162,39,0.18)',borderRadius:'10px',border:'2px solid var(--gold)'}}><CardEl card={joker} size="md"/></div>
             </div>}
             {!joker&&<div style={{textAlign:'center',paddingTop:'50px'}}><div style={{fontSize:'50px',marginBottom:'12px'}}>🎯</div><p style={{color:'rgba(255,255,255,0.5)'}}>Choose side and place bet</p></div>}
             {(andar.length>0||bahar.length>0)&&<>
               <div style={{marginBottom:'14px'}}>
                 <div style={{display:'flex',alignItems:'center',gap:'8px',marginBottom:'8px'}}>
                   <span style={{color:'#4488ff',fontWeight:'700',fontSize:'13px'}}>ANDAR</span>
-                  {result==='andar'&&<span style={{color:'#e03030',fontSize:'12px'}}>⭐ WIN</span>}
+                  {result==='andar'&&<span style={{color:'#c9a227',fontSize:'12px'}}>⭐ WIN</span>}
                 </div>
                 <div style={{display:'flex',gap:'6px',flexWrap:'wrap',minHeight:'72px',alignItems:'center'}}>{andar.map((c,i)=><CardEl key={i} card={c} size="sm"/>)}</div>
               </div>
               <div>
                 <div style={{display:'flex',alignItems:'center',gap:'8px',marginBottom:'8px'}}>
                   <span style={{color:'#ff4444',fontWeight:'700',fontSize:'13px'}}>BAHAR</span>
-                  {result==='bahar'&&<span style={{color:'#e03030',fontSize:'12px'}}>⭐ WIN</span>}
+                  {result==='bahar'&&<span style={{color:'#c9a227',fontSize:'12px'}}>⭐ WIN</span>}
                 </div>
                 <div style={{display:'flex',gap:'6px',flexWrap:'wrap',minHeight:'72px',alignItems:'center'}}>{bahar.map((c,i)=><CardEl key={i} card={c} size="sm"/>)}</div>
               </div>
@@ -649,7 +649,7 @@ export function AndarBahar() {
             <div style={{fontSize:'11px',color:'var(--text-muted)',textTransform:'uppercase',letterSpacing:'0.5px',marginBottom:'10px'}}>Place Bet</div>
             {['100','200','500','1000'].map(a=>(
               <button key={a} onClick={()=>phase==='bet'&&deal(Number(a))} disabled={phase!=='bet'}
-                style={{display:'block',width:'100%',padding:'11px',marginBottom:'8px',borderRadius:'8px',fontWeight:'700',fontSize:'14px',background:phase!=='bet'?'rgba(224,48,48,0.08)':'linear-gradient(135deg,#e03030,#ff5555)',border:'none',color:phase!=='bet'?'rgba(0,0,0,0.3)':'#0a0a0f',cursor:phase!=='bet'?'not-allowed':'pointer'}}>
+                style={{display:'block',width:'100%',padding:'11px',marginBottom:'8px',borderRadius:'8px',fontWeight:'700',fontSize:'14px',background:phase!=='bet'?'rgba(201,162,39,0.08)':'linear-gradient(135deg,#c9a227,#f0c84a)',border:'none',color:phase!=='bet'?'rgba(0,0,0,0.3)':'#0a0a0f',cursor:phase!=='bet'?'not-allowed':'pointer'}}>
                 🪙 {Number(a).toLocaleString()}
               </button>
             ))}
@@ -745,7 +745,7 @@ export function DragonTiger() {
     <div style={{textAlign:'center'}}>
       <div style={{color:'rgba(255,255,255,0.6)',fontSize:'11px',marginBottom:'8px',textTransform:'uppercase',letterSpacing:'1px'}}>{side}</div>
       <CardEl card={card} size="lg"/>
-      {result&&<div style={{marginTop:'8px',fontSize:'22px',fontWeight:'900',color:result.winner===side.toLowerCase()?'#e03030':'rgba(255,255,255,0.4)'}}>{RANKS_VAL[card.rank]}</div>}
+      {result&&<div style={{marginTop:'8px',fontSize:'22px',fontWeight:'900',color:result.winner===side.toLowerCase()?'#c9a227':'rgba(255,255,255,0.4)'}}>{RANKS_VAL[card.rank]}</div>}
     </div>
   ) : (
     <div style={{textAlign:'center',width:'100px'}}>
@@ -799,13 +799,13 @@ export function DragonTiger() {
               <button onClick={()=>setBetInput(v=>Math.min(balance,v*2))} style={{padding:'6px 10px',background:'var(--bg-hover)',border:'1px solid var(--border)',borderRadius:'6px',color:'#888',cursor:'pointer'}}>2x</button>
             </div>
             <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'4px',marginBottom:'10px'}}>
-              {[50,100,500,1000].map(a=><button key={a} onClick={()=>setBetInput(a)} style={{padding:'5px',borderRadius:'5px',border:`1px solid ${betInput===a?'var(--gold)':'var(--border)'}`,background:betInput===a?'rgba(224,48,48,0.15)':'var(--bg-hover)',color:betInput===a?'var(--gold)':'#666',fontSize:'11px',fontWeight:'700',cursor:'pointer'}}>{a>=1000?`${a/1000}K`:a}</button>)}
+              {[50,100,500,1000].map(a=><button key={a} onClick={()=>setBetInput(a)} style={{padding:'5px',borderRadius:'5px',border:`1px solid ${betInput===a?'var(--gold)':'var(--border)'}`,background:betInput===a?'rgba(201,162,39,0.15)':'var(--bg-hover)',color:betInput===a?'var(--gold)':'#666',fontSize:'11px',fontWeight:'700',cursor:'pointer'}}>{a>=1000?`${a/1000}K`:a}</button>)}
             </div>
-            <div style={{display:'flex',justifyContent:'space-between',padding:'7px 10px',background:'rgba(224,48,48,0.07)',borderRadius:'7px',border:'1px solid rgba(224,48,48,0.15)',marginBottom:'10px'}}>
+            <div style={{display:'flex',justifyContent:'space-between',padding:'7px 10px',background:'rgba(201,162,39,0.07)',borderRadius:'7px',border:'1px solid rgba(201,162,39,0.15)',marginBottom:'10px'}}>
               <span style={{color:'var(--text-secondary)',fontSize:'12px'}}>Balance</span>
               <span style={{color:'var(--gold)',fontWeight:'700'}}>🪙 {balance.toLocaleString()}</span>
             </div>
-            {betPlaced&&<div style={{padding:'12px',background:'rgba(224,48,48,0.1)',border:'1px solid rgba(224,48,48,0.3)',borderRadius:'10px',textAlign:'center'}}>
+            {betPlaced&&<div style={{padding:'12px',background:'rgba(201,162,39,0.1)',border:'1px solid rgba(201,162,39,0.3)',borderRadius:'10px',textAlign:'center'}}>
               <div style={{color:'var(--gold)',fontWeight:'700'}}>✅ {betAmt} on {betSide?.toUpperCase()}</div>
             </div>}
           </div>
@@ -854,7 +854,7 @@ export function PokerGame() {
     else toast('🤝 Tie — bet returned.')
   }
 
-  const col=result?.outcome==='win'?'#00d084':result?.outcome==='lose'?'#ff4444':'#e03030'
+  const col=result?.outcome==='win'?'#00d084':result?.outcome==='lose'?'#ff4444':'#c9a227'
 
   return (
     <div style={{maxWidth:'900px',margin:'0 auto'}}>
@@ -887,11 +887,11 @@ export function PokerGame() {
           </div>
           {phase==='preflop'&&<div style={{display:'flex',gap:'10px',marginTop:'12px'}}>
             <button onClick={call} style={{flex:1,padding:'12px',borderRadius:'10px',fontWeight:'800',background:'rgba(0,208,132,0.2)',border:'2px solid #00d084',color:'#00d084',cursor:'pointer'}}>Call</button>
-            <button onClick={raise} style={{flex:1,padding:'12px',borderRadius:'10px',fontWeight:'800',background:'rgba(224,48,48,0.2)',border:'2px solid var(--gold)',color:'var(--gold)',cursor:'pointer'}}>Raise 2x</button>
+            <button onClick={raise} style={{flex:1,padding:'12px',borderRadius:'10px',fontWeight:'800',background:'rgba(201,162,39,0.2)',border:'2px solid var(--gold)',color:'var(--gold)',cursor:'pointer'}}>Raise 2x</button>
             <button onClick={fold} style={{flex:1,padding:'12px',borderRadius:'10px',fontWeight:'800',background:'rgba(255,68,68,0.15)',border:'2px solid #ff4444',color:'#ff4444',cursor:'pointer'}}>Fold</button>
           </div>}
           {phase==='flop'&&<div style={{display:'flex',gap:'10px',marginTop:'12px'}}>
-            <button onClick={showdown} style={{flex:2,padding:'12px',borderRadius:'10px',fontWeight:'800',background:'linear-gradient(135deg,#e03030,#ff5555)',border:'none',color:'#0a0a0f',cursor:'pointer'}}>Showdown</button>
+            <button onClick={showdown} style={{flex:2,padding:'12px',borderRadius:'10px',fontWeight:'800',background:'linear-gradient(135deg,#c9a227,#f0c84a)',border:'none',color:'#0a0a0f',cursor:'pointer'}}>Showdown</button>
             <button onClick={fold} style={{flex:1,padding:'12px',borderRadius:'10px',fontWeight:'800',background:'rgba(255,68,68,0.15)',border:'2px solid #ff4444',color:'#ff4444',cursor:'pointer'}}>Fold</button>
           </div>}
           {phase==='result'&&<button onClick={()=>setPhase('bet')} className="btn-gold" style={{width:'100%',marginTop:'12px',padding:'13px'}}>New Round</button>}
@@ -991,13 +991,13 @@ export function TowerGame() {
                     return(
                       <button key={col} onClick={()=>pick(displayRow,col)} style={{
                         flex:1,height:'42px',borderRadius:'7px',fontSize:'18px',
-                        background:rev==='bomb'?'rgba(255,68,68,0.28)':rev==='safe'?'rgba(0,208,132,0.28)':isActive?'rgba(224,48,48,0.12)':'var(--bg-hover)',
-                        border:rev==='bomb'?'2px solid #ff4444':rev==='safe'?'2px solid #00d084':isActive?'2px solid rgba(224,48,48,0.45)':'1px solid var(--border)',
+                        background:rev==='bomb'?'rgba(255,68,68,0.28)':rev==='safe'?'rgba(0,208,132,0.28)':isActive?'rgba(201,162,39,0.12)':'var(--bg-hover)',
+                        border:rev==='bomb'?'2px solid #ff4444':rev==='safe'?'2px solid #00d084':isActive?'2px solid rgba(201,162,39,0.45)':'1px solid var(--border)',
                         color:rev==='bomb'?'#ff4444':rev==='safe'?'#00d084':'var(--text-muted)',
                         cursor:clickable?'pointer':'default',transition:'all 0.15s'
                       }}
-                      onMouseEnter={e=>{if(clickable){e.currentTarget.style.background='rgba(224,48,48,0.28)';e.currentTarget.style.transform='scale(1.06)'}}}
-                      onMouseLeave={e=>{if(clickable){e.currentTarget.style.background='rgba(224,48,48,0.12)';e.currentTarget.style.transform='scale(1)'}}}>
+                      onMouseEnter={e=>{if(clickable){e.currentTarget.style.background='rgba(201,162,39,0.28)';e.currentTarget.style.transform='scale(1.06)'}}}
+                      onMouseLeave={e=>{if(clickable){e.currentTarget.style.background='rgba(201,162,39,0.12)';e.currentTarget.style.transform='scale(1)'}}}>
                         {rev==='bomb'?'💣':rev==='safe'?'✅':isActive?'?':'·'}
                       </button>
                     )

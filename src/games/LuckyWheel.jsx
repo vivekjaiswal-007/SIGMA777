@@ -6,9 +6,9 @@ import useBet from '../hooks/useBet'
 import sounds from '../utils/sounds'
 
 const SEGS = [
-  {l:'2x',m:2,c:'#e03030'},{l:'LOSE',m:0,c:'#ff4444'},{l:'3x',m:3,c:'#4488ff'},{l:'LOSE',m:0,c:'#ff4444'},
+  {l:'2x',m:2,c:'#c9a227'},{l:'LOSE',m:0,c:'#ff4444'},{l:'3x',m:3,c:'#4488ff'},{l:'LOSE',m:0,c:'#ff4444'},
   {l:'1.5x',m:1.5,c:'#00d084'},{l:'LOSE',m:0,c:'#ff4444'},{l:'5x',m:5,c:'#9944ff'},{l:'LOSE',m:0,c:'#ff4444'},
-  {l:'2x',m:2,c:'#e03030'},{l:'LOSE',m:0,c:'#ff4444'},{l:'10x',m:10,c:'#ff5555'},{l:'LOSE',m:0,c:'#ff4444'},
+  {l:'2x',m:2,c:'#c9a227'},{l:'LOSE',m:0,c:'#ff4444'},{l:'10x',m:10,c:'#f0c84a'},{l:'LOSE',m:0,c:'#ff4444'},
 ]
 const W=400,H=400,CX=200,CY=200,R=178
 
@@ -48,7 +48,7 @@ export default function LuckyWheel() {
 
       const sliceAngle = (Math.PI*2)/SEGS.length
       const rimG = ctx.createLinearGradient(CX-R-8,CY,CX+R+8,CY)
-      rimG.addColorStop(0,'#9a7a10'); rimG.addColorStop(0.5,'#ff5555'); rimG.addColorStop(1,'#9a7a10')
+      rimG.addColorStop(0,'#9a7a10'); rimG.addColorStop(0.5,'#f0c84a'); rimG.addColorStop(1,'#9a7a10')
       ctx.beginPath(); ctx.arc(CX,CY,R+8,0,Math.PI*2); ctx.fillStyle=rimG; ctx.fill()
 
       SEGS.forEach((seg,i)=>{
@@ -63,7 +63,7 @@ export default function LuckyWheel() {
       })
 
       const cG = ctx.createRadialGradient(CX-4,CY-4,2,CX,CY,26)
-      cG.addColorStop(0,'#ff5555'); cG.addColorStop(1,'#8a6010')
+      cG.addColorStop(0,'#f0c84a'); cG.addColorStop(1,'#8a6010')
       ctx.beginPath(); ctx.arc(CX,CY,26,0,Math.PI*2); ctx.fillStyle=cG; ctx.fill()
       ctx.font='bold 15px Cinzel'; ctx.fillStyle='#0a0a0f'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('♠',CX,CY)
 
@@ -89,7 +89,7 @@ export default function LuckyWheel() {
       </h1>
       <div className="game-layout" style={{ gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))' }}>
         <div style={{ textAlign:'center' }}>
-          <canvas ref={canvasRef} width={W} height={H} style={{ width:'100%',maxWidth:'400px',borderRadius:'50%',display:'block',margin:'0 auto',boxShadow:spinning?'0 0 40px rgba(224,48,48,0.5)':'0 8px 36px rgba(0,0,0,0.5)' }} />
+          <canvas ref={canvasRef} width={W} height={H} style={{ width:'100%',maxWidth:'400px',borderRadius:'50%',display:'block',margin:'0 auto',boxShadow:spinning?'0 0 40px rgba(201,162,39,0.5)':'0 8px 36px rgba(0,0,0,0.5)' }} />
           {result && (
             <div style={{ marginTop:'14px',padding:'12px 24px',borderRadius:'12px',display:'inline-block',background:result.m>0?'rgba(0,208,132,0.12)':'rgba(255,68,68,0.12)',border:`1px solid ${result.m>0?'rgba(0,208,132,0.3)':'rgba(255,68,68,0.3)'}`,fontSize:'22px',fontWeight:'900',color:result.m>0?'#00d084':'#ff4444' }}>
               {result.l}{result.m>0?` — +${Math.floor(betRef.current*result.m)} 🪙`:''}

@@ -10,7 +10,7 @@ const COLORS = [
   { name: 'Red', color: '#ff4444', payout: 2 },
   { name: 'Green', color: '#00d084', payout: 2 },
   { name: 'Blue', color: '#4488ff', payout: 2 },
-  { name: 'Yellow', color: '#ff5555', payout: 2 },
+  { name: 'Yellow', color: '#f0c84a', payout: 2 },
   { name: 'Purple', color: '#9944ff', payout: 3 },
   { name: 'Orange', color: '#ff8800', payout: 3 },
 ]
@@ -136,13 +136,13 @@ export default function ColorPrediction() {
       // Rim
       ctx.beginPath()
       ctx.arc(CX, CY, R + 2, 0, Math.PI * 2)
-      ctx.strokeStyle = '#e03030'
+      ctx.strokeStyle = '#c9a227'
       ctx.lineWidth = 4
       ctx.stroke()
 
       // Center
       const cg = ctx.createRadialGradient(CX - 3, CY - 3, 1, CX, CY, 22)
-      cg.addColorStop(0, '#ff5555')
+      cg.addColorStop(0, '#f0c84a')
       cg.addColorStop(1, '#7a5a00')
       ctx.beginPath()
       ctx.arc(CX, CY, 22, 0, Math.PI * 2)
@@ -233,14 +233,14 @@ export default function ColorPrediction() {
         <div>
           {/* Countdown */}
           {phase === 'bet' && (
-            <div style={{ textAlign: 'center', marginBottom: '10px', padding: '8px', background: 'rgba(224,48,48,0.08)', border: '1px solid rgba(224,48,48,0.2)', borderRadius: '8px' }}>
+            <div style={{ textAlign: 'center', marginBottom: '10px', padding: '8px', background: 'rgba(201,162,39,0.08)', border: '1px solid rgba(201,162,39,0.2)', borderRadius: '8px' }}>
               <span style={{ color: 'var(--gold)', fontSize: '13px', fontWeight: '700' }}>⏳ Auto spin in {countdown}s — Pick your color!</span>
             </div>
           )}
 
           <canvas ref={canvasRef} width={360} height={360} style={{
             width: '100%', maxWidth: '360px', display: 'block', margin: '0 auto',
-            borderRadius: '50%', boxShadow: spinRef.current ? '0 0 40px rgba(224,48,48,0.4)' : '0 8px 40px rgba(0,0,0,0.6)'
+            borderRadius: '50%', boxShadow: spinRef.current ? '0 0 40px rgba(201,162,39,0.4)' : '0 8px 40px rgba(0,0,0,0.6)'
           }} />
 
           {/* Color picker */}

@@ -95,7 +95,7 @@ export default function RouletteGame() {
 
       // Outer gold rim
       const rimG = ctx.createLinearGradient(CX-R-12, CY, CX+R+12, CY)
-      rimG.addColorStop(0, '#9a7a10'); rimG.addColorStop(0.5, '#ff5555'); rimG.addColorStop(1, '#9a7a10')
+      rimG.addColorStop(0, '#9a7a10'); rimG.addColorStop(0.5, '#f0c84a'); rimG.addColorStop(1, '#9a7a10')
       ctx.beginPath(); ctx.arc(CX, CY, R + 10, 0, Math.PI*2)
       ctx.fillStyle = rimG; ctx.fill()
 
@@ -105,7 +105,7 @@ export default function RouletteGame() {
         const end = start + sliceAngle
         ctx.beginPath(); ctx.moveTo(CX, CY); ctx.arc(CX, CY, R, start, end); ctx.closePath()
         ctx.fillStyle = getColor(num); ctx.fill()
-        ctx.strokeStyle = 'rgba(224,48,48,0.25)'; ctx.lineWidth = 0.5; ctx.stroke()
+        ctx.strokeStyle = 'rgba(201,162,39,0.25)'; ctx.lineWidth = 0.5; ctx.stroke()
 
         const mid = start + sliceAngle/2
         const tx = CX + R * 0.76 * Math.cos(mid), ty = CY + R * 0.76 * Math.sin(mid)
@@ -116,9 +116,9 @@ export default function RouletteGame() {
 
       // Inner circle
       const innerG = ctx.createRadialGradient(CX, CY, 0, CX, CY, 88)
-      innerG.addColorStop(0, '#1a1a2e'); innerG.addColorStop(0.8, '#0d0d1a'); innerG.addColorStop(1, '#e03030')
+      innerG.addColorStop(0, '#1a1a2e'); innerG.addColorStop(0.8, '#0d0d1a'); innerG.addColorStop(1, '#c9a227')
       ctx.beginPath(); ctx.arc(CX, CY, 88, 0, Math.PI*2); ctx.fillStyle = innerG; ctx.fill()
-      ctx.font = 'bold 22px Cinzel'; ctx.fillStyle = '#e03030'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'
+      ctx.font = 'bold 22px Cinzel'; ctx.fillStyle = '#c9a227'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'
       ctx.fillText('♠', CX, CY)
 
       // Ball physics
@@ -185,7 +185,7 @@ export default function RouletteGame() {
         <div>
           <canvas ref={canvasRef} width={W} height={H} style={{
             width: '100%', borderRadius: '50%', display: 'block',
-            boxShadow: spinning ? '0 0 40px rgba(224,48,48,0.4)' : '0 8px 40px rgba(0,0,0,0.5)'
+            boxShadow: spinning ? '0 0 40px rgba(201,162,39,0.4)' : '0 8px 40px rgba(0,0,0,0.5)'
           }} />
           {result !== null && (
             <div style={{
@@ -209,7 +209,7 @@ export default function RouletteGame() {
               {[10, 50, 100, 500].map(v => (
                 <button key={v} onClick={() => setChipValue(v)} style={{
                   padding: '8px 16px', borderRadius: '8px', fontWeight: '700', fontSize: '13px',
-                  background: chipValue === v ? 'rgba(224,48,48,0.2)' : 'var(--bg-hover)',
+                  background: chipValue === v ? 'rgba(201,162,39,0.2)' : 'var(--bg-hover)',
                   border: `1px solid ${chipValue === v ? 'var(--gold)' : 'var(--border)'}`,
                   color: chipValue === v ? 'var(--gold)' : 'var(--text-secondary)', cursor: 'pointer'
                 }}>{v}</button>
@@ -243,7 +243,7 @@ export default function RouletteGame() {
               <button key={n} onClick={() => placeBet(`n${n}`)} style={{
                 padding: '6px 2px', borderRadius: '4px', fontWeight: '800', fontSize: '11px',
                 background: bets[`n${n}`] ? `${getColor(n)}80` : getColor(n),
-                border: `1px solid ${bets[`n${n}`] ? '#ff5555' : 'transparent'}`,
+                border: `1px solid ${bets[`n${n}`] ? '#f0c84a' : 'transparent'}`,
                 color: 'white', cursor: 'pointer'
               }}>{n}</button>
             ))}
@@ -259,7 +259,7 @@ export default function RouletteGame() {
           <div style={{ display:'flex', gap:'10px' }}>
             <button onClick={spin} disabled={spinning} style={{
               flex:1, padding:'14px', borderRadius:'10px', fontWeight:'800', fontSize:'15px',
-              background: spinning ? 'rgba(224,48,48,0.3)' : 'linear-gradient(135deg,#e03030,#ff5555)',
+              background: spinning ? 'rgba(201,162,39,0.3)' : 'linear-gradient(135deg,#c9a227,#f0c84a)',
               border:'none', color: spinning ? 'rgba(0,0,0,0.4)' : '#0a0a0f', cursor: spinning ? 'not-allowed' : 'pointer',
               textTransform:'uppercase', letterSpacing:'1px'
             }}>{spinning ? 'Spinning...' : '🎡 Spin'}</button>

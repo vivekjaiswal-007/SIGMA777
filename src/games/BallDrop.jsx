@@ -9,7 +9,7 @@ const ZONES = [
   { label:'10x',  mult:10,  color:'#9944ff', weight:3  },
   { label:'5x',   mult:5,   color:'#ff4444', weight:7  },
   { label:'3x',   mult:3,   color:'#ff8800', weight:12 },
-  { label:'2x',   mult:2,   color:'#e03030', weight:18 },
+  { label:'2x',   mult:2,   color:'#c9a227', weight:18 },
   { label:'1.5x', mult:1.5, color:'#00d084', weight:25 },
   { label:'❌',   mult:0,   color:'#333',    weight:35 },
 ]

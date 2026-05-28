@@ -105,7 +105,7 @@ export default function SicBoGame() {
     { key: 'big', label: 'Big (11–17)', color: '#ff4444', payout: '1:1' },
     { key: 'odd', label: 'Odd', color: '#9944ff', payout: '1:1' },
     { key: 'even', label: 'Even', color: '#00d084', payout: '1:1' },
-    { key: 'triple', label: 'Any Triple', color: '#e03030', payout: '30:1' },
+    { key: 'triple', label: 'Any Triple', color: '#c9a227', payout: '30:1' },
   ]
 
   return (
@@ -122,10 +122,10 @@ export default function SicBoGame() {
             {result && (
               <div style={{
                 display: 'inline-block', padding: '10px 24px', borderRadius: '10px',
-                background: result.isTriple ? 'rgba(224,48,48,0.2)' : result.isSmall ? 'rgba(68,136,255,0.15)' : 'rgba(255,68,68,0.15)',
-                border: `1px solid ${result.isTriple ? 'rgba(224,48,48,0.4)' : result.isSmall ? 'rgba(68,136,255,0.3)' : 'rgba(255,68,68,0.3)'}`
+                background: result.isTriple ? 'rgba(201,162,39,0.2)' : result.isSmall ? 'rgba(68,136,255,0.15)' : 'rgba(255,68,68,0.15)',
+                border: `1px solid ${result.isTriple ? 'rgba(201,162,39,0.4)' : result.isSmall ? 'rgba(68,136,255,0.3)' : 'rgba(255,68,68,0.3)'}`
               }}>
-                <div style={{ fontSize: '26px', fontWeight: '900', color: result.isTriple ? '#e03030' : result.isSmall ? '#4488ff' : '#ff4444' }}>
+                <div style={{ fontSize: '26px', fontWeight: '900', color: result.isTriple ? '#c9a227' : result.isSmall ? '#4488ff' : '#ff4444' }}>
                   Sum: {result.sum}
                 </div>
                 <div style={{ fontSize: '13px', color: 'var(--text-secondary)', marginTop: '2px' }}>
@@ -141,7 +141,7 @@ export default function SicBoGame() {
               {[10, 50, 100, 500].map(v => (
                 <button key={v} onClick={() => setBetAmount(v)} style={{
                   flex: 1, padding: '8px 4px', borderRadius: '6px', fontSize: '13px', fontWeight: '700',
-                  background: betAmount === v ? 'rgba(224,48,48,0.2)' : 'var(--bg-hover)',
+                  background: betAmount === v ? 'rgba(201,162,39,0.2)' : 'var(--bg-hover)',
                   border: `1px solid ${betAmount === v ? 'var(--gold)' : 'var(--border)'}`,
                   color: betAmount === v ? 'var(--gold)' : 'var(--text-secondary)', cursor: 'pointer'
                 }}>{v}</button>
@@ -168,7 +168,7 @@ export default function SicBoGame() {
             {[4,5,6,7,8,9,10,11,12,13,14,15,16,17].map(n => (
               <button key={n} onClick={() => placeBet(`sum_${n}`)} style={{
                 padding: '8px 2px', borderRadius: '6px', fontSize: '12px', fontWeight: '700',
-                background: bets[`sum_${n}`] ? 'rgba(224,48,48,0.2)' : 'var(--bg-hover)',
+                background: bets[`sum_${n}`] ? 'rgba(201,162,39,0.2)' : 'var(--bg-hover)',
                 border: `1px solid ${bets[`sum_${n}`] ? 'var(--gold)' : 'var(--border)'}`,
                 color: bets[`sum_${n}`] ? 'var(--gold)' : 'var(--text-secondary)', cursor: 'pointer'
               }}>{n}</button>
@@ -182,7 +182,7 @@ export default function SicBoGame() {
           <div style={{ display: 'flex', gap: '10px' }}>
             <button onClick={rollDice} disabled={rolling} style={{
               flex: 1, padding: '14px', borderRadius: '10px', fontWeight: '800', fontSize: '15px',
-              background: rolling ? 'rgba(224,48,48,0.3)' : 'linear-gradient(135deg,#e03030,#ff5555)',
+              background: rolling ? 'rgba(201,162,39,0.3)' : 'linear-gradient(135deg,#c9a227,#f0c84a)',
               border: 'none', color: rolling ? 'rgba(0,0,0,0.4)' : '#0a0a0f', cursor: rolling ? 'not-allowed' : 'pointer',
               textTransform: 'uppercase', letterSpacing: '1px'
             }}>{rolling ? 'Rolling...' : '🎲 Roll Dice'}</button>

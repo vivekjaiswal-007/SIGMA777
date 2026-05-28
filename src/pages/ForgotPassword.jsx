@@ -44,12 +44,12 @@ export default function ForgotPassword() {
     <div style={{
       minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
       background: 'var(--bg-primary)',
-      backgroundImage: 'radial-gradient(ellipse at 50% 0%, rgba(224,48,48,0.08) 0%, transparent 65%)',
+      backgroundImage: 'radial-gradient(ellipse at 50% 0%, rgba(201,162,39,0.08) 0%, transparent 65%)',
       padding: '16px'
     }}>
       <div style={{ width: '100%', maxWidth: '400px' }}>
         <div style={{ textAlign: 'center', marginBottom: '22px' }}>
-          <div style={{ width: '52px', height: '52px', background: 'linear-gradient(135deg,#e03030,#ff5555)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '26px', margin: '0 auto 10px', color: '#0a0a0f' }}>🔑</div>
+          <div style={{ width: '52px', height: '52px', background: 'linear-gradient(135deg,#c9a227,#f0c84a)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '26px', margin: '0 auto 10px', color: '#0a0a0f' }}>🔑</div>
           <h1 style={{ fontFamily: 'Cinzel,serif', fontSize: '20px', fontWeight: '700', color: 'var(--gold)' }}>Reset Password</h1>
           <p style={{ color: 'var(--text-secondary)', fontSize: '13px', marginTop: '4px' }}>Enter your registered email/phone and set a new password</p>
         </div>

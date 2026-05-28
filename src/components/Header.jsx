@@ -1,77 +1,151 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { toggleSound, getSoundState } from '../utils/sounds'
 import { useStore } from '../store/useStore'
 
-export default function Header({ onMobileMenuClick, isMobile, onLoginClick, onSignupClick }) {
+export default function Header({ onMobileMenuClick, isMobile }) {
   const { user, balance, logout, toggleSidebar } = useStore()
   const navigate = useNavigate()
-  const [searchOpen, setSearchOpen] = useState(false)
-  const [searchVal, setSearchVal] = useState('')
+  const [soundOn, setSoundOn] = useState(getSoundState())
+  const handleSoundToggle = () => { const s = toggleSound(); setSoundOn(s) }
 
-  const handleSearch = (e) => {
-    e.preventDefault()
-    setSearchOpen(false)
-    setSearchVal('')
+  const handleMenuClick = () => {
+    if (isMobile) {
+      onMobileMenuClick?.()
+    } else {
+      toggleSidebar()
+    }
   }
 
   return (
-    <header className="app-header" style={{ background:'#0a2e14', borderBottom:'1px solid #071f0e', boxShadow:'0 1px 6px rgba(0,0,0,0.5)', padding:'0 10px' }}>
-
-      {/* Search overlay */}
-      {searchOpen && (
-        <div style={{ position:'fixed', inset:0, background:'rgba(0,0,0,0.85)', zIndex:2000, display:'flex', alignItems:'flex-start', justifyContent:'center', paddingTop:'60px' }}
-          onClick={() => setSearchOpen(false)}>
-          <form onSubmit={handleSearch} onClick={e => e.stopPropagation()}
-            style={{ width:'90%', maxWidth:'400px', display:'flex', gap:'8px' }}>
-            <input autoFocus value={searchVal} onChange={e => setSearchVal(e.target.value)}
-              placeholder="Search games..."
-              style={{ flex:1, padding:'10px 14px', background:'#1a1a1a', border:'1px solid #333', borderRadius:'8px', color:'#fff', fontSize:'15px', outline:'none' }} />
-            <button type="submit" style={{ padding:'10px 16px', background:'#1e7d32', border:'none', borderRadius:'8px', color:'#fff', fontWeight:'700', cursor:'pointer' }}>Go</button>
-          </form>
-        </div>
-      )}
-
-      {/* Left */}
-      <div style={{ display:'flex', alignItems:'center', gap:'7px', flexShrink:0 }}>
-        {!isMobile && (
-          <button onClick={() => toggleSidebar()} style={{ background:'none', border:'none', color:'rgba(255,255,255,0.7)', padding:'5px', display:'flex', alignItems:'center', cursor:'pointer' }}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/></svg>
-          </button>
-        )}
-        <Link to="/" style={{ display:'flex', alignItems:'center', gap:'6px', flexShrink:0 }}>
-          <div style={{ width:'24px', height:'24px', background:'rgba(255,255,255,0.12)', border:'1.5px solid rgba(255,255,255,0.35)', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
-            <span style={{ fontFamily:'Cinzel,serif', fontWeight:'900', fontSize:'11px', color:'#fff' }}>Σ</span>
-          </div>
-          <span style={{ fontFamily:'Cinzel,serif', fontWeight:'900', fontSize: isMobile?'13px':'15px', color:'#fff', letterSpacing:'1px' }}>
-            SIGMA<span style={{ color:'#ffe066' }}>777</span>
-          </span>
-        </Link>
-      </div>
-
-      {/* Right */}
-      <div style={{ display:'flex', alignItems:'center', gap:'5px', flexShrink:0 }}>
-        {/* Search icon */}
-        <button onClick={() => setSearchOpen(true)} style={{ background:'none', border:'none', color:'rgba(255,255,255,0.75)', padding:'4px 6px', cursor:'pointer', display:'flex', alignItems:'center' }}>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-            <circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/>
+    <header className="app-header">
+      {/* Left side */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
+        {/* Hamburger */}
+        <button
+          onClick={handleMenuClick}
+          style={{
+            background: 'none', border: 'none', color: 'var(--text-secondary)',
+            padding: '8px', borderRadius: '7px', display: 'flex', alignItems: 'center',
+            cursor: 'pointer', flexShrink: 0
+          }}
+          aria-label="Toggle menu"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
           </svg>
         </button>
 
+        {/* Logo */}
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0, textDecoration: 'none' }}>
+          {/* Σ icon */}
+          <div style={{
+            width: isMobile ? '32px' : '38px',
+            height: isMobile ? '32px' : '38px',
+            background: 'linear-gradient(135deg,#c91818,#ff4040)',
+            borderRadius: '9px',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: isMobile ? '16px' : '20px',
+            fontWeight: '900',
+            color: '#fff',
+            fontFamily: 'Cinzel,serif',
+            boxShadow: '0 0 16px rgba(220,30,30,0.45)',
+            flexShrink: 0,
+            letterSpacing: '-1px'
+          }}>Σ</div>
+          {/* Name */}
+          <div style={{ lineHeight: 1 }}>
+            <div className="sigma-logo-text" style={{ fontSize: isMobile ? '15px' : '20px', letterSpacing: '2px' }}>
+              SIGMA<span style={{ color: '#ff6b00', WebkitTextFillColor: '#ff6b00' }}>777</span>
+            </div>
+            {!isMobile && (
+              <div style={{ fontSize: '9px', color: 'var(--text-muted)', letterSpacing: '2px', textTransform: 'uppercase', marginTop: '1px' }}>
+                Premium Casino
+              </div>
+            )}
+          </div>
+        </Link>
+      </div>
+
+      {/* Right side */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
         {user ? (
           <>
-            {/* Balance chip — Mahaling777 style */}
-            <div onClick={() => navigate('/dashboard')} style={{ display:'flex', alignItems:'center', gap:'5px', background:'rgba(0,0,0,0.35)', border:'1px solid rgba(255,255,255,0.2)', borderRadius:'6px', padding:'3px 10px', cursor:'pointer', flexShrink:0 }}>
-              <span style={{ fontSize:'12px' }}>🪙</span>
-              <span style={{ color:'#ffe066', fontWeight:'800', fontSize:'12px' }}>CI {Number(balance||0).toLocaleString()}</span>
+            {/* Balance */}
+            <div
+              onClick={() => navigate('/dashboard')}
+              style={{
+                display: 'flex', alignItems: 'center', gap: '5px',
+                background: 'rgba(224,48,48,0.1)', border: '1px solid rgba(224,48,48,0.28)',
+                borderRadius: '8px', padding: isMobile ? '5px 10px' : '6px 12px',
+                cursor: 'pointer', flexShrink: 0
+              }}
+            >
+              <span style={{ fontSize: '13px' }}>🪙</span>
+              <span style={{ color: 'var(--gold)', fontWeight: '700', fontSize: isMobile ? '13px' : '14px' }}>
+                {Number(balance).toLocaleString()}
+              </span>
             </div>
-            <button onClick={logout} style={{ background:'rgba(0,0,0,0.3)', border:'1px solid rgba(255,255,255,0.18)', color:'rgba(255,255,255,0.8)', padding:'3px 7px', borderRadius:'4px', fontSize:'10px', fontWeight:'600', cursor:'pointer', whiteSpace:'nowrap' }}>
+
+            {/* Avatar */}
+            <div style={{
+              width: '30px', height: '30px',
+              background: 'linear-gradient(135deg,#c91818,#ff4040)',
+              borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: '13px', fontWeight: '700', flexShrink: 0, cursor: 'pointer',
+              boxShadow: '0 0 10px rgba(220,30,30,0.4)'
+            }}
+              onClick={() => navigate('/dashboard')}
+            >
+              {user.username?.[0]?.toUpperCase()}
+            </div>
+
+            {/* Username */}
+            {!isMobile && (
+              <span style={{ fontSize: '13px', color: 'var(--text-secondary)', maxWidth: '80px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                {user.username}
+              </span>
+            )}
+
+            <button
+              onClick={handleSoundToggle}
+              title={soundOn ? 'Sound ON' : 'Sound OFF'}
+              style={{
+                background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
+                color: soundOn ? 'var(--gold)' : 'var(--text-muted)',
+                padding: isMobile ? '5px 7px' : '6px 10px', borderRadius: '7px',
+                fontSize: isMobile ? '14px' : '16px', cursor: 'pointer', flexShrink: 0
+              }}
+            >{soundOn ? '🔊' : '🔇'}</button>
+
+            <button
+              onClick={logout}
+              style={{
+                background: 'rgba(255,68,68,0.1)', border: '1px solid rgba(255,68,68,0.28)',
+                color: '#ff4444', padding: isMobile ? '5px 8px' : '6px 12px', borderRadius: '7px',
+                fontSize: isMobile ? '11px' : '12px', fontWeight: '600', cursor: 'pointer', whiteSpace: 'nowrap'
+              }}
+            >
               {isMobile ? '⬅' : 'Logout'}
             </button>
           </>
         ) : (
           <>
-            <button onClick={onLoginClick} style={{ background:'rgba(0,0,0,0.3)', border:'1px solid rgba(255,255,255,0.25)', color:'#fff', padding:'4px 9px', borderRadius:'4px', fontSize:'11px', fontWeight:'700', cursor:'pointer', whiteSpace:'nowrap' }}>LOGIN</button>
-            <button onClick={onSignupClick} style={{ background:'rgba(0,0,0,0.4)', border:'1.5px solid rgba(255,255,255,0.4)', color:'#fff', padding:'3px 8px', borderRadius:'4px', fontSize:'11px', fontWeight:'800', cursor:'pointer', whiteSpace:'nowrap' }}>SIGNUP</button>
+            <Link to="/login">
+              <button style={{
+                background: 'transparent', border: '1px solid var(--gold)', color: 'var(--gold)',
+                padding: isMobile ? '6px 10px' : '7px 16px', borderRadius: '7px',
+                fontSize: isMobile ? '12px' : '13px', fontWeight: '600', cursor: 'pointer', whiteSpace: 'nowrap'
+              }}>Login</button>
+            </Link>
+            <Link to="/signup">
+              <button style={{
+                background: 'linear-gradient(135deg,#c91818,#ff4040)', border: 'none', color: '#fff',
+                padding: isMobile ? '6px 10px' : '7px 16px', borderRadius: '7px',
+                fontSize: isMobile ? '12px' : '13px', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap',
+                boxShadow: '0 0 12px rgba(220,30,30,0.35)'
+              }}>Sign Up</button>
+            </Link>
           </>
         )}
       </div>

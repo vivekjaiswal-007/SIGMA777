@@ -89,7 +89,7 @@ export default function ThreeCardPoker() {
               )
             })}
             {result&&(
-              <div style={{textAlign:'center',padding:'12px',borderRadius:'10px',background:result.outcome==='win'?'rgba(0,208,132,0.1)':result.outcome==='lose'?'rgba(255,68,68,0.1)':'rgba(224,48,48,0.1)',border:`1px solid ${result.outcome==='win'?'rgba(0,208,132,0.3)':result.outcome==='lose'?'rgba(255,68,68,0.3)':'rgba(224,48,48,0.3)'}`,fontSize:'16px',fontWeight:'900',color:result.outcome==='win'?'#00d084':result.outcome==='lose'?'#ff4444':'#e03030',marginTop:'10px'}}>
+              <div style={{textAlign:'center',padding:'12px',borderRadius:'10px',background:result.outcome==='win'?'rgba(0,208,132,0.1)':result.outcome==='lose'?'rgba(255,68,68,0.1)':'rgba(201,162,39,0.1)',border:`1px solid ${result.outcome==='win'?'rgba(0,208,132,0.3)':result.outcome==='lose'?'rgba(255,68,68,0.3)':'rgba(201,162,39,0.3)'}`,fontSize:'16px',fontWeight:'900',color:result.outcome==='win'?'#00d084':result.outcome==='lose'?'#ff4444':'#c9a227',marginTop:'10px'}}>
                 {result.outcome==='win'?`🎉 You Win! +${result.pay} 🪙`:result.outcome==='lose'?`😞 Dealer Wins`:`🤝 Tie — Bet Returned`}
               </div>
             )}
@@ -98,7 +98,7 @@ export default function ThreeCardPoker() {
           <div style={{background:'var(--bg-card)',border:'1px solid var(--border)',borderRadius:'10px',padding:'12px',fontSize:'12px'}}>
             <div style={{color:'var(--text-muted)',marginBottom:'6px',fontWeight:'600',textTransform:'uppercase',fontSize:'11px'}}>Paytable</div>
             <div style={{display:'flex',flexWrap:'wrap',gap:'6px'}}>
-              {[['Straight Flush','10x','#ff5555'],['Three of a Kind','5x','#9944ff'],['Straight','4x','#00d084'],['Flush','3x','#4488ff'],['Pair','2x','#e03030']].map(([n,p,c])=>(
+              {[['Straight Flush','10x','#f0c84a'],['Three of a Kind','5x','#9944ff'],['Straight','4x','#00d084'],['Flush','3x','#4488ff'],['Pair','2x','#c9a227']].map(([n,p,c])=>(
                 <div key={n} style={{padding:'4px 10px',borderRadius:'5px',background:`${c}15`,border:`1px solid ${c}33`,color:c,fontWeight:'700'}}>{n} {p}</div>
               ))}
             </div>

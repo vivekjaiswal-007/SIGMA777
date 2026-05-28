@@ -143,7 +143,7 @@ export default function MinesGame() {
                     transition:'all 0.15s', outline:'none',
                     boxShadow: isMine?'0 0 10px rgba(255,68,68,0.3)' : isGem?'0 0 10px rgba(0,208,132,0.25)' : 'none'
                   }}
-                  onMouseEnter={e => { if(canClick){e.currentTarget.style.background='rgba(224,48,48,0.18)';e.currentTarget.style.borderColor='var(--gold)';e.currentTarget.style.transform='scale(1.1)'}}}
+                  onMouseEnter={e => { if(canClick){e.currentTarget.style.background='rgba(201,162,39,0.18)';e.currentTarget.style.borderColor='var(--gold)';e.currentTarget.style.transform='scale(1.1)'}}}
                   onMouseLeave={e => { if(canClick){e.currentTarget.style.background='var(--bg-hover)';e.currentTarget.style.borderColor='rgba(255,255,255,0.1)';e.currentTarget.style.transform='scale(1)'}}}
                 >
                   {isMine ? '💣' : isGem ? '💎' : canClick ? '' : '·'}

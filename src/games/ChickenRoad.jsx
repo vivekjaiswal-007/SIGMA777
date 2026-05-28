@@ -9,7 +9,7 @@ const COLS = 9          // number of road lanes
 const MULTS = [1.5, 2.1, 3.0, 4.1, 5.4, 7.2, 9.8, 13.5, 19.0]
 const DIFFICULTY = {
   Easy:     { truckChance: 0.25, label: 'Easy',     color: '#00d084' },
-  Medium:   { truckChance: 0.42, label: 'Medium',   color: '#e03030' },
+  Medium:   { truckChance: 0.42, label: 'Medium',   color: '#c9a227' },
   Hard:     { truckChance: 0.58, label: 'Hard',      color: '#ff8800' },
   Hardcore: { truckChance: 0.75, label: 'Hardcore', color: '#ff4444' },
 }
@@ -216,21 +216,21 @@ export default function ChickenRoad() {
         } else if (tile === 'safe') {
           ctx.fillStyle = 'rgba(0,208,132,0.3)'
         } else if (isCurrent) {
-          ctx.fillStyle = `rgba(224,48,48,${0.2 + 0.1 * Math.sin(frameRef.current * 0.08)})`
+          ctx.fillStyle = `rgba(201,162,39,${0.2 + 0.1 * Math.sin(frameRef.current * 0.08)})`
         } else {
           ctx.fillStyle = 'rgba(50,50,60,0.85)'
         }
         ctx.fill()
 
         // Tile border
-        ctx.strokeStyle = tile === 'truck' ? '#ff4444' : tile === 'safe' ? '#00d084' : isCurrent ? '#e03030' : 'rgba(255,255,255,0.12)'
+        ctx.strokeStyle = tile === 'truck' ? '#ff4444' : tile === 'safe' ? '#00d084' : isCurrent ? '#c9a227' : 'rgba(255,255,255,0.12)'
         ctx.lineWidth = isCurrent ? 2.5 : 1.5
         ctx.stroke()
 
         // Multiplier text
         ctx.textAlign = 'center'; ctx.textBaseline = 'middle'
         ctx.font = `bold ${radius > 28 ? 13 : 11}px Outfit`
-        ctx.fillStyle = tile === 'truck' ? '#ff6666' : tile === 'safe' ? '#00d084' : isCurrent ? '#ff5555' : 'rgba(255,255,255,0.5)'
+        ctx.fillStyle = tile === 'truck' ? '#ff6666' : tile === 'safe' ? '#00d084' : isCurrent ? '#f0c84a' : 'rgba(255,255,255,0.5)'
         ctx.fillText(`${mult}x`, tx, ty)
       }
 
@@ -314,7 +314,7 @@ export default function ChickenRoad() {
       // Coin icon on platform
       ctx.beginPath(); ctx.arc(ROAD_START_X / 2, chickenRow - 28, 18, 0, Math.PI * 2)
       const cg = ctx.createRadialGradient(ROAD_START_X / 2 - 4, chickenRow - 32, 2, ROAD_START_X / 2, chickenRow - 28, 18)
-      cg.addColorStop(0, '#ff5555'); cg.addColorStop(1, '#e03030')
+      cg.addColorStop(0, '#f0c84a'); cg.addColorStop(1, '#c9a227')
       ctx.fillStyle = cg; ctx.fill()
       ctx.strokeStyle = '#9a7a10'; ctx.lineWidth = 2; ctx.stroke()
       ctx.fillStyle = '#0a0a0f'; ctx.font = 'bold 13px Cinzel'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'
@@ -409,7 +409,7 @@ export default function ChickenRoad() {
         const bw = 58, bh = 24
         ctx.roundRect(badgeX - bw / 2, badgeY - bh / 2, bw, bh, 8)
         ctx.fill()
-        ctx.fillStyle = '#ff5555'
+        ctx.fillStyle = '#f0c84a'
         ctx.font = 'bold 14px Outfit'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'
         ctx.fillText(`${mult}x`, badgeX, badgeY)
       }
@@ -420,7 +420,7 @@ export default function ChickenRoad() {
         ctx.beginPath(); ctx.roundRect(8, 8, 180, 34, 8); ctx.fill()
         ctx.fillStyle = '#00d084'; ctx.font = 'bold 13px Outfit'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'
         ctx.fillText(`Column ${posRef.current}/${COLS}`, 18, 25)
-        ctx.fillStyle = '#e03030'; ctx.textAlign = 'right'
+        ctx.fillStyle = '#c9a227'; ctx.textAlign = 'right'
         const mult = posRef.current > 0 ? MULTS[posRef.current - 1] : 1
         ctx.fillText(`💰 ${Math.floor(betRef.current * mult)}`, 182, 25)
       }
@@ -504,7 +504,7 @@ export default function ChickenRoad() {
       {/* Rotate message - portrait only */}
       <div className="chicken-road-rotate-msg" style={{ display: 'none', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', background: '#1a1a2e', position: 'fixed', inset: 0, zIndex: 99999, color: 'white', textAlign: 'center', gap: '16px' }}>
         <div style={{ fontSize: '60px' }}>🔄</div>
-        <div style={{ fontSize: '20px', fontWeight: '700', color: '#e03030' }}>Rotate your phone</div>
+        <div style={{ fontSize: '20px', fontWeight: '700', color: '#c9a227' }}>Rotate your phone</div>
         <div style={{ fontSize: '14px', color: '#888' }}>Chicken Road is best in landscape mode</div>
       </div>
       <h1 style={{ fontFamily: 'Cinzel,serif', fontSize: 'clamp(16px,3.5vw,24px)', marginBottom: '10px' }}>
@@ -563,7 +563,7 @@ export default function ChickenRoad() {
                   {canCashout && (
                     <button onClick={doCashout} style={{
                       flex: 1, padding: '8px', borderRadius: '9px', fontWeight: '800',
-                      fontSize: '13px', background: 'linear-gradient(135deg,#e03030,#ff5555)',
+                      fontSize: '13px', background: 'linear-gradient(135deg,#c9a227,#f0c84a)',
                       border: 'none', color: '#0a0a0f', cursor: 'pointer'
                     }}>
                       CASH OUT<br />
@@ -588,14 +588,14 @@ export default function ChickenRoad() {
               return (
                 <div key={i} style={{
                   flex: 1, minWidth: '52px', padding: '6px 4px', borderRadius: '8px', textAlign: 'center',
-                  background: isReached ? 'rgba(0,208,132,0.15)' : isCurrent ? 'rgba(224,48,48,0.2)' : isNext ? 'rgba(255,255,255,0.07)' : 'rgba(255,255,255,0.03)',
+                  background: isReached ? 'rgba(0,208,132,0.15)' : isCurrent ? 'rgba(201,162,39,0.2)' : isNext ? 'rgba(255,255,255,0.07)' : 'rgba(255,255,255,0.03)',
                   border: `1px solid ${isReached ? 'rgba(0,208,132,0.35)' : isCurrent ? 'var(--gold)' : isNext ? 'rgba(255,255,255,0.15)' : 'var(--border)'}`,
                   transition: 'all 0.3s'
                 }}>
-                  <div style={{ fontSize: '11px', fontWeight: '800', color: isReached ? '#00d084' : isCurrent ? '#ff5555' : isNext ? 'white' : 'var(--text-muted)' }}>
+                  <div style={{ fontSize: '11px', fontWeight: '800', color: isReached ? '#00d084' : isCurrent ? '#f0c84a' : isNext ? 'white' : 'var(--text-muted)' }}>
                     {isReached ? '✓' : isNext ? '→' : `${i + 1}`}
                   </div>
-                  <div style={{ fontSize: '12px', fontWeight: '700', color: isReached ? '#00d084' : isCurrent ? '#ff5555' : isNext ? '#ccc' : 'var(--text-muted)' }}>
+                  <div style={{ fontSize: '12px', fontWeight: '700', color: isReached ? '#00d084' : isCurrent ? '#f0c84a' : isNext ? '#ccc' : 'var(--text-muted)' }}>
                     {m}x
                   </div>
                 </div>
@@ -616,7 +616,7 @@ export default function ChickenRoad() {
             {[
               { l: 'Difficulty', v: diff, c: DIFFICULTY[diff].color },
               { l: 'Column', v: `${pos} / ${COLS}`, c: 'white' },
-              { l: 'Multiplier', v: pos > 0 ? `${MULTS[pos - 1]}x` : '—', c: '#e03030' },
+              { l: 'Multiplier', v: pos > 0 ? `${MULTS[pos - 1]}x` : '—', c: '#c9a227' },
               { l: 'Potential Win', v: pos > 0 ? `🪙 ${Math.floor(betAmount * MULTS[pos - 1])}` : '—', c: '#00d084' },
             ].map(s => (
               <div key={s.l} style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', fontSize: '12px' }}>

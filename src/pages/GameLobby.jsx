@@ -23,7 +23,7 @@ const ALL_GAMES = [
 
   // ── CARDS ──
   { id:'blackjack',        settingKey:'blackjack',     name:'Blackjack',         icon:'🃏',  cat:'cards',     color:'#4488ff', hot:false },
-  { id:'baccarat',         settingKey:'baccarat',      name:'Baccarat',          icon:'🎴',  cat:'cards',     color:'#e03030', hot:false },
+  { id:'baccarat',         settingKey:'baccarat',      name:'Baccarat',          icon:'🎴',  cat:'cards',     color:'#c9a227', hot:false },
   { id:'teen-patti',       settingKey:'teenPatti',     name:'Teen Patti',        icon:'♠️',  cat:'cards',     color:'#ff4488', hot:true  },
   { id:'andar-bahar',      settingKey:'andarBahar',    name:'Andar Bahar',       icon:'🎯',  cat:'cards',     color:'#00d084', hot:true  },
   { id:'poker',            settingKey:'poker',         name:'Poker',             icon:'♣️',  cat:'cards',     color:'#9944ff', hot:false },
@@ -31,10 +31,10 @@ const ALL_GAMES = [
   { id:'hi-lo',            settingKey:'hiLo',          name:'Hi-Lo',             icon:'📈',  cat:'cards',     color:'#4488ff', hot:false },
   { id:'video-poker',      settingKey:'videoPoker',    name:'Video Poker',       icon:'🎰',  cat:'cards',     color:'#ff8800', hot:false, new:true },
   { id:'hilo-card',        settingKey:'hiloCard',      name:'Hilo Card',         icon:'🃏',  cat:'cards',     color:'#00d084', hot:false, new:true },
-  { id:'war',              settingKey:'war',           name:'War',               icon:'⚔️',  cat:'cards',     color:'#e03030', hot:false, new:true },
+  { id:'war',              settingKey:'war',           name:'War',               icon:'⚔️',  cat:'cards',     color:'#c9a227', hot:false, new:true },
   { id:'blackjack-switch', settingKey:'blackjackSwitch',name:'Blackjack Switch', icon:'🔄',  cat:'cards',     color:'#4488ff', hot:false, new:true },
   { id:'three-card-poker', settingKey:'threeCardPoker',name:'3 Card Poker',      icon:'🃏',  cat:'cards',     color:'#9944ff', hot:false, new:true },
-  { id:'mini-baccarat',    settingKey:'miniBaccarat',  name:'Mini Baccarat',     icon:'🎴',  cat:'cards',     color:'#e03030', hot:false, new:true },
+  { id:'mini-baccarat',    settingKey:'miniBaccarat',  name:'Mini Baccarat',     icon:'🎴',  cat:'cards',     color:'#c9a227', hot:false, new:true },
 
   // ── DICE ──
   { id:'dice',             settingKey:'dice',          name:'Dice',              icon:'🎲',  cat:'dice',      color:'#00d084', hot:false },
@@ -43,12 +43,12 @@ const ALL_GAMES = [
 
   // ── SLOTS ──
   { id:'slots',            settingKey:'slots',         name:'Slot Machine',      icon:'🎰',  cat:'slots',     color:'#ff8800', hot:true  },
-  { id:'lucky-7s',         settingKey:'lucky7s',       name:'Lucky 7s',          icon:'7️⃣',  cat:'slots',     color:'#e03030', hot:false, new:true },
+  { id:'lucky-7s',         settingKey:'lucky7s',       name:'Lucky 7s',          icon:'7️⃣',  cat:'slots',     color:'#c9a227', hot:false, new:true },
   { id:'scratch-card',     settingKey:'scratchCard',   name:'Scratch Card',      icon:'🎴',  cat:'slots',     color:'#9944ff', hot:false, new:true },
 
   // ── WHEEL ──
   { id:'roulette',         settingKey:'roulette',      name:'Roulette',          icon:'🎡',  cat:'wheel',     color:'#00d084', hot:false },
-  { id:'lucky-wheel',      settingKey:'luckyWheel',    name:'Lucky Wheel',       icon:'🎡',  cat:'wheel',     color:'#e03030', hot:false },
+  { id:'lucky-wheel',      settingKey:'luckyWheel',    name:'Lucky Wheel',       icon:'🎡',  cat:'wheel',     color:'#c9a227', hot:false },
   { id:'spin-win',         settingKey:'spinWin',       name:'Spin & Win',        icon:'🎪',  cat:'wheel',     color:'#ff4488', hot:false },
   { id:'wheel-fortune',    settingKey:'wheelFortune',  name:'Wheel of Fortune',  icon:'🎡',  cat:'wheel',     color:'#9944ff', hot:false, new:true },
   { id:'color-prediction', settingKey:'colorPrediction',name:'Color Prediction', icon:'🎨',  cat:'wheel',     color:'#ff4488', hot:false },
@@ -60,7 +60,7 @@ const ALL_GAMES = [
   { id:'ball-drop',        settingKey:'ballDrop',      name:'Ball Drop',         icon:'⚽',  cat:'grid',      color:'#ff8800', hot:false, new:true },
 
   // ── INSTANT ──
-  { id:'coin-flip',        settingKey:'coinFlip',      name:'Coin Flip',         icon:'🪙',  cat:'instant',   color:'#e03030', hot:false, new:true },
+  { id:'coin-flip',        settingKey:'coinFlip',      name:'Coin Flip',         icon:'🪙',  cat:'instant',   color:'#c9a227', hot:false, new:true },
   { id:'number-guess',     settingKey:'numberGuess',   name:'Number Guess',      icon:'🔢',  cat:'instant',   color:'#4488ff', hot:false, new:true },
   { id:'rps',              settingKey:'rps',           name:'Rock Paper Scissors',icon:'✊', cat:'instant',   color:'#00d084', hot:false, new:true },
   { id:'hot-cold',         settingKey:'hotCold',       name:'Hot & Cold',        icon:'🔥',  cat:'instant',   color:'#ff4444', hot:false, new:true },
@@ -251,7 +251,7 @@ export default function GameLobby() {
 
       {/* Login prompt */}
       {!user && (
-        <div style={{ marginTop: '24px', padding: '16px', background: 'rgba(224,48,48,0.06)', border: '1px solid rgba(224,48,48,0.15)', borderRadius: '12px', textAlign: 'center' }}>
+        <div style={{ marginTop: '24px', padding: '16px', background: 'rgba(201,162,39,0.06)', border: '1px solid rgba(224,48,48,0.15)', borderRadius: '12px', textAlign: 'center' }}>
           <p style={{ color: 'var(--text-secondary)', fontSize: '14px', marginBottom: '10px' }}>
             Login to play all games and win real coins! 🪙
           </p>

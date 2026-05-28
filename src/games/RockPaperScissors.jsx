@@ -103,7 +103,7 @@ export default function RockPaperScissors() {
               <div style={{ display: 'flex', gap: '10px', marginBottom: '14px' }}>
                 {CHOICES.map(c => (
                   <button key={c.id} onClick={() => phase === 'bet' && setChoice(c.id)}
-                    style={{ flex: 1, padding: '14px 8px', borderRadius: '12px', border: `2px solid ${choice === c.id ? 'var(--gold)' : 'var(--border)'}`, background: choice === c.id ? 'rgba(224,48,48,0.15)' : 'var(--bg-hover)', cursor: phase === 'bet' ? 'pointer' : 'default', textAlign: 'center', transition: 'all 0.2s', opacity: phase === 'reveal' ? 0.6 : 1 }}>
+                    style={{ flex: 1, padding: '14px 8px', borderRadius: '12px', border: `2px solid ${choice === c.id ? 'var(--gold)' : 'var(--border)'}`, background: choice === c.id ? 'rgba(201,162,39,0.15)' : 'var(--bg-hover)', cursor: phase === 'bet' ? 'pointer' : 'default', textAlign: 'center', transition: 'all 0.2s', opacity: phase === 'reveal' ? 0.6 : 1 }}>
                     <div style={{ fontSize: 'clamp(24px,7vw,36px)', marginBottom: '4px' }}>{c.emoji}</div>
                     <div style={{ fontSize: '11px', color: choice === c.id ? 'var(--gold)' : 'var(--text-muted)', fontWeight: '600' }}>
                       {c.id.charAt(0).toUpperCase() + c.id.slice(1)}
@@ -114,7 +114,7 @@ export default function RockPaperScissors() {
             )}
 
             {result && (
-              <div style={{ textAlign: 'center', padding: '16px', borderRadius: '12px', background: result === 'win' ? 'rgba(0,208,132,0.1)' : result === 'lose' ? 'rgba(255,68,68,0.1)' : 'rgba(224,48,48,0.1)', border: `1px solid ${result === 'win' ? 'rgba(0,208,132,0.3)' : result === 'lose' ? 'rgba(255,68,68,0.3)' : 'rgba(224,48,48,0.3)'}`, fontSize: '20px', fontWeight: '900', color: result === 'win' ? '#00d084' : result === 'lose' ? '#ff4444' : '#e03030' }}>
+              <div style={{ textAlign: 'center', padding: '16px', borderRadius: '12px', background: result === 'win' ? 'rgba(0,208,132,0.1)' : result === 'lose' ? 'rgba(255,68,68,0.1)' : 'rgba(201,162,39,0.1)', border: `1px solid ${result === 'win' ? 'rgba(0,208,132,0.3)' : result === 'lose' ? 'rgba(255,68,68,0.3)' : 'rgba(201,162,39,0.3)'}`, fontSize: '20px', fontWeight: '900', color: result === 'win' ? '#00d084' : result === 'lose' ? '#ff4444' : '#c9a227' }}>
                 {result === 'win' ? '🎉 You Win! 2x' : result === 'lose' ? '😞 House Wins' : '🤝 Tie — Bet Returned'}
               </div>
             )}

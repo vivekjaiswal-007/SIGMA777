@@ -111,7 +111,7 @@ export default function KenoGame() {
                     style={{
                       aspectRatio: '1', borderRadius: '6px', fontSize: 'clamp(9px,2vw,13px)', fontWeight: '700',
                       border: `1.5px solid ${isMatch ? '#00d084' : isPicked ? 'var(--gold)' : isDrawn ? '#4488ff' : 'var(--border)'}`,
-                      background: isMatch ? 'rgba(0,208,132,0.25)' : isPicked ? 'rgba(224,48,48,0.18)' : isDrawn ? 'rgba(68,136,255,0.18)' : 'var(--bg-hover)',
+                      background: isMatch ? 'rgba(0,208,132,0.25)' : isPicked ? 'rgba(201,162,39,0.18)' : isDrawn ? 'rgba(68,136,255,0.18)' : 'var(--bg-hover)',
                       color: isMatch ? '#00d084' : isPicked ? 'var(--gold)' : isDrawn ? '#4488ff' : 'var(--text-secondary)',
                       cursor: phase === 'pick' ? 'pointer' : 'default',
                       transition: 'all 0.15s',

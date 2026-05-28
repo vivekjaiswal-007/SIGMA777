@@ -7,13 +7,13 @@ import toast from 'react-hot-toast'
 
 const SYMBOLS = [
   { sym: '💎', value: 50, color: '#44ccff' },
-  { sym: '🌟', value: 25, color: '#ff5555' },
+  { sym: '🌟', value: 25, color: '#f0c84a' },
   { sym: '🍀', value: 15, color: '#00d084' },
   { sym: '🎯', value: 10, color: '#ff8800' },
   { sym: '🔮', value: 8,  color: '#9944ff' },
   { sym: '🎲', value: 5,  color: '#4488ff' },
   { sym: '🍒', value: 3,  color: '#ff4444' },
-  { sym: '💰', value: 2,  color: '#e03030' },
+  { sym: '💰', value: 2,  color: '#c9a227' },
 ]
 
 function generateCard() {
@@ -135,7 +135,7 @@ export default function ScratchCard() {
 
                 {phase === 'scratch' && !revealed.every(Boolean) && (
                   <button onClick={revealAll} disabled={autoRevealing}
-                    style={{ width: '100%', padding: '11px', borderRadius: '9px', background: 'rgba(224,48,48,0.12)', border: '1px solid rgba(224,48,48,0.3)', color: 'var(--gold)', fontWeight: '700', fontSize: '14px', cursor: 'pointer', marginBottom: '8px' }}>
+                    style={{ width: '100%', padding: '11px', borderRadius: '9px', background: 'rgba(201,162,39,0.12)', border: '1px solid rgba(201,162,39,0.3)', color: 'var(--gold)', fontWeight: '700', fontSize: '14px', cursor: 'pointer', marginBottom: '8px' }}>
                     ⚡ Reveal All
                   </button>
                 )}

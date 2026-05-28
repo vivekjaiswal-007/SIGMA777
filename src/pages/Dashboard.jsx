@@ -441,7 +441,7 @@ export default function Dashboard() {
                         </div>
                         {/* Submit button */}
                         <button onClick={submitDeposit} disabled={submitLoading}
-                          style={{ width: '100%', padding: '12px', background: 'linear-gradient(135deg,#c01818,#e8c840)', border: 'none', borderRadius: '8px', color: '#050200', fontWeight: '800', fontSize: '14px', cursor: 'pointer' }}>
+                          style={{ width: '100%', padding: '12px', background: 'linear-gradient(135deg,#c01818,#ff4444)', border: 'none', borderRadius: '8px', color: '#050200', fontWeight: '800', fontSize: '14px', cursor: 'pointer' }}>
                           {submitLoading ? '⏳ Submitting...' : '✅ Submit Deposit Request'}
                         </button>
                         <div style={{ color: 'var(--text-muted)', fontSize: '11px', lineHeight: 1.5, marginTop: '8px', textAlign: 'center' }}>Coins credited within 30 minutes after verification.</div>

@@ -70,17 +70,17 @@ export default function MiniBaccarat(){
               const val=li===0?result?.pv:result?.bv2
               const won=result&&result.winner===(li===0?'player':'banker')
               return(
-                <div key={label} style={{marginBottom:'14px',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'10px',background:'rgba(255,255,255,0.03)',borderRadius:'10px',border:`1px solid ${won?'rgba(224,48,48,0.4)':'rgba(255,255,255,0.06)'}`}}>
+                <div key={label} style={{marginBottom:'14px',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'10px',background:'rgba(255,255,255,0.03)',borderRadius:'10px',border:`1px solid ${won?'rgba(201,162,39,0.4)':'rgba(255,255,255,0.06)'}`}}>
                   <div style={{color:li===0?'#4488ff':'#ff4444',fontWeight:'700',fontSize:'13px',minWidth:'60px'}}>{label}</div>
                   <div style={{display:'flex',gap:'6px',flex:1,justifyContent:'center'}}>
                     {cards.length>0?cards.map((c,i)=><MCard key={i} c={c}/>):Array(2).fill(null).map((_,i)=><div key={i} style={{width:'clamp(36px,10vw,52px)',height:'clamp(50px,14vw,72px)',background:'linear-gradient(135deg,#1a1a4e,#2a2a8e)',borderRadius:'6px'}}/>)}
                   </div>
-                  <div style={{fontWeight:'900',fontSize:'22px',color:won?'#e03030':'#555',minWidth:'40px',textAlign:'right'}}>{val??''}</div>
+                  <div style={{fontWeight:'900',fontSize:'22px',color:won?'#c9a227':'#555',minWidth:'40px',textAlign:'right'}}>{val??''}</div>
                 </div>
               )
             })}
             {result&&(
-              <div style={{textAlign:'center',padding:'10px',borderRadius:'8px',background:'rgba(224,48,48,0.08)',border:'1px solid rgba(224,48,48,0.2)',marginTop:'6px',fontSize:'15px',fontWeight:'800',color:result.win>0?'#00d084':result.winner==='tie'?'#e03030':'#ff4444'}}>
+              <div style={{textAlign:'center',padding:'10px',borderRadius:'8px',background:'rgba(201,162,39,0.08)',border:'1px solid rgba(201,162,39,0.2)',marginTop:'6px',fontSize:'15px',fontWeight:'800',color:result.win>0?'#00d084':result.winner==='tie'?'#c9a227':'#ff4444'}}>
                 {result.winner.toUpperCase()} WINS {result.win>0?`• +${result.win} 🪙`:''}
               </div>
             )}
@@ -106,7 +106,7 @@ export default function MiniBaccarat(){
             <div style={{fontSize:'11px',color:'var(--text-muted)',textTransform:'uppercase',letterSpacing:'0.5px',marginBottom:'8px'}}>Amount</div>
             <div style={{display:'flex',gap:'5px',flexWrap:'wrap'}}>
               {AMOUNTS.map(a=>(
-                <button key={a} onClick={()=>setBet(p=>({...p,amount:a}))} style={{flex:'1 1 30%',padding:'8px 4px',borderRadius:'6px',border:`1px solid ${bet.amount===a?'var(--gold)':'var(--border)'}`,background:bet.amount===a?'rgba(224,48,48,0.15)':'var(--bg-hover)',color:bet.amount===a?'var(--gold)':'var(--text-secondary)',fontWeight:'700',fontSize:'12px',cursor:'pointer'}}>
+                <button key={a} onClick={()=>setBet(p=>({...p,amount:a}))} style={{flex:'1 1 30%',padding:'8px 4px',borderRadius:'6px',border:`1px solid ${bet.amount===a?'var(--gold)':'var(--border)'}`,background:bet.amount===a?'rgba(201,162,39,0.15)':'var(--bg-hover)',color:bet.amount===a?'var(--gold)':'var(--text-secondary)',fontWeight:'700',fontSize:'12px',cursor:'pointer'}}>
                   🪙{a>=1000?`${a/1000}K`:a}
                 </button>
               ))}

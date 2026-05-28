@@ -74,7 +74,7 @@ export default function LimboGame() {
         <div>
           <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px', padding: '24px', textAlign: 'center' }}>
             {/* Result display */}
-            <div style={{ fontSize: 'clamp(48px,15vw,80px)', fontWeight: '900', fontFamily: 'Cinzel,serif', minHeight: '90px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: phase === 'result' ? (result?.win ? '#00d084' : '#ff4444') : 'var(--gold)', textShadow: `0 0 20px ${phase === 'result' ? (result?.win ? 'rgba(0,208,132,0.5)' : 'rgba(255,68,68,0.5)') : 'rgba(224,48,48,0.4)'}`, transition: 'color 0.3s' }}>
+            <div style={{ fontSize: 'clamp(48px,15vw,80px)', fontWeight: '900', fontFamily: 'Cinzel,serif', minHeight: '90px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: phase === 'result' ? (result?.win ? '#00d084' : '#ff4444') : 'var(--gold)', textShadow: `0 0 20px ${phase === 'result' ? (result?.win ? 'rgba(0,208,132,0.5)' : 'rgba(255,68,68,0.5)') : 'rgba(201,162,39,0.4)'}`, transition: 'color 0.3s' }}>
               {displayMult ? `${displayMult}x` : '?'}
             </div>
 
@@ -96,7 +96,7 @@ export default function LimboGame() {
               <div style={{ display: 'flex', gap: '6px', justifyContent: 'center', marginTop: '12px', flexWrap: 'wrap' }}>
                 {[1.5, 2, 3, 5, 10, 25, 50].map(t => (
                   <button key={t} onClick={() => phase === 'bet' && setTarget(t)}
-                    style={{ padding: '5px 12px', borderRadius: '6px', fontSize: '12px', fontWeight: '700', background: target === t ? 'rgba(224,48,48,0.2)' : 'var(--bg-card)', border: `1px solid ${target === t ? 'var(--gold)' : 'var(--border)'}`, color: target === t ? 'var(--gold)' : 'var(--text-secondary)', cursor: 'pointer' }}>
+                    style={{ padding: '5px 12px', borderRadius: '6px', fontSize: '12px', fontWeight: '700', background: target === t ? 'rgba(201,162,39,0.2)' : 'var(--bg-card)', border: `1px solid ${target === t ? 'var(--gold)' : 'var(--border)'}`, color: target === t ? 'var(--gold)' : 'var(--text-secondary)', cursor: 'pointer' }}>
                     {t}x
                   </button>
                 ))}

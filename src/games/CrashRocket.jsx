@@ -234,8 +234,8 @@ export default function CrashRocket() {
           const ang=Math.atan2(tip.y-prev.y,tip.x-prev.x)
           ctx.save(); ctx.translate(tip.x,tip.y); ctx.rotate(ang)
           // Rocket body
-          ctx.fillStyle='#e03030'; ctx.beginPath(); ctx.ellipse(0,0,11,5,0,0,Math.PI*2); ctx.fill()
-          ctx.fillStyle='#ff5555'; ctx.beginPath(); ctx.moveTo(11,0); ctx.lineTo(5,-4); ctx.lineTo(5,4); ctx.closePath(); ctx.fill()
+          ctx.fillStyle='#c9a227'; ctx.beginPath(); ctx.ellipse(0,0,11,5,0,0,Math.PI*2); ctx.fill()
+          ctx.fillStyle='#f0c84a'; ctx.beginPath(); ctx.moveTo(11,0); ctx.lineTo(5,-4); ctx.lineTo(5,4); ctx.closePath(); ctx.fill()
           ctx.fillStyle='#ff8800'
           ctx.beginPath(); ctx.moveTo(-5,-5); ctx.lineTo(-12,-12); ctx.lineTo(-10,-5); ctx.closePath(); ctx.fill()
           ctx.beginPath(); ctx.moveTo(-5,5); ctx.lineTo(-12,12); ctx.lineTo(-10,5); ctx.closePath(); ctx.fill()

@@ -73,7 +73,7 @@ export default function PenaltyShootout() {
             {/* Zone buttons */}
             {ZONES.map(z => (
               <button key={z.id} onClick={() => phase === 'pick' && setPicked(z.id)}
-                style={{ position: 'absolute', transform: 'translate(-50%,-50%)', left: z.x, top: z.y, width: 'clamp(36px,10vw,52px)', height: 'clamp(36px,10vw,52px)', borderRadius: '50%', border: `3px solid ${picked === z.id ? '#ff5555' : 'rgba(255,255,255,0.5)'}`, background: picked === z.id ? 'rgba(240,200,74,0.3)' : 'rgba(255,255,255,0.1)', cursor: phase === 'pick' ? 'pointer' : 'default', zIndex: 2, transition: 'all 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                style={{ position: 'absolute', transform: 'translate(-50%,-50%)', left: z.x, top: z.y, width: 'clamp(36px,10vw,52px)', height: 'clamp(36px,10vw,52px)', borderRadius: '50%', border: `3px solid ${picked === z.id ? '#f0c84a' : 'rgba(255,255,255,0.5)'}`, background: picked === z.id ? 'rgba(240,200,74,0.3)' : 'rgba(255,255,255,0.1)', cursor: phase === 'pick' ? 'pointer' : 'default', zIndex: 2, transition: 'all 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 {result && gkZone?.id === z.id && (
                   <span style={{ fontSize: '20px' }}>🧤</span>
                 )}
@@ -91,13 +91,13 @@ export default function PenaltyShootout() {
             {/* Status */}
             <div style={{ position: 'absolute', bottom: '4%', left: '50%', transform: 'translateX(-50%)', textAlign: 'center', whiteSpace: 'nowrap' }}>
               {phase === 'pick' && <span style={{ background: 'rgba(0,0,0,0.6)', color: 'white', padding: '4px 10px', borderRadius: '20px', fontSize: '12px', fontWeight: '600' }}>Pick a corner to shoot!</span>}
-              {shooting && <span style={{ background: 'rgba(0,0,0,0.7)', color: '#ff5555', padding: '4px 10px', borderRadius: '20px', fontSize: '13px', fontWeight: '800' }}>Shooting... 🎯</span>}
+              {shooting && <span style={{ background: 'rgba(0,0,0,0.7)', color: '#f0c84a', padding: '4px 10px', borderRadius: '20px', fontSize: '13px', fontWeight: '800' }}>Shooting... 🎯</span>}
               {result && <span style={{ background: result.scored ? 'rgba(0,200,80,0.8)' : 'rgba(200,0,0,0.8)', color: 'white', padding: '6px 14px', borderRadius: '20px', fontSize: '14px', fontWeight: '900' }}>{result.scored ? '⚽ GOAL!' : '🧤 SAVED!'}</span>}
             </div>
           </div>
 
           {picked && phase === 'pick' && (
-            <div style={{ padding: '8px 12px', background: 'rgba(224,48,48,0.1)', border: '1px solid rgba(224,48,48,0.25)', borderRadius: '8px', fontSize: '13px', color: 'var(--gold)', textAlign: 'center' }}>
+            <div style={{ padding: '8px 12px', background: 'rgba(201,162,39,0.1)', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '8px', fontSize: '13px', color: 'var(--gold)', textAlign: 'center' }}>
               🎯 Shooting {ZONES.find(z=>z.id===picked)?.label} — Pays <strong>2x</strong>
             </div>
           )}

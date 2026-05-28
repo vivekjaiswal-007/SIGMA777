@@ -9,13 +9,13 @@ const PLATFORM_GAMES = [
   { name: 'Chicken Road',     path: '/games/chicken-road',     icon: '🐔', color: '#ff9900', cat: 'Crash' },
   { name: 'Mines',            path: '/games/mines',            icon: '💎', color: '#00d084', cat: 'Arcade' },
   { name: 'Dragon Tiger',     path: '/games/dragon-tiger',     icon: '🐉', color: '#ff4444', cat: 'Casino' },
-  { name: 'Teen Patti',       path: '/games/teen-patti',       icon: '♠️', color: '#e03030', cat: 'Indian' },
+  { name: 'Teen Patti',       path: '/games/teen-patti',       icon: '♠️', color: '#c9a227', cat: 'Indian' },
   { name: 'Roulette',         path: '/games/roulette',         icon: '🎡', color: '#00d084', cat: 'Casino' },
   { name: 'Blackjack',        path: '/games/blackjack',        icon: '🃏', color: '#4488ff', cat: 'Cards' },
   { name: 'Andar Bahar',      path: '/games/andar-bahar',      icon: '🎯', color: '#ff9900', cat: 'Indian' },
   { name: 'Plinko',           path: '/games/plinko',           icon: '⚡', color: '#ff4488', cat: 'Arcade' },
   { name: 'Hi-Lo',            path: '/games/hi-lo',            icon: '📈', color: '#00d084', cat: 'Cards' },
-  { name: 'Lucky Wheel',      path: '/games/lucky-wheel',      icon: '🎡', color: '#e03030', cat: 'Arcade' },
+  { name: 'Lucky Wheel',      path: '/games/lucky-wheel',      icon: '🎡', color: '#c9a227', cat: 'Arcade' },
   { name: 'Sic Bo',           path: '/games/sic-bo',           icon: '🎲', color: '#ff9900', cat: 'Dice' },
   { name: 'Dice',             path: '/games/dice',             icon: '⚀', color: '#4488ff', cat: 'Dice' },
   { name: 'Poker',            path: '/games/poker',            icon: '♣️', color: '#9944ff', cat: 'Cards' },
@@ -85,7 +85,7 @@ export default function AllGames() {
           const active = cat === c
           return (
             <button key={c} onClick={function() { setCat(c) }}
-              style={{ padding: '6px 14px', borderRadius: '20px', border: '1px solid ' + (active ? '#e03030' : '#2a2a3a'), background: active ? 'rgba(224,48,48,0.15)' : '#1a1a28', color: active ? '#e03030' : '#888', fontSize: '11px', fontWeight: active ? '700' : '400', cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0 }}>
+              style={{ padding: '6px 14px', borderRadius: '20px', border: '1px solid ' + (active ? '#c9a227' : '#2a2a3a'), background: active ? 'rgba(201,162,39,0.15)' : '#1a1a28', color: active ? '#c9a227' : '#888', fontSize: '11px', fontWeight: active ? '700' : '400', cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0 }}>
               {c}
             </button>
           )
