@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import Footer from './components/Footer'
 import Terms from './pages/Terms'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useStore } from './store/useStore'
@@ -136,6 +137,7 @@ export default function App() {
         <Route path="games/penalty" element={<ProtectedRoute><GameWrapper><PenaltyShootout /></GameWrapper></ProtectedRoute>} />
       </Route>
     </Routes>
+    <Footer />
     <WhatsAppButton />
     </>
   )

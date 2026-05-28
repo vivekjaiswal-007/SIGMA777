@@ -1,100 +1,77 @@
-import React from 'react'
-import { Link, useNavigate, useLocation } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useStore } from '../store/useStore'
 
-export default function Header({ isMobile, onLoginClick, onSignupClick }) {
-  const { user, balance, logout } = useStore()
+export default function Header({ onMobileMenuClick, isMobile, onLoginClick, onSignupClick }) {
+  const { user, balance, logout, toggleSidebar } = useStore()
   const navigate = useNavigate()
-  const location = useLocation()
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [searchVal, setSearchVal] = useState('')
 
-  const navTabs = [
-    { label: 'Home', path: '/' },
-    { label: 'Inplay', action: 'cricket' },
-    { label: 'Sportsbook', action: 'cricket' },
-    { label: 'Casino', path: '/live-casino' },
-    { label: 'Multi Markets', path: '/lobby' },
-  ]
-
-  const handleTab = (tab) => {
-    if (tab.action === 'cricket') window.dispatchEvent(new CustomEvent('launch-cricket'))
-    else if (tab.path) navigate(tab.path)
+  const handleSearch = (e) => {
+    e.preventDefault()
+    setSearchOpen(false)
+    setSearchVal('')
   }
 
   return (
-    <header style={{
-      position: 'fixed',
-      top: 0, left: 0, right: 0,
-      height: 'var(--header-height)',
-      background: '#2a1e00',
-      borderBottom: '1px solid #3a2800',
-      display: 'flex',
-      alignItems: 'center',
-      padding: '0 14px',
-      zIndex: 1100,
-      gap: '16px',
-    }}>
+    <header className="app-header" style={{ background:'#0a2e14', borderBottom:'1px solid #071f0e', boxShadow:'0 1px 6px rgba(0,0,0,0.5)', padding:'0 10px' }}>
 
-      {/* Logo */}
-      <Link to="/" style={{ display:'flex', alignItems:'center', flexShrink:0, textDecoration:'none', gap:'2px' }}>
-        <span style={{ fontFamily:'Georgia,serif', fontWeight:'900', fontSize: isMobile?'17px':'21px', color:'#c9a84c', letterSpacing:'-0.5px', textTransform:'uppercase', textShadow:'0 0 14px rgba(201,168,76,0.5)' }}>
-          MAHADEV<span style={{ fontSize: isMobile?'11px':'13px', verticalAlign:'super' }}>247</span>
-        </span>
-      </Link>
+      {/* Search overlay */}
+      {searchOpen && (
+        <div style={{ position:'fixed', inset:0, background:'rgba(0,0,0,0.85)', zIndex:2000, display:'flex', alignItems:'flex-start', justifyContent:'center', paddingTop:'60px' }}
+          onClick={() => setSearchOpen(false)}>
+          <form onSubmit={handleSearch} onClick={e => e.stopPropagation()}
+            style={{ width:'90%', maxWidth:'400px', display:'flex', gap:'8px' }}>
+            <input autoFocus value={searchVal} onChange={e => setSearchVal(e.target.value)}
+              placeholder="Search games..."
+              style={{ flex:1, padding:'10px 14px', background:'#1a1a1a', border:'1px solid #333', borderRadius:'8px', color:'#fff', fontSize:'15px', outline:'none' }} />
+            <button type="submit" style={{ padding:'10px 16px', background:'#1e7d32', border:'none', borderRadius:'8px', color:'#fff', fontWeight:'700', cursor:'pointer' }}>Go</button>
+          </form>
+        </div>
+      )}
 
-      {/* Nav tabs — always visible, even mobile */}
-      <nav style={{ display:'flex', alignItems:'center', gap:'2px', flex:1, overflowX:'auto', scrollbarWidth:'none' }}>
-        {navTabs.map((tab, i) => {
-          const isActive = tab.path && location.pathname === tab.path
-          return (
-            <button key={i} onClick={() => handleTab(tab)}
-              style={{
-                flexShrink: 0,
-                padding: isMobile ? '5px 10px' : '5px 16px',
-                background: isActive ? '#c9a84c' : 'transparent',
-                border: 'none',
-                borderRadius: '20px',
-                color: isActive ? '#111' : '#bbb',
-                fontWeight: isActive ? '700' : '500',
-                fontSize: isMobile ? '11px' : '13px',
-                cursor: 'pointer',
-                whiteSpace: 'nowrap',
-                transition: 'all 0.15s',
-              }}
-              onMouseEnter={e => { if (!isActive) e.currentTarget.style.color = '#fff' }}
-              onMouseLeave={e => { if (!isActive) e.currentTarget.style.color = '#bbb' }}
-            >
-              {tab.label}
-            </button>
-          )
-        })}
-      </nav>
+      {/* Left */}
+      <div style={{ display:'flex', alignItems:'center', gap:'7px', flexShrink:0 }}>
+        {!isMobile && (
+          <button onClick={() => toggleSidebar()} style={{ background:'none', border:'none', color:'rgba(255,255,255,0.7)', padding:'5px', display:'flex', alignItems:'center', cursor:'pointer' }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/></svg>
+          </button>
+        )}
+        <Link to="/" style={{ display:'flex', alignItems:'center', gap:'6px', flexShrink:0 }}>
+          <div style={{ width:'24px', height:'24px', background:'rgba(255,255,255,0.12)', border:'1.5px solid rgba(255,255,255,0.35)', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
+            <span style={{ fontFamily:'Cinzel,serif', fontWeight:'900', fontSize:'11px', color:'#fff' }}>Σ</span>
+          </div>
+          <span style={{ fontFamily:'Cinzel,serif', fontWeight:'900', fontSize: isMobile?'13px':'15px', color:'#fff', letterSpacing:'1px' }}>
+            SIGMA<span style={{ color:'#ffe066' }}>777</span>
+          </span>
+        </Link>
+      </div>
 
       {/* Right */}
-      <div style={{ display:'flex', alignItems:'center', gap:'6px', flexShrink:0 }}>
+      <div style={{ display:'flex', alignItems:'center', gap:'5px', flexShrink:0 }}>
+        {/* Search icon */}
+        <button onClick={() => setSearchOpen(true)} style={{ background:'none', border:'none', color:'rgba(255,255,255,0.75)', padding:'4px 6px', cursor:'pointer', display:'flex', alignItems:'center' }}>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+            <circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/>
+          </svg>
+        </button>
+
         {user ? (
           <>
-            <div onClick={() => navigate('/account')}
-              style={{ display:'flex', alignItems:'center', gap:'4px', background:'rgba(201,168,76,0.15)', border:'1px solid rgba(201,168,76,0.4)', borderRadius:'20px', padding:'3px 10px', cursor:'pointer' }}>
-              <span style={{ fontSize:'11px' }}>🪙</span>
-              <span style={{ color:'#c9a84c', fontWeight:'800', fontSize:'12px' }}>CI {Number(balance||0).toLocaleString()}</span>
+            {/* Balance chip — Mahaling777 style */}
+            <div onClick={() => navigate('/dashboard')} style={{ display:'flex', alignItems:'center', gap:'5px', background:'rgba(0,0,0,0.35)', border:'1px solid rgba(255,255,255,0.2)', borderRadius:'6px', padding:'3px 10px', cursor:'pointer', flexShrink:0 }}>
+              <span style={{ fontSize:'12px' }}>🪙</span>
+              <span style={{ color:'#ffe066', fontWeight:'800', fontSize:'12px' }}>CI {Number(balance||0).toLocaleString()}</span>
             </div>
-            <button onClick={logout}
-              style={{ background:'transparent', border:'1px solid #444', color:'#ccc', padding:'4px 12px', borderRadius:'20px', fontSize:'12px', cursor:'pointer' }}>
+            <button onClick={logout} style={{ background:'rgba(0,0,0,0.3)', border:'1px solid rgba(255,255,255,0.18)', color:'rgba(255,255,255,0.8)', padding:'3px 7px', borderRadius:'4px', fontSize:'10px', fontWeight:'600', cursor:'pointer', whiteSpace:'nowrap' }}>
               {isMobile ? '⬅' : 'Logout'}
             </button>
           </>
         ) : (
           <>
-            <button onClick={onLoginClick}
-              style={{ background:'transparent', border:'1px solid #c9a84c', color:'#c9a84c', padding:'5px 16px', borderRadius:'20px', fontSize:'13px', fontWeight:'600', cursor:'pointer', whiteSpace:'nowrap' }}>
-              Login
-            </button>
-            {!isMobile && (
-              <button onClick={onSignupClick}
-                style={{ background:'#c9a84c', border:'none', color:'#111', padding:'5px 16px', borderRadius:'20px', fontSize:'13px', fontWeight:'700', cursor:'pointer', whiteSpace:'nowrap' }}>
-                Sign Up
-              </button>
-            )}
+            <button onClick={onLoginClick} style={{ background:'rgba(0,0,0,0.3)', border:'1px solid rgba(255,255,255,0.25)', color:'#fff', padding:'4px 9px', borderRadius:'4px', fontSize:'11px', fontWeight:'700', cursor:'pointer', whiteSpace:'nowrap' }}>LOGIN</button>
+            <button onClick={onSignupClick} style={{ background:'rgba(0,0,0,0.4)', border:'1.5px solid rgba(255,255,255,0.4)', color:'#fff', padding:'3px 8px', borderRadius:'4px', fontSize:'11px', fontWeight:'800', cursor:'pointer', whiteSpace:'nowrap' }}>SIGNUP</button>
           </>
         )}
       </div>

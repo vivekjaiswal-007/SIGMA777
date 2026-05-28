@@ -221,137 +221,6 @@ function GameRow({ row, idx, onPlay, launchingGame }) {
 }
 
 
-function CasinoLobby({ games, onPlay, launchingGame }) {
-  return (
-    <section style={{ marginBottom:'20px' }}>
-      <div style={{ marginBottom:'10px', borderBottom:'1px solid #2a2a2a', paddingBottom:'8px' }}>
-        <h2 style={{ fontSize:'14px', fontWeight:'900', color:'#fff', textTransform:'uppercase', letterSpacing:'1px', margin:0, fontStyle:'italic' }}>CASINO LOBBY</h2>
-      </div>
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:'4px' }}>
-        {games.map((g, i) => {
-          const busy = launchingGame === g.game_uid
-          return (
-            <div key={i} style={{ borderRadius:'6px', overflow:'hidden', cursor:busy?'wait':'pointer', opacity:busy?0.6:1, position:'relative', aspectRatio:'4/3', transition:'transform 0.15s' }}
-              onClick={() => !busy && onPlay(g)}
-              onMouseEnter={e => e.currentTarget.style.transform='scale(1.04)'}
-              onMouseLeave={e => e.currentTarget.style.transform='none'}
-            >
-              {g.img
-                ? <img src={g.img} alt={g.name} style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} onError={e=>{e.target.style.display='none'}}/>
-                : <div style={{ width:'100%', height:'100%', background:'linear-gradient(135deg,#1a1a3a,#2a1a3a)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'14px' }}>🎮</div>
-              }
-              <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'linear-gradient(transparent,rgba(0,0,0,0.85))', padding:'8px 4px 3px' }}>
-                <div style={{ fontSize:'7px', fontWeight:'900', color:'#fff', textTransform:'uppercase', overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{busy?'⏳':g.name}</div>
-              </div>
-            </div>
-          )
-        })}
-      </div>
-    </section>
-  )
-}
-
-function LiveRow({ label, games, onPlay, launchingGame }) {
-  const rowRef = useRef(null)
-  if (!games || games.length === 0) return null
-  return (
-    <section style={{ marginBottom:'20px' }}>
-      <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'10px', borderBottom:'1px solid #2a2a2a', paddingBottom:'8px' }}>
-        <h2 style={{ fontSize:'14px', fontWeight:'900', color:'#fff', textTransform:'uppercase', letterSpacing:'1px', margin:0, fontStyle:'italic' }}>{label}</h2>
-        <div style={{ display:'flex', gap:'5px' }}>
-          <button onClick={() => rowRef.current?.scrollBy({ left:-300, behavior:'smooth' })} style={{ width:'26px', height:'26px', borderRadius:'5px', background:'#2a2a2a', border:'1px solid #3a3a3a', color:'#ccc', fontSize:'14px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>‹</button>
-          <button onClick={() => rowRef.current?.scrollBy({ left:300, behavior:'smooth' })} style={{ width:'26px', height:'26px', borderRadius:'5px', background:'#2a2a2a', border:'1px solid #3a3a3a', color:'#ccc', fontSize:'14px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>›</button>
-        </div>
-      </div>
-      <div ref={rowRef} className="hscroll" style={{ gap:'8px' }}>
-        {games.map((g, i) => {
-          const busy = launchingGame === g.game_uid
-          return (
-            <div key={i} style={{ flexShrink:0, width:'130px', borderRadius:'10px', overflow:'hidden', cursor:busy?'wait':'pointer', opacity:busy?0.6:1, position:'relative', transition:'transform 0.2s' }}
-              onClick={() => !busy && onPlay(g)}
-              onMouseEnter={e => e.currentTarget.style.transform='translateY(-3px)'}
-              onMouseLeave={e => e.currentTarget.style.transform='none'}
-            >
-              {g.img
-                ? <img src={g.img} alt={g.name} style={{ width:'100%', height:'175px', objectFit:'cover', display:'block' }} onError={e=>{e.target.style.display='none'}}/>
-                : <div style={{ width:'100%', height:'175px', background:'linear-gradient(135deg,#1a1a3a,#2a1a2a)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'32px' }}>🎮</div>
-              }
-              <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'linear-gradient(transparent,rgba(0,0,0,0.9))', padding:'20px 8px 7px' }}>
-                <div style={{ fontSize:'10px', fontWeight:'900', color:'#fff', textTransform:'uppercase', letterSpacing:'0.3px', lineHeight:1.3 }}>{busy?'⏳':g.name}</div>
-              </div>
-            </div>
-          )
-        })}
-      </div>
-    </section>
-  )
-}
-
-function LuckySportEmbed() {
-  const [url, setUrl] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(false)
-
-  useEffect(function() {
-    api.post('/live-casino/launch', { game_uid: '7004', language: 'hi', currency_code: 'INR' })
-      .then(function(r) {
-        if (r.data.success && r.data.gameUrl) setUrl(r.data.gameUrl)
-        else setError(true)
-        setLoading(false)
-      })
-      .catch(function() { setError(true); setLoading(false) })
-  }, [])
-
-  if (error) return null
-  if (loading) return null
-
-  return (
-    <section style={{ marginBottom:'20px' }}>
-      <div style={{ marginBottom:'8px', display:'flex', alignItems:'center', gap:'8px' }}>
-        <div style={{ width:8, height:8, borderRadius:'50%', background:'#ff4444', animation:'pulse 1.4s infinite' }} />
-        <span style={{ fontSize:'13px', fontWeight:'700', color:'#ddd' }}>🏏 Live Sports Betting</span>
-      </div>
-      <div style={{ borderRadius:'12px', overflow:'hidden', border:'1px solid #3a2800' }}>
-        <iframe src={url} style={{ width:'100%', height:'500px', border:'none', display:'block' }} allow="autoplay; fullscreen" title="Live Sports" />
-      </div>
-    </section>
-  )
-}
-
-function NewLaunchRow({ games, onPlay, launchingGame }) {
-  const rowRef = useRef(null)
-  return (
-    <section style={{ marginBottom:'20px' }}>
-      <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'10px' }}>
-        <h2 style={{ fontSize:'14px', fontWeight:'900', color:'#fff', textTransform:'uppercase', letterSpacing:'1px', margin:0 }}>
-          <span style={{ fontStyle:'italic' }}>NEW LAUNCH</span>
-        </h2>
-        <div style={{ display:'flex', gap:'5px' }}>
-          <button onClick={() => rowRef.current?.scrollBy({ left:-300, behavior:'smooth' })}
-            style={{ width:'26px', height:'26px', borderRadius:'5px', background:'#2a2a2a', border:'1px solid #3a3a3a', color:'#ccc', fontSize:'14px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>‹</button>
-          <button onClick={() => rowRef.current?.scrollBy({ left:300, behavior:'smooth' })}
-            style={{ width:'26px', height:'26px', borderRadius:'5px', background:'#2a2a2a', border:'1px solid #3a3a3a', color:'#ccc', fontSize:'14px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>›</button>
-        </div>
-      </div>
-      <div ref={rowRef} className="hscroll" style={{ gap:'8px' }}>
-        {games.map((g, i) => {
-          const busy = launchingGame === g.game_uid
-          return (
-            <div key={i} className="game-card" onClick={() => !busy && onPlay(g)}
-              style={{ opacity:busy?0.6:1, cursor:busy?'wait':'pointer' }}>
-              {g.img
-                ? <img src={g.img} alt={g.name} className="game-card-thumb" onError={e=>{e.target.style.display='none';e.target.nextSibling&&(e.target.nextSibling.style.display='flex')}}/>
-                : null}
-              <div className="game-card-thumb-placeholder" style={{ background:'#1a1a2a', fontSize:'24px', display:g.img?'none':'flex' }}>🎮</div>
-              <div className="game-card-name">{busy?'⏳':g.name}</div>
-            </div>
-          )
-        })}
-      </div>
-    </section>
-  )
-}
-
 export default function Home() {
   const { user, balance } = useStore()
   const navigate = useNavigate()
@@ -359,7 +228,6 @@ export default function Home() {
   const [launchingGame, setLaunchingGame] = useState(null)
   const [modal, setModal] = useState(null)
   const [liveGames, setLiveGames] = useState([])
-  const [cricketUrl, setCricketUrl] = useState(null)
 
   useEffect(() => {
     api.get('/live-casino/games').then(r => setLiveGames(r.data.games || [])).catch(() => {})
@@ -375,10 +243,7 @@ export default function Home() {
     setLaunching(true)
     try {
       const res = await api.post('/live-casino/launch', { game_uid:'7004', language:'hi', currency_code:'INR' })
-      if (res.data.success && res.data.gameUrl) {
-        setCricketUrl(res.data.gameUrl)
-        setModal(res.data.gameUrl)
-      }
+      if (res.data.success && res.data.gameUrl) setModal(res.data.gameUrl)
       else toast.error(res.data.message || 'Launch failed')
     } catch { toast.error('Launch failed') }
     setLaunching(false)
@@ -425,83 +290,112 @@ export default function Home() {
         </div>
       )}
 
-      {/* HERO — 2 column like Jackpot247 */}
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'10px', marginBottom:'16px' }}>
-        {/* Casino Card */}
-        <div onClick={() => navigate('/live-casino')}
-          style={{ borderRadius:'12px', overflow:'hidden', cursor:'pointer' }}>
-          <img src="https://res.cloudinary.com/dblqd29s3/image/upload/v1779935399/banner__b60da0af-8c10-4ed6-bacf-469a95279493_gss8fo.webp"
-            alt="Casino" style={{ width:'100%', height:'auto', display:'block' }} />
-        </div>
-
-        {/* Sports Card */}
-        <div onClick={() => window.dispatchEvent(new CustomEvent('launch-cricket'))}
-          style={{ borderRadius:'12px', overflow:'hidden', cursor:'pointer' }}>
-          <img src="https://res.cloudinary.com/dblqd29s3/image/upload/v1779935399/banner__dd023389-11bc-4599-91aa-8115fafaa346_bqoyll.webp"
-            alt="Sports" style={{ width:'100%', height:'auto', display:'block' }} />
-        </div>
+      {/* QUICK TABS */}
+      <style>{`
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+        @keyframes icon-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(0.9)} }
+        .live-dot { animation: blink 1.2s infinite; }
+        .tab-icon-blink { animation: icon-pulse 2s infinite; display:flex; align-items:center; }
+      `}</style>
+      <div style={{ display:'flex', gap:'6px', overflowX:'auto', paddingBottom:'10px', marginBottom:'2px', scrollbarWidth:'none', marginLeft:'-12px', marginRight:'-12px', paddingLeft:'12px', paddingRight:'12px' }}>
+        {[
+          {
+            label:'Aviator',
+            icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M21 3L3 10.5l7 2.5 1.5 6.5 3.5-4 4.5 3L21 3z"/></svg>,
+            path:'/games/aviator', live: false
+          },
+          {
+            label:'Grey Gaming',
+            icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><rect x="2" y="6" width="20" height="12" rx="4"/><line x1="8" y1="12" x2="12" y2="12"/><line x1="10" y1="10" x2="10" y2="14"/><circle cx="17" cy="11" r="1" fill="white"/><circle cx="17" cy="13" r="1" fill="white"/></svg>,
+            action:'cricket', live: false
+          },
+          {
+            label:'Live Cricket',
+            icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><circle cx="12" cy="12" r="9"/><path d="M8 12 Q12 8 16 12 Q12 16 8 12"/></svg>,
+            action:'cricket', live: true
+          },
+          {
+            label:'E-Soccer',
+            icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><circle cx="12" cy="12" r="9"/><path d="M12 3 L14 8 L19 8 L15 11 L17 16 L12 13 L7 16 L9 11 L5 8 L10 8 Z" fill="white" stroke="none"/></svg>,
+            path:'/e-sports', live: false
+          },
+          {
+            label:'Live Casino',
+            icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M3 10h18"/></svg>,
+            path:'/live-casino', live: true
+          },
+          {
+            label:'Teen Patti',
+            icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M7 2h10a2 2 0 012 2v16a2 2 0 01-2 2H7a2 2 0 01-2-2V4a2 2 0 012-2zm5 3a1 1 0 100 2 1 1 0 000-2zm0 4a3 3 0 100 6 3 3 0 000-6z"/></svg>,
+            path:'/games/teen-patti', live: false
+          },
+          {
+            label:'Crash',
+            icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M3 17 L9 11 L13 15 L21 7"/><polyline points="15 7 21 7 21 13" fill="none" stroke="white" strokeWidth="2"/></svg>,
+            path:'/games/crash-rocket', live: false
+          },
+          {
+            label:'Mines',
+            icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><circle cx="12" cy="12" r="5" fill="white"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="7.1" y2="7.1"/><line x1="16.9" y1="16.9" x2="19.1" y2="19.1"/></svg>,
+            path:'/games/mines', live: false
+          },
+        ].map((tab, i) => (
+          <button key={i} onClick={() => tab.action === 'cricket' ? launchCricket() : navigate(tab.path)}
+            style={{ flexShrink:0, display:'flex', alignItems:'center', gap:'5px', padding:'5px 12px', background:'#1a1a1a', border:'1px solid #2a2a2a', borderRadius:'20px', color:'#ccc', fontSize:'11px', fontWeight:'600', cursor:'pointer', whiteSpace:'nowrap' }}
+            onMouseEnter={e => { e.currentTarget.style.background='#222'; e.currentTarget.style.borderColor='#3a3a3a' }}
+            onMouseLeave={e => { e.currentTarget.style.background='#1a1a1a'; e.currentTarget.style.borderColor='#2a2a2a' }}
+          >
+            {tab.live && <span className="live-dot" style={{ width:'6px', height:'6px', borderRadius:'50%', background:'#4caf50', display:'inline-block', marginRight:'1px' }}/>}
+            <span className="tab-icon-blink" style={{ display:'flex', alignItems:'center' }}>{tab.icon}</span>
+            <span>{tab.label}</span>
+          </button>
+        ))}
       </div>
 
-      {/* VIDEO SECTIONS */}
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'10px', marginBottom:'16px' }}>
-        <div style={{ borderRadius:'12px', overflow:'hidden', cursor:'pointer' }} onClick={() => navigate('/live-casino')}>
-          <img src="https://res.cloudinary.com/dblqd29s3/image/upload/v1779935534/download_1_oujczg.webp"
-            alt="Video 1" style={{ width:'100%', height:'160px', objectFit:'cover', display:'block' }} />
-        </div>
-        <div style={{ borderRadius:'12px', overflow:'hidden', cursor:'pointer' }} onClick={() => window.dispatchEvent(new CustomEvent('launch-cricket'))}>
-          <img src="https://res.cloudinary.com/dblqd29s3/image/upload/v1779935534/download_g3qc8w.webp"
-            alt="Video 2" style={{ width:'100%', height:'160px', objectFit:'cover', display:'block' }} />
-        </div>
+      {/* BANNER */}
+      <BannerSlider onLaunch={launchCricket} launching={launching} />
+
+      {/* 6 CATEGORY GRID */}
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'8px', marginBottom:'18px' }}>
+        {CATEGORIES.map((cat, i) => (
+          <button key={i} onClick={() => handleCat(cat)} style={{ position:'relative', background:'transparent', border:'1px solid #2a2a2a', borderRadius:'12px', padding:'0', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:'0', cursor:'pointer', transition:'all 0.2s', overflow:'hidden', aspectRatio:'1/1' }}
+            onMouseEnter={e => { e.currentTarget.style.background='#222'; e.currentTarget.style.borderColor='#3a3a3a' }}
+            onMouseLeave={e => { e.currentTarget.style.background='#181818'; e.currentTarget.style.borderColor='#2a2a2a' }}
+          >
+            {cat.badge && (
+              <div style={{ position:'absolute', top:0, right:0, background:'#e03030', color:'#fff', fontSize:'8px', fontWeight:'900', padding:'3px 8px 3px 12px', borderBottomLeftRadius:'10px', letterSpacing:'0.5px' }}>NEW</div>
+            )}
+            {/* Icon */}
+            <img src={cat.img} alt={cat.label} style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
+            {/* Label */}
+
+          </button>
+        ))}
       </div>
 
-
-      {/* TOP MATCHES — LuckySports Live */}
-      {user && <LuckySportEmbed />}
-
-      {/* NEW LAUNCH ROW */}
-      {liveGames.length > 0 && (() => {
-        const newLaunch = liveGames.slice(0, 12)
-        return (
-          <NewLaunchRow games={newLaunch} onPlay={launchGame} launchingGame={launchingGame} />
-        )
-      })()}
-
-      {/* TRENDING GAMES 3x2 GRID */}
-      <section style={{ marginBottom:'20px' }}>
-        <h2 style={{ fontSize:'14px', fontWeight:'900', color:'#fff', textTransform:'uppercase', letterSpacing:'1px', marginBottom:'12px', fontStyle:'italic', borderBottom:'1px solid #2a2a2a', paddingBottom:'8px' }}>
-          TRENDING GAMES
-        </h2>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'8px' }}>
-          {[
-            { label:'AVIATOR', color:'#3a0808', path:'/games/aviator', video:'https://res.cloudinary.com/dblqd29s3/video/upload/v1779935948/aviator_k2ysp5.mp4' },
-            { label:'MARBLE RUN', color:'#1a1a0a', path:'/live-casino', video:'https://res.cloudinary.com/dblqd29s3/video/upload/v1779935949/Mobile_run_mc8tr4.mp4' },
-            { label:'CHICKEN GAMES', color:'#1a2a0a', path:'/games/chicken-road', video:'https://res.cloudinary.com/dblqd29s3/video/upload/v1779935948/chicken_road_w7kqyo.mp4' },
-            { label:'COLOR PREDICTION', color:'#3a1a08', path:'/games/color-prediction', video:'https://res.cloudinary.com/dblqd29s3/video/upload/v1779935948/colour_prediction_mucljg.mp4' },
-            { label:'LIVE PREDICTION', color:'#0a1a0a', action:'cricket', video:null },
-            { label:'MINES', color:'#08083a', path:'/games/mines', video:'https://res.cloudinary.com/dblqd29s3/video/upload/v1779935949/mines_mxzdzq.mp4' },
-          ].map((g, i) => (
-            <div key={i}
-              onClick={() => g.action === 'cricket' ? window.dispatchEvent(new CustomEvent('launch-cricket')) : navigate(g.path)}
-              style={{ background:g.color, borderRadius:'10px', overflow:'hidden', cursor:'pointer', aspectRatio:'16/10', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:'6px', border:'1px solid rgba(255,255,255,0.06)', transition:'transform 0.2s', position:'relative' }}
-              onMouseEnter={e => e.currentTarget.style.transform='scale(1.02)'}
-              onMouseLeave={e => e.currentTarget.style.transform='scale(1)'}
-            >
-              {g.video
-                ? <video src={g.video} autoPlay loop muted playsInline style={{ width:'100%', height:'100%', objectFit:'cover', position:'absolute', inset:0 }} />
-                : <span style={{ fontSize:'clamp(24px,6vw,40px)' }}>📈</span>
-              }
-            </div>
-          ))}
-        </div>
-      </section>
-
-
-
-      {/* CASINO LOBBY */}
-      {liveGames.length > 0 && (
-        <CasinoLobby games={liveGames.slice(0, 18)} onPlay={launchGame} launchingGame={launchingGame} />
+      {/* LIVE CASINO GAME ROWS — from API */}
+      {liveGames.length === 0 && (
+        <div style={{ height:'120px', display:'flex', alignItems:'center', justifyContent:'center', color:'var(--text-muted)', fontSize:'13px' }}>⏳ Loading games...</div>
       )}
 
+      {rows.map((row, idx) => (
+        <GameRow key={idx} row={row} idx={idx} onPlay={launchGame} launchingGame={launchingGame} />
+      ))}
+
+      {/* LIVE SPORTS EMBED */}
+      {user && <LiveSportsEmbed />}
+
+      {/* GUEST CTA */}
+      {!user && (
+        <div style={{ textAlign:'center', padding:'28px 16px', background:'rgba(34,139,34,0.05)', borderRadius:'14px', border:'1px solid rgba(34,139,34,0.15)', marginBottom:'16px' }}>
+          <div style={{ fontFamily:'Cinzel,serif', fontWeight:'900', fontSize:'clamp(22px,6vw,36px)', marginBottom:'6px', color:'#4caf50' }}>SIGMA<span style={{ color:'#ffe066' }}>777</span></div>
+          <p style={{ color:'var(--text-secondary)', fontSize:'13px', marginBottom:'18px' }}>248+ Live Games • Instant Payouts • 24/7 Support</p>
+          <div style={{ display:'flex', gap:'10px', justifyContent:'center' }}>
+            <Link to="/signup"><button style={{ padding:'11px 24px', background:'linear-gradient(135deg,#1e7d32,#4caf50)', border:'none', borderRadius:'8px', color:'#fff', fontWeight:'800', fontSize:'14px', cursor:'pointer' }}>🎁 Get 1000 Free Coins</button></Link>
+            <Link to="/login"><button style={{ padding:'11px 24px', background:'transparent', border:'1px solid #333', borderRadius:'8px', color:'#aaa', cursor:'pointer', fontSize:'14px' }}>Login</button></Link>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
@@ -516,7 +410,7 @@ function LiveSportsEmbed() {
       .catch(() => { setErr(true); setLoading(false) })
   }, [])
   if (err || !url) return null
-  if (loading) return null
+  if (loading) return <div style={{ height:'160px', background:'var(--bg-card)', borderRadius:'10px', display:'flex', alignItems:'center', justifyContent:'center', color:'var(--text-muted)', fontSize:'13px', marginBottom:'18px' }}>⏳ Loading...</div>
   return (
     <section style={{ marginBottom:'18px' }}>
       <div style={{ display:'flex', alignItems:'center', gap:'6px', marginBottom:'8px' }}>

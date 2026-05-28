@@ -5,7 +5,6 @@ import Header from './Header'
 import { openAuthModal } from '../utils/authModal.js'
 import Sidebar from './Sidebar'
 import AuthModal from './AuthModal'
-import Footer from './Footer'
 
 function BottomNav({ onLoginClick, onSignupClick }) {
   const { user } = useStore()
@@ -140,18 +139,18 @@ export default function Layout() {
   return (
     <div className="app-shell">
       <Header
-        onMobileMenuClick={() => {}}
+        onMobileMenuClick={() => setMobileSidebarOpen(p=>!p)}
         isMobile={isMobile}
         onLoginClick={() => setAuthModal('login')}
         onSignupClick={() => setAuthModal('signup')}
       />
       <div className="app-body">
-        {!isMobile && <Sidebar className={getSidebarClass()} sidebarOpen={sidebarOpen} isMobile={false} />}
+        <Sidebar className={getSidebarClass()} sidebarOpen={isMobile?mobileSidebarOpen:sidebarOpen} isMobile={isMobile} />
+        <div className={`sidebar-overlay${isMobile&&mobileSidebarOpen?' visible':''}`} onClick={()=>setMobileSidebarOpen(false)} />
         <main className={getMainClass()}><Outlet /></main>
       </div>
       <BottomNav onLoginClick={()=>setAuthModal('login')} onSignupClick={()=>setAuthModal('signup')} />
 
-      <Footer />
       <PWAInstallBanner />
       {authModal && (
         <AuthModal
